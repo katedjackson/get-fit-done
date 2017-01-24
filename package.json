@@ -1,0 +1,26 @@
+{
+  "name": "get-fit-done",
+  "version": "0.0.1",
+  "description": "incentivizing wellness and movement with fitbit integration",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack -w",
+    "start": "nodemon server/start.js",
+    "test": "mocha --watch --compilers js:babel-register server/api/**/*.test.js",
+    "seed": "node seed.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/katedjackson/get-fit-done"
+  },
+  "author": "Lisa Pan, Kathryn Middleton, Soyeon Sophia Bok, Katelyn Jackson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/katedjackson/get-fit-done/issues"
+  },
+  "homepage": "https://github.com/katedjackson/get-fit-done#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "webpack": "^1.14.0"
+  }
+}
