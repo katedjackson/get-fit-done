@@ -4,11 +4,15 @@
     "manifest_version": 2,
     "description": "Blocks pages based on fitbit data to encourage user to move around",
     "icons": {
-        "16": "icon.png"
+        "16": "public/icon.png"
     },
-
+    "browser_action":{
+      "default_icon": "public/icon.png",
+      "default_title": "idkfitbit",
+      "default_popup" :  "public/popup.html"
+    },
     "options_ui": {
-        "page": "options.html",
+        "page": "public/options.html",
         "chrome_style": true,
         "open_in_tab": true
     },
