@@ -8,7 +8,7 @@
       "default_popup" :  "popup/src/index.html"
     },
     "options_ui": {
-        "page": "options/index.html",
+        "page": "options/src/index.html",
         "chrome_style": true,
         "open_in_tab": true
     },
