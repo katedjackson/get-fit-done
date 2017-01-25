@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import SignIn from './SignIn'
 
 class App extends Component {
   constructor(props) {
@@ -10,6 +11,7 @@ class App extends Component {
     return (
       <div>
         Hello World
+        <SignIn />
       </div>
     );
   }

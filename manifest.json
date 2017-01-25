@@ -1,24 +1,39 @@
 {
-    "name": "idkfitbit",
-    "version": "1.0.0",
-    "manifest_version": 2,
-    "description": "Blocks pages based on fitbit data to encourage user to move around",
-    "browser_action":{
-      "default_title": "Get Fit Done",
-      "default_popup" :  "popup/src/index.html"
-    },
-    "options_ui": {
-        "page": "options/src/index.html",
-        "chrome_style": true,
-        "open_in_tab": true
-    },
-
-    "permissions": [
-        "webRequest",
-        "tabs",
-        "http://*/*",
-        "https://*/*",
-        "webRequestBlocking",
-        "storage"
+  "name": "get-fit-done",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "description": "Blocks pages based on fitbit data to encourage user to move around",
+  "background": {
+    "scripts": [
+        "background.js"
     ]
+  },
+  "browser_action":{
+    "default_title": "Get Fit Done",
+    "default_popup" :  "popup/src/index.html"
+  },
+  "options_ui": {
+    "page": "options/src/index.html",
+    "chrome_style": true,
+    "open_in_tab": true
+  },
+  "permissions": [
+    "webRequest",
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "webRequestBlocking",
+    "storage"
+  ],
+  // Adding https://www.gstatic.com/ to the external scripts authorized domains so we can import the firebase JS SDK and access the Realtime Database as well as Firebase Storage.
+  "content_security_policy":"script-src 'self' https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com; object-src 'self'",
+  "oauth2": {
+    "client_id": "847708992152-i8rm3oo10nunblb0mganj7lk99i7m8ec.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/userinfo.profile"
+    ]
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApjR3Sh9CmGrJP+XLBF6IraqQAqXxg1MtZ/WcgnN/0HR2w1LWw2DfW/uxSrHU/xIFn1OXKDcBJEeWtpF0Z9sfaKYsHGoBhMQ9622GJYnsCRZZeGuXCe5mYnw0A2p7eh1+YWGHV5CM85n7KGb9pMpvhYy5JoYGl49sKsQlgfFxPDuMThGZ9dlHXHvtUBa0tJEMcfv9OtUdrY5F8GHDIBGxWfprgjEpsr9r4HRDYQ87U0AuGx2Mo4IEOeplHDPyqQVW/eq35icMA0G/tiyjIbEma0dbzTMjDRfFFQN0rE1WKf+IFPGRx/j44WBruQFI2IJun7mSDXTND842Izl3l3e6eQIDAQAB"
 }
+
