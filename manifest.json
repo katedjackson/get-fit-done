@@ -3,16 +3,12 @@
     "version": "1.0.0",
     "manifest_version": 2,
     "description": "Blocks pages based on fitbit data to encourage user to move around",
-    "icons": {
-        "16": "public/icon.png"
-    },
     "browser_action":{
-      "default_icon": "public/icon.png",
-      "default_title": "idkfitbit",
-      "default_popup" :  "public/popup.html"
+      "default_title": "Get Fit Done",
+      "default_popup" :  "popup/index.html"
     },
     "options_ui": {
-        "page": "public/options.html",
+        "page": "options/index.html",
         "chrome_style": true,
         "open_in_tab": true
     },
