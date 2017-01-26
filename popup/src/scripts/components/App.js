@@ -9,7 +9,6 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Blocked />
         Hello World
         <button id="sign-in">Sign In</button>
       </div>

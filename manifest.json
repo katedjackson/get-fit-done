@@ -8,13 +8,6 @@
   //     // "background.js"
   //   ]
   // },
-  "content_scripts": [
-    {
-      "matches": ["http://www.fitbit.com/*"],
-      "js": ["oauth2/oauth2_inject.js"],
-      "run_at": "document_start"
-    }
-  ],
   "browser_action":{
     "default_title": "Get Fit Done",
     "default_popup" : "popup/src/index.html"
