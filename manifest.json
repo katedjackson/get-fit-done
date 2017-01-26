@@ -13,6 +13,10 @@
         "open_in_tab": true
     },
 
+    "background": {
+       "page": "background/index.html"
+    },
+
     "permissions": [
         "webRequest",
         "tabs",
