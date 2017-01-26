@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
+import Blocked from './Blocked';
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -8,9 +10,7 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        Hello World
-      </div>
+      <Blocked />
     );
   }
 }
