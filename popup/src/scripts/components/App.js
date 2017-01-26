@@ -10,6 +10,7 @@ class App extends Component {
     return (
       <div>
         Hello World
+        <button id="sign-in">Sign In</button>
       </div>
     );
   }
