@@ -14,7 +14,9 @@
     },
 
     "background": {
-       "page": "background/index.html"
+      "scripts": [
+        "background/index.js"
+      ]
     },
 
     "permissions": [
@@ -24,5 +26,10 @@
         "https://*/*",
         "webRequestBlocking",
         "storage"
+    ],
+
+
+    "web_accessible_resources": [
+        "background/index.html"
     ]
 }
