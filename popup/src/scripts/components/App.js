@@ -10,7 +10,10 @@ class App extends Component {
 
   render() {
     return (
-      <Blocked />
+      <div>
+        Hello World
+        <button id="sign-in">Sign In</button>
+      </div>
     );
   }
 }
