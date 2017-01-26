@@ -2,43 +2,43 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { Icon } from 'semantic-ui-react';
 
-require('rc-progress/assets/index.css');
-import { Line, Circle } from 'rc-progress';
+// var ProgressBar = require('react-progressbar')
+// var Circle = ProgressBar.Circle;
 
-let tm;
+import { Circle } from 'react-progressbar.js'
 
 const Blocked = React.createClass({
   getInitialState() {
     return {
-      percent: 0,
+      progress: 0.5,
     };
   },
-  componentDidMount() {
-    this.increase();
-  },
-  increase() {
-    let percent = this.state.percent + 1;
-    if (percent > 65) {
-      percent = 65;
-      clearTimeout(tm);
-      return;
-    }
-    this.setState({ percent });
-    tm = setTimeout(this.increase, 10);
-  },
-  restart() {
-    clearTimeout(tm);
-    this.setState({ percent: 0 }, () => {
-      this.increase();
-    });
-  },
-  render() {
-    return (
-      <div style={{ margin: 10, width: 150 }}>
-        <Circle trailWidth="20" strokeWidth="20" percent={this.state.percent} />
-        <h3>150 Steps Left</h3>
 
-      </div>
+  render() {
+    var options = {
+        strokeWidth: 20,
+        trailWidth: 20,
+        easing: 'easeInOut',
+        duration: 1400,
+        text: {
+          autoStyleContainer: false
+        },
+        color: '#64e1ec'
+    };
+
+    var containerStyle = {
+        width: '200px',
+        height: '200px'
+    };
+
+    return (
+      <Circle
+          progress={this.state.progress}
+          text={'150 Steps Left'}
+          options={options}
+          initialAnimate={true}
+          containerStyle={containerStyle}
+          containerClassName={'.progressbar'} />
     );
   },
 });

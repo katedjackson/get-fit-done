@@ -35,6 +35,7 @@
     "react-dom": "^15.4.0",
     "react-motion": "^0.4.5",
     "react-progressbar": "^1.4.6",
+    "react-progressbar.js": "^0.2.0",
     "react-redux": "^4.4.6",
     "redux": "^3.6.0",
     "redux-actions": "^0.13.0",
