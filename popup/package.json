@@ -31,9 +31,11 @@
     "file-loader": "^0.9.0",
     "lodash": "^4.17.2",
     "node-sass": "^3.13.0",
+    "rc-progress": "^2.0.6",
     "react": "^15.4.0",
     "react-dom": "^15.4.0",
     "react-motion": "^0.4.5",
+    "react-progressbar.js": "^0.2.0",
     "react-redux": "^4.4.6",
     "redux": "^3.6.0",
     "redux-actions": "^0.13.0",
@@ -41,6 +43,7 @@
     "redux-logger": "^2.7.4",
     "redux-thunk": "^2.1.0",
     "sass-loader": "^4.0.2",
+    "semantic-ui-react": "^0.64.4",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7"
   }
