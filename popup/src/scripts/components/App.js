@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 import Blocked from './Blocked';
+import Login from './Login';
 
 class App extends Component {
   constructor(props) {
@@ -10,7 +11,7 @@ class App extends Component {
 
   render() {
     return (
-      <Blocked />
+      <Login />
     );
   }
 }
