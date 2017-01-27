@@ -23,6 +23,10 @@ Code to look at:
   - Gulp to handle all the package.jsons/webpacks at once?
 
 Instructions for building project:
+
+
+
+
   - git clone https://github.com/katedjackson/get-fit-done.git
   - cd get-fit-done
   - npm install
