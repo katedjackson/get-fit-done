@@ -1,24 +1,24 @@
 'use strict';
 
 //Retrieve user preferences, then execute a callback function that redirects to the "Stop wasting time page" if user navigates to a specified website during specified time.
-var startTime, endTime, startDay, endDay, websites, always;
+var websites;
 chrome.storage.sync.get({
   // startTime: '',
   // endTime: '',
   // startDay: '',
   // endDay: '',
-  // websites: '',
+  websites: '',
   // always: ''
 }, function(items) {
   // startTime = Number(items.startTime);
   // endTime = Number(items.endTime);
   // startDay = Number(items.startDay);
   // endDay = Number(items.endDay);
-  // websites = items.websites;
+  websites = items.websites;
   // always = items.always;
 
-  //var urlsArray = websites.split(",").map(function(url){return "*://*." + url.trim() + "/*"});
-  //var urlsArray = ["*://*.facebook.com/*"]
+  var urlsArray = websites.split(",").map(function(url){return "*://*." + url.trim() + "/*"});
+//  var urlsArray = ["*://*.yipitdata.com/*"]
 
   chrome.webRequest.onBeforeRequest.addListener(
     function () {
@@ -57,7 +57,7 @@ chrome.storage.sync.get({
     },
 
     {
-      urls: ["<all_urls>"],
+      urls: urlsArray,
       types: ["main_frame", "sub_frame", "stylesheet", "script", "image", "object", "xmlhttprequest", "other"]
     },
 
