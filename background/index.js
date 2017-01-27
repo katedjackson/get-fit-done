@@ -18,7 +18,7 @@ chrome.storage.sync.get({
   // always = items.always;
 
   //var urlsArray = websites.split(",").map(function(url){return "*://*." + url.trim() + "/*"});
-  //var urlsArray = ["*://*.facebook.com/*"]
+  var urlsArray = ["*://*.facebook.com/*"]
 
   chrome.webRequest.onBeforeRequest.addListener(
     function () {
@@ -57,7 +57,7 @@ chrome.storage.sync.get({
     },
 
     {
-      urls: ["<all_urls>"],
+      urls: urlsArray,
       types: ["main_frame", "sub_frame", "stylesheet", "script", "image", "object", "xmlhttprequest", "other"]
     },
 
