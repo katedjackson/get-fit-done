@@ -3,10 +3,10 @@
 var webpack = require('webpack');
 
 module.exports = {
-  entry: './src/scripts/index.js',
+  entry: './background/index.js',
   output: {
     path: __dirname,
-    filename: './src/bundle.js'
+    filename: 'background.js'
   },
   context: __dirname,
   devtool: 'source-map',

@@ -21,6 +21,7 @@
   "homepage": "https://github.com/katedjackson/get-fit-done#readme",
   "dependencies": {},
   "devDependencies": {
+    "oauth2": "0.0.1",
     "webpack": "^1.14.0"
   }
 }

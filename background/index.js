@@ -65,3 +65,4 @@ chrome.storage.sync.get({
   );
 
 });
+

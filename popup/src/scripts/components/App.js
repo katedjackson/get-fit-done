@@ -11,7 +11,10 @@ class App extends Component {
 
   render() {
     return (
-      <Login />
+      <div>
+        Hello World
+        <button id="sign-in">Sign In</button>
+      </div>
     );
   }
 }
