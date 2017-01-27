@@ -1,5 +1,7 @@
 'use strict';
 
+// import rg from 'rangen'
+
 //Retrieve user preferences, then execute a callback function that redirects to the "Stop wasting time page" if user navigates to a specified website during specified time.
 var startTime, endTime, startDay, endDay, websites, always;
 chrome.storage.sync.get({
@@ -27,7 +29,7 @@ chrome.storage.sync.get({
       // var day = currentTime.getDay();
 
       //if (always) {
-        return {redirectUrl: chrome.extension.getURL('background/index.html')};
+        return {redirectUrl: chrome.extension.getURL('background/src/index.html')};
       // }
 
       // if (startTime < endTime && startDay <= endDay){
