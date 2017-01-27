@@ -1,3 +1,5 @@
+const axios = require('axios');
+
 //--------Fitbit OAuth2 Integration--------//
 const redirect_uri = chrome.identity.getRedirectURL();
 const client_id = "2284D2";
@@ -18,4 +20,9 @@ signIn.addEventListener('click', () => {
   });
 });
 
-console.log(accessToken);
+let steps;
+
+axios.get('https://api.fitbit.com/1/user/-/activities/date/2017-01-25.json', { headers: {'Authorization': 'Bearer ' + accessToken})
+  .then(response => {
+    document.getElementById("sign-in").innerHTML = response.activities[0].steps;
+  })
