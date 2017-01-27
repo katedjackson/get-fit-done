@@ -17,8 +17,10 @@ chrome.storage.sync.get({
   websites = items.websites;
   // always = items.always;
 
+
   var urlsArray = websites.split(",").map(function(url){return "*://*." + url.trim() + "/*"});
-//  var urlsArray = ["*://*.yipitdata.com/*"]
+  //var urlsArray = ["*://*.facebook.com/*"]
+
 
   chrome.webRequest.onBeforeRequest.addListener(
     function () {
@@ -65,3 +67,4 @@ chrome.storage.sync.get({
   );
 
 });
+

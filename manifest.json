@@ -1,6 +1,6 @@
 {
-    "name": "idkfitbit",
-    "version": "1.0.0",
+    "name": "Get [F]it Done",
+    "version": "1.0.1",
     "manifest_version": 2,
     "description": "Blocks pages based on fitbit data to encourage user to move around",
     "browser_action":{
@@ -12,23 +12,21 @@
         "chrome_style": true,
         "open_in_tab": true
     },
-
     "background": {
       "scripts": [
         "background/index.js"
       ]
     },
-
     "permissions": [
         "webRequest",
         "tabs",
         "http://*/*",
         "https://*/*",
         "webRequestBlocking",
-        "storage"
+        "storage",
+        "identity",
+        "https://api.fitbit.com/oauth2/token"
     ],
-
-
     "web_accessible_resources": [
         "background/index.html"
     ]
