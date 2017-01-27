@@ -1,4 +1,34 @@
 {
+<<<<<<< HEAD
+  "name": "Get [F]it Done",
+  "version": "1.0.1",
+  "manifest_version": 2,
+  "description": "Blocks pages based on fitbit data to encourage user to move around",
+  "browser_action":{
+    "default_title": "Get Fit Done",
+    "default_popup" : "popup/src/index.html"
+  },
+  "options_ui": {
+    "page": "options/src/index.html",
+    "chrome_style": true,
+    "open_in_tab": true
+  },
+  "background": {
+    "scripts": [
+      "background/background.js"
+    ]
+  },
+  "permissions": [
+    "webRequest",
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "webRequestBlocking",
+    "storage",
+    "https://api.fitbit.com/oauth2/token",
+    "identity"
+  ]
+=======
     "name": "Get [F]it Done",
     "version": "1.0.1",
     "manifest_version": 2,
@@ -30,4 +60,5 @@
     "web_accessible_resources": [
         "background/index.html"
     ]
+>>>>>>> master
 }

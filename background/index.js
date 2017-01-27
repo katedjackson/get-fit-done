@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 'use strict';
 
 //Retrieve user preferences, then execute a callback function that redirects to the "Stop wasting time page" if user navigates to a specified website during specified time.
@@ -67,4 +69,5 @@ chrome.storage.sync.get({
   );
 
 });
+>>>>>>> master
 
