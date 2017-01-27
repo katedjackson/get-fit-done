@@ -6,7 +6,7 @@ module.exports = {
   entry: './background/index.js',
   output: {
     path: __dirname,
-    filename: 'background.js'
+    filename: 'bundle.js'
   },
   context: __dirname,
   devtool: 'source-map',
