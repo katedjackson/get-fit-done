@@ -20,9 +20,9 @@ signIn.addEventListener('click', () => {
   });
 });
 
-let steps;
+// let steps;
 
-axios.get('https://api.fitbit.com/1/user/-/activities/date/2017-01-25.json', { headers: {'Authorization': 'Bearer ' + accessToken})
-  .then(response => {
-    document.getElementById("sign-in").innerHTML = response.activities[0].steps;
-  })
+// axios.get('https://api.fitbit.com/1/user/-/activities/date/2017-01-25.json', { headers: {'Authorization': 'Bearer ' + accessToken})
+//   .then(response => {
+//     document.getElementById("sign-in").innerHTML = response.activities[0].steps;
+//   })

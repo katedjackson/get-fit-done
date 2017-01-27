@@ -41,3 +41,5 @@ Instructions for building project:
   - check off developer mode
   - click load unpacked extension
   - select get-fit-done directory
+
+#Published extension: https://chrome.google.com/webstore/detail/idkfitbit/fecjgkehmgognabbnohaoombfboddooo
