@@ -1,7 +1,6 @@
 {
-<<<<<<< HEAD
-    "name": "idkfitbit",
-    "version": "1.0.0",
+    "name": "Get [F]it Done",
+    "version": "1.0.1",
     "manifest_version": 2,
     "description": "Blocks pages based on fitbit data to encourage user to move around",
     "browser_action":{
@@ -13,49 +12,22 @@
         "chrome_style": true,
         "open_in_tab": true
     },
-
     "background": {
       "scripts": [
         "background/index.js"
       ]
     },
-
     "permissions": [
         "webRequest",
         "tabs",
         "http://*/*",
         "https://*/*",
         "webRequestBlocking",
-        "storage"
+        "storage",
+        "identity",
+        "https://api.fitbit.com/oauth2/token"
     ],
-
-
     "web_accessible_resources": [
         "background/index.html"
     ]
-=======
-  "name": "idkfitbit",
-  "version": "1.0.1",
-  "manifest_version": 2,
-  "description": "Blocks pages based on fitbit data to encourage user to move around",
-  "browser_action":{
-    "default_title": "Get Fit Done",
-    "default_popup" : "popup/src/index.html"
-  },
-  "options_ui": {
-    "page": "options/src/index.html",
-    "chrome_style": true,
-    "open_in_tab": true
-  },
-  "permissions": [
-    "webRequest",
-    "tabs",
-    "http://*/*",
-    "https://*/*",
-    "webRequestBlocking",
-    "storage",
-    "https://api.fitbit.com/oauth2/token",
-    "identity"
-  ]
->>>>>>> master
 }
