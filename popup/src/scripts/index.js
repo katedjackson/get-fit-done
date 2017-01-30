@@ -26,11 +26,12 @@ signIn.addEventListener('click', () => {
   chrome.identity.launchWebAuthFlow({'url':auth_url, 'interactive': true},
   function(redirect_url) {
      // extract the token from this url and use it for future requests
-     const accessToken = redirect_url.substring(redirect_url.indexOf("=") + 1);
+     const accessToken = redirect_url.substring(redirect_url.indexOf("=") + 1, redirect_url.indexOf("&user_id"));
 
      axios.get('https://api.fitbit.com/1/user/-/activities/date/2017-01-25.json', { headers: {'Authorization': 'Bearer ' + accessToken}})
      .then(response => {
-       document.getElementById("sign-in").innerHTML = response.activities[0].steps;
+       document.getElementById("sign-in").innerHTML = response.data.activities[0].steps;
      })
   });
 });
+
