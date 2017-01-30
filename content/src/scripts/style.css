@@ -1,19 +1,19 @@
-.forest-overlay-container {
+.block-overlay-container {
     position: absolute !important;
     height: 100% !important;
     width: 100% !important;
     z-index: 2147483647 !important;
 }
 
-.forest-select {
+.block-select {
     user-select: none !important;
 }
 
-.forest-cursor {
+.block-cursor {
     cursor: default !important;
 }
 
-.forest-overlay {
+.block-overlay {
     z-index: 2147483647 !important;
     position: fixed !important;
     top: 0px !important;
@@ -26,7 +26,7 @@
     margin: 0px !important;
 }
 
-.forest-info-container {
+.block-info-container {
     text-align: center !important;
     position: absolute !important;
     top: calc(50% - 200px) !important;
@@ -34,7 +34,8 @@
     width: 100% !important;
 }
 
-.forest-overlay-top-text {
+.block-overlay-top-text {
+    display: inline-block !important;
     vertical-align: middle !important;
     font-size: 32px !important;
     cursor: default !important;
@@ -47,7 +48,7 @@
     margin: 0px auto !important;
 }
 
-.forest-giveup-button {
+.block-giveup-button {
     display: inline-block !important;
     vertical-align: middle !important;
     color: white !important;
@@ -58,15 +59,113 @@
     border-color: white !important;
     border-image: initial !important;
     border-radius: 5px !important;
-    margin: 200px auto 0px !important;
+    margin: 75px auto 0px !important;
     padding: 5px !important;
 }
 
-.forest-buttons {
+.block-buttons {
     cursor: pointer !important;
     transition: transform 0.1s !important;
 }
 
 body{
   overflow: hidden !important;
+}
+
+.block-tree-ball {
+    display: inline-block !important!;
+    top: 120px !important;
+    left: 0px !important;
+    right: 0px !important;
+    width: 200px !important;
+    height: 200px !important;
+    background-size: contain !important;
+    margin: 100px auto 0px !important;
+}
+
+.block-popup-mask {
+    position: fixed !important;
+    left: 0px !important;
+    right: 0px !important;
+    top: 0px !important;
+    bottom: 0px !important;
+    background-color: black !important;
+    opacity: 0 !important;
+    transition: opacity 0.3s !important;
+}
+.block-popup-shrink {
+    transform: scale(0);
+}
+
+.block-popup {
+    position: fixed;
+    top: calc(50% - 70px);
+    left: 0px;
+    right: 0px;
+    width: 300px;
+    height: 140px;
+    background-color: white;
+    color: black;
+    text-align: center;
+    margin: 0px auto;
+    padding: 20px;
+    border-radius: 10px;
+    transition: transform 0.3s;
+}
+
+.block-popup-title {
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+}
+.block-popup-message {
+    font-size: 18px;
+    text-align: center;
+}
+
+.block-popup-confirm-button {
+    right: 50px;
+    background-color: #00B0B9;
+}
+
+.block-popup-confirm-button, .block-popup-cancel-button {
+    position: absolute;
+    bottom: 20px;
+    display: inline-block;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    line-height: 30px;
+    height: 30px;
+    width: 100px;
+    font-size: 18px;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.block-popup-cancel-button {
+    left: 50px;
+    background-color: #00B0B9;
+}
+
+.block-popup-confirm-button, .block-popup-cancel-button {
+    position: absolute;
+    bottom: 20px;
+    display: inline-block;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    line-height: 30px;
+    height: 30px;
+    width: 100px;
+    font-size: 18px;
+    border-radius: 5px;
+    padding: 5px;
+}
+.block-buttons {
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+.block-disappear {
+    display: none !important;
 }

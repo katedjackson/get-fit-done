@@ -10,14 +10,14 @@ if (!document.getElementById('rcr-anchor')) {
   anchor.id = 'rcr-anchor';
 
   document.body.insertBefore(anchor, document.body.childNodes[0]);
-}
-const proxyStore =  new Store({
-  state: {},
-  portName: 'example'
-});
+  const proxyStore =  new Store({
+    state: {},
+    portName: 'example'
+  });
 
-render(
-  <Provider store={proxyStore}>
-    <App/>
-  </Provider>
-  , document.getElementById('rcr-anchor'));
+  render(
+    <Provider store={proxyStore}>
+      <App/>
+    </Provider>
+    , document.getElementById('rcr-anchor'));
+}

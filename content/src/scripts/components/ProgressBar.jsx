@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import { Icon } from 'semantic-ui-react';
 
 // var ProgressBar = require('react-progressbar')
 // var Circle = ProgressBar.Circle;
 
 import { Circle } from 'react-progressbar.js'
 
-const Blocked = React.createClass({
+const ProgressBar = React.createClass({
   getInitialState() {
     return {
       progress: 0.5,
@@ -34,7 +33,7 @@ const Blocked = React.createClass({
     return (
       <Circle
           progress={this.state.progress}
-          text={'150 Steps Left'}
+          text={'107 Steps Left'}
           options={options}
           initialAnimate={true}
           containerStyle={containerStyle}
@@ -43,4 +42,4 @@ const Blocked = React.createClass({
   },
 });
 
-export default Blocked;
+export default ProgressBar;
