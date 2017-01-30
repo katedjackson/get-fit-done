@@ -1,8 +1,3 @@
-
-      // chrome.tabs.executeScript(null, {file: "content/src/bundle.js"});
-      // chrome.tabs.insertCSS(null, {file: "content/src/scripts/style.css"});
-
-
 'use strict';
 
 var websites;
