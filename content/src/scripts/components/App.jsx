@@ -18,14 +18,14 @@ class App extends Component {
 
   render() {
     return (
-      <div id="forest-overlay-container" className="forest-cursor forest-select forest-overlay-container">
-        <div id="forest-overlay" className="forest-cursor forest-select forest-overlay">
-          <div id="forest-info-container" className="forest-cursor forest-select forest-info-container">
-            <span id="forest-overlay-top-text" className="forest-cursor forest-select forest-overlay-top-text">You need 107 more steps to unlock this page...</span>
-            <div id="forest-tree-ball" className="forest-tree-ball"><ProgressBar /></div>
-            <div id="forest-giveup-button" className="forest-cursor forest-select forest-giveup-button forest-buttons" onClick={this.giveUpToggle}>Give Up</div>
-            <div id="forest-popup-mask" className="forest-cursor forest-select forest-popup-mask forest-disappear"></div>
-            <div id="forest-popup" className={"forest-cursor forest-select forest-popup" + (!this.state.showPopup ? 'forest-popup-shrink forest-disappear' : '')}><div id="forest-popup-title" className="forest-cursor forest-select forest-popup-title">Are you sure you don't want to stretch your legs?</div><br/><div id="forest-popup-message" className="forest-cursor forest-select forest-popup-message">This will break your 3 day streak.</div><div id="forest-popup-confirm-button" className="forest-cursor forest-select forest-popup-confirm-button forest-buttons">Yes</div><div id="forest-popup-cancel-button" className="forest-cursor forest-select forest-popup-cancel-button forest-buttons" onClick={this.giveUpToggle}>No</div></div>
+      <div id="block-overlay-container" className="block-cursor block-select block-overlay-container">
+        <div id="block-overlay" className="block-cursor block-select block-overlay">
+          <div id="block-info-container" className="block-cursor block-select block-info-container">
+            <span id="block-overlay-top-text" className="block-cursor block-select block-overlay-top-text">You need 107 more steps to unlock this page...</span>
+            <div id="block-tree-ball" className="block-tree-ball"><ProgressBar /></div>
+            <div id="block-giveup-button" className="block-cursor block-select block-giveup-button block-buttons" onClick={this.giveUpToggle}>Give Up</div>
+            <div id="block-popup-mask" className="block-cursor block-select block-popup-mask block-disappear"></div>
+            <div id="block-popup" className={"block-cursor block-select block-popup" + (!this.state.showPopup ? 'block-popup-shrink block-disappear' : '')}><div id="block-popup-title" className="block-cursor block-select block-popup-title">Are you sure you don't want to stretch your legs?</div><br/><div id="block-popup-message" className="block-cursor block-select block-popup-message">This will break your 3 day streak.</div><div id="block-popup-confirm-button" className="block-cursor block-select block-popup-confirm-button block-buttons">Yes</div><div id="block-popup-cancel-button" className="block-cursor block-select block-popup-cancel-button block-buttons" onClick={this.giveUpToggle}>No</div></div>
           </div>
         </div>
       </div>
