@@ -1,3 +1,8 @@
+
+      // chrome.tabs.executeScript(null, {file: "content/src/bundle.js"});
+      // chrome.tabs.insertCSS(null, {file: "content/src/scripts/style.css"});
+
+
 'use strict';
 
 var websites;
@@ -6,18 +11,16 @@ chrome.storage.sync.get({
 }, function(items) {
   websites = items.websites;
 
-  var urlsArray = websites.split(",").map(function(url){return "*://*." + url.trim() + "/*"});
+  var urlsArray = websites.split(",").map(function(url){return url.trim() + "/*"});
 
-  chrome.webRequest.onBeforeRequest.addListener(
-    function () {
-      chrome.tabs.executeScript(null, {file: "content/src/bundle.js"});
-      chrome.tabs.insertCSS(null, {file: "content/src/scripts/style.css"});
-    },
-    {
-      urls: urlsArray,
-      types: ["main_frame", "sub_frame", "stylesheet", "script", "image", "object", "xmlhttprequest", "other"]
-    }
-  );
+  urlsArray.forEach(function(url){
+    var regexp = new RegExp(url);
+    chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
+      if(regexp.test(tab.url)){
+        chrome.tabs.executeScript(tabId, {file: "content/src/bundle.js"});
+        chrome.tabs.insertCSS(tabId, {file: "content/src/scripts/style.css"});
+      }
+    })
+  })
+
 });
-
-

@@ -28,10 +28,9 @@ signIn.addEventListener('click', () => {
      // extract the token from this url and use it for future requests
      const accessToken = redirect_url.substring(redirect_url.indexOf("=") + 1, redirect_url.indexOf("&user_id"));
 
-     axios.get('https://api.fitbit.com/1/user/-/activities/date/2017-01-25.json', { headers: {'Authorization': 'Bearer ' + accessToken}})
+     axios.get('https://api.fitbit.com/1/user/-/activities/date/2017-01-26.json', { headers: {'Authorization': 'Bearer ' + accessToken}})
      .then(response => {
-       document.getElementById("sign-in").innerHTML = response.data.activities[0].steps;
+       return response.data.summary.steps;
      })
   });
 });
-
