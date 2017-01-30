@@ -66,3 +66,7 @@
     cursor: pointer !important;
     transition: transform 0.1s !important;
 }
+
+body{
+  overflow: hidden !important;
+}

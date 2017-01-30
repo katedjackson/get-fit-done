@@ -8,15 +8,15 @@ chrome.storage.sync.get({
 
   var urlsArray = websites.split(",").map(function(url){return "*://*." + url.trim() + "/*"});
 
-  chrome.webRequest.onBeforeRequest.addListener(
+  chrome.webRequest.onCompleted.addListener(
     function () {
-      return {redirectUrl: chrome.extension.getURL('background/index.html')};
+      chrome.tabs.executeScript(null, {file: "content/src/bundle.js"});
+      chrome.tabs.insertCSS(null, {file: "content/src/scripts/style.css"});
     },
     {
       urls: urlsArray,
       types: ["main_frame", "sub_frame", "stylesheet", "script", "image", "object", "xmlhttprequest", "other"]
-    },
-    ["blocking"]
+    }
   );
 });
 

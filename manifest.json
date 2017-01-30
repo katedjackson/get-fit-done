@@ -8,13 +8,6 @@
     "default_title": "Get Fit Done",
     "default_popup" : "popup/src/index.html"
   },
-  "content_scripts": [
-    {
-      "matches": ["*://*/*"],
-      "css": ["content/src/scripts/style.css"],
-      "js": ["content/src/bundle.js"]
-    }
-  ],
   "options_ui": {
     "page": "options/src/index.html",
     "chrome_style": true,
@@ -27,6 +20,7 @@
   },
   "permissions": [
     "webRequest",
+    "activeTab",
     "tabs",
     "http://*/*",
     "https://*/*",
@@ -37,6 +31,7 @@
   ],
   "web_accessible_resources": [
       "background/index.html",
-      "content/src/scripts/style.css"
+      "content/src/scripts/style.css",
+      "content/src/bundle.js"
   ]
 }
