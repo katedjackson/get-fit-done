@@ -8,7 +8,7 @@ chrome.storage.sync.get({
 
   var urlsArray = websites.split(",").map(function(url){return "*://*." + url.trim() + "/*"});
 
-  chrome.webRequest.onCompleted.addListener(
+  chrome.webRequest.onBeforeRequest.addListener(
     function () {
       chrome.tabs.executeScript(null, {file: "content/src/bundle.js"});
       chrome.tabs.insertCSS(null, {file: "content/src/scripts/style.css"});
