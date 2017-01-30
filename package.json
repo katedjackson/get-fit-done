@@ -19,7 +19,9 @@
     "url": "https://github.com/katedjackson/get-fit-done/issues"
   },
   "homepage": "https://github.com/katedjackson/get-fit-done#readme",
-  "dependencies": {},
+  "dependencies": {
+    "react-simpletabs": "^0.7.0"
+  },
   "devDependencies": {
     "oauth2": "0.0.1",
     "webpack": "^1.14.0"

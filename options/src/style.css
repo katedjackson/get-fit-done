@@ -1,0 +1,23 @@
+div .tabs {
+  border: 1px solid;
+  border-color: grey;
+}
+
+.tabs_labels li {
+  border-bottom: 1px solid grey;
+  display: inline;
+  margin: 15px;
+  padding: 10px 15px 15px 15px;
+  font-size: 20px;
+}
+
+.tabs_labels li a {
+  color: black;
+  text-decoration: none;
+}
+
+.tabs_content {
+  display: block;
+  margin: 15px;
+  padding-top: 20px;
+}
