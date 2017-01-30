@@ -7,6 +7,7 @@ import { Icon } from 'semantic-ui-react';
 
 import { Circle } from 'react-progressbar.js'
 
+//is there a reason why you’re using mixed ES5/ES6 syntax
 const Blocked = React.createClass({
   getInitialState() {
     return {
