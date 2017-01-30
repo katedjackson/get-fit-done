@@ -13,6 +13,7 @@ chrome.storage.sync.get({
 
   var urlsArray = websites.split(",").map(function(url){return url.trim() + "/*"});
 
+
   urlsArray.forEach(function(url){
     var regexp = new RegExp(url);
     chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
