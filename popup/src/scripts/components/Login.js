@@ -12,7 +12,7 @@ const Login = React.createClass({
   render() {
 
     return (
-      <Button>
+      <Button id="sign-in">
         Click to log in through Fitbit
       </Button>
     );
