@@ -1,5 +1,11 @@
 import React from 'react';
 import {Grid, Col, Row} from 'react-bootstrap';
+import {Line} from 'react-chartjs-2';
+
+let stepData = {
+  1: 5,
+  2: 8
+};
 
 const Achievements = (props) => {
   const today = new Date().toString();
@@ -10,7 +16,7 @@ const Achievements = (props) => {
       <Col md={6} lg={6}>
         <Row id="step-graph">
           <h3>{`Steps for Week of ${headerDate}`}</h3>
-          <div>This div will grow up to be a graph one day.</div>
+          <Line data={stepData} />
         </Row>
         <Row id="failure-log">
           <h3>FAILURE LOG</h3>
