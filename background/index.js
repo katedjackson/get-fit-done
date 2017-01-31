@@ -2,12 +2,14 @@
 
 import {wrapStore} from 'react-chrome-redux';
 import { reducer } from './reducers/settings';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import createLogger from 'redux-logger'
+
 
 console.log("this is the reducer",reducer)
-const store = createStore(reducer, {}); // a normal Redux store
+const store = createStore(reducer, applyMiddleware(createLogger())); // a normal Redux store
 
-
+window.store = store;
 wrapStore(store, {portName: 'GET_FIT_DONE'});
 
 var websites;
