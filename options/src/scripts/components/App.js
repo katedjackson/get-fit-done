@@ -15,7 +15,7 @@ class App extends Component {
     chrome.storage.sync.set({
         websites: websites
     }, function() {
-      chrome.runtime.reload();
+      // chrome.runtime.reload();
     })
   }
 

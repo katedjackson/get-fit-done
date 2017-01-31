@@ -9,7 +9,7 @@ import { Circle } from 'react-progressbar.js'
 const ProgressBar = React.createClass({
   getInitialState() {
     return {
-      progress: 0.5,
+      progress: 0.63,
     };
   },
 
@@ -33,7 +33,7 @@ const ProgressBar = React.createClass({
     return (
       <Circle
           progress={this.state.progress}
-          text={'107 Steps Left'}
+          text={'157/250'}
           options={options}
           initialAnimate={true}
           containerStyle={containerStyle}
