@@ -22,6 +22,7 @@ class App extends Component {
   render() {
     return (
       <div>
+        <h1>Get [F]it Done</h1>
         <Tabs selected={0}>
           <Pane label="Settings">
             <Settings handleWebsiteSubmit={this.handleWebsiteSubmit}/>

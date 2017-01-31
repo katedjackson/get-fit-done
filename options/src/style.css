@@ -1,6 +1,29 @@
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+}
+
+#app {
+  height: 100%;
+}
+
+#app > div {
+  height: 100%;
+}
+
+h1 {
+  text-align: center;
+  font-size: 3em;
+  font-family: Helvetica;
+}
+
 div .tabs {
   border: 1px solid;
   border-color: grey;
+  height: 90%;
 }
 
 .tabs_labels li {
@@ -21,3 +44,15 @@ div .tabs {
   margin: 15px;
   padding-top: 20px;
 }
+
+/*div .col-lg-6 {
+  display: inline-block;
+  margin: 25px;
+  height: 100%;
+}
+
+div .col-md-6 {
+  display: inline-block;
+  margin: 25px;
+  height: 100%;
+}*/
