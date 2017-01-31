@@ -3,6 +3,22 @@ div .tabs {
   border-color: grey;
 }
 
+h3 {
+  border-bottom: 1px solid #dddddd;
+  margin: 0 0 1em;
+}
+
+.mode_switch {
+    border: 1px solid #dddddd;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 1em;
+
+    p {
+      margin: 0;
+    }
+  }
+
 .tabs_labels li {
   border-bottom: 1px solid grey;
   display: inline;
@@ -20,4 +36,9 @@ div .tabs {
   display: block;
   margin: 15px;
   padding-top: 20px;
+}
+
+.switch {
+  float: none;
+  margin-top: 1em;
 }
