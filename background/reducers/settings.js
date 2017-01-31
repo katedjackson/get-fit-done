@@ -6,28 +6,56 @@ const SET_HOURLY_STEPS    = 'SET_HOURLY_STEPS';
 //
 /* --------------    ACTION CREATORS    ----------------- */
 
-const SET_WEBSITES     = websites => ({ type: SET_WEBSITES, websites });
-const SET_HOURLY_STEPS  = steps => ({ type: SET_HOURLY_STEPS, steps });
+export const setWebsites     = websites => ({ type: SET_WEBSITES, websites });
+const setHourlySteps  = hourlySteps => ({ type: SET_HOURLY_STEPS, hourlySteps });
+export const setCount  = count => ({ type: 'SET_COUNT', count });
 
 /* ------------------    REDUCER    --------------------- */
 const initialState = {
   websites: '',
-  hourlySteps: 100
+  hourlySteps: 100,
+  count: 0
 }
 
-export default function reducer (state = initialState, action) {
- switch (action.type) {
+export function reducer (state = initialState, action) {
 
-   case SET_WEBSITES:
-     return action.websites;
+	const newState = Object.assign({}, state)
 
-   case SET_HOURLY_STEPS:
-     return action.hourlySteps;
+	switch (action.type) {
 
-   default:
-     return state;
- }
+		case SET_WEBSITES:
+			newState.websites = action.websites;
+			break;
+
+		case SET_HOURLY_STEPS:
+			newState.hourlySteps = action.hourlySteps;
+			break;
+
+		case 'SET_COUNT':
+			newState.count = action.count;
+			break;
+
+		default:
+			console.log("this is the initialState: ", state);
+			return state;
+	}
+	return newState;
 }
 
 
-export const setWebsites =
+// export const setWebsites = websites => dispatch => {
+// 	chrome.storage.sync.set({
+// 	       websites: websites
+// 	   }, function() {
+// 	   		dispatch(receiveWebsites(websites))
+// 	   })
+// }
+
+// export const setWebsites = websites => {
+// 	chrome.storage.sync.set({
+// 	       websites: websites
+// 	   }, function() {
+// 	   		dispatch(receiveWebsites(websites))
+// 	   })
+
+// }

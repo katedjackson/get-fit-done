@@ -22,7 +22,7 @@
   },
   "background": {
     "scripts": [
-      "background/index.js"
+      "background/bundle.js"
     ]
   },
   "permissions": [
