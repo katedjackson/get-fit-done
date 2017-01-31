@@ -1,5 +1,11 @@
 'use strict';
 
+import {wrapStore} from 'react-chrome-redux';
+
+const store; // a normal Redux store
+
+wrapStore(store, {portName: 'GET_FIT_DONE'});
+
 var websites;
 chrome.storage.sync.get({
   websites: '',

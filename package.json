@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/katedjackson/get-fit-done#readme",
   "dependencies": {
+    "react-chrome-redux": "^1.2.0",
     "react-simpletabs": "^0.7.0"
   },
   "devDependencies": {

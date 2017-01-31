@@ -33,6 +33,7 @@
     "node-sass": "^3.13.0",
     "rc-progress": "^2.0.6",
     "react": "^15.4.0",
+    "react-chrome-redux": "^1.2.0",
     "react-dom": "^15.4.0",
     "react-motion": "^0.4.5",
     "react-progressbar.js": "^0.2.0",
