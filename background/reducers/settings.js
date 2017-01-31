@@ -11,7 +11,7 @@ const SET_HOURLY_STEPS  = steps => ({ type: SET_HOURLY_STEPS, steps });
 
 /* ------------------    REDUCER    --------------------- */
 const initialState = {
-  websites: [],
+  websites: '',
   hourlySteps: 100
 }
 
@@ -28,3 +28,6 @@ export default function reducer (state = initialState, action) {
      return state;
  }
 }
+
+
+export const setWebsites =
