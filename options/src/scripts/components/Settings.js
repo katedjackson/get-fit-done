@@ -16,7 +16,6 @@ class Settings extends Component {
       dailySteps: false,
       foodLog: false,
       waterLog: false,
-
       disabledTimeStart: null,
       disabledTimeEnd: null,
       hourlyStepsNum: '250',
@@ -27,16 +26,12 @@ class Settings extends Component {
     }
     this.onLoad = this.onLoad.bind(this);
     this.handleTextChange = this.handleTextChange.bind(this);
-
-  }
-
-  onLoad() {
-    chrome.storage.sync.get({ websites: '' }, (items) => this.setState({ websites: items.websites }));
   }
 
   handleChangeTimePickerStart = (event, date) => {
     this.setState({disabledTimeStart: date});
   };
+
   handleChangeTimePickerEnd = (event, date) => {
     this.setState({disabledTimeEnd: date});
   };
@@ -49,11 +44,13 @@ class Settings extends Component {
   };
 
   render() {
+    console.log("settings Component: ",this.props.websites);
+    console.log(typeof this.props.websites);
+    
     return (
       <div>
         <div onSubmit={this.props.handleWebsiteSubmit}>
-          <form >
-
+          <form>
             <div>
               <fieldset>
                 <legend>
@@ -63,20 +60,22 @@ class Settings extends Component {
                       toggled = {this.state.blacklist} labelPosition="right"/>
                 </legend>
                 <div>
-                  <label>Enter the websites you want to block/allow separated by a comma. Enter <b>only</b> the domain name and extension. For example, enter facebook.com, snapchat.com, instagram.com <b>not</b> https://www.facebook.com/, https://www.snapchat.com/, https://www.instagram.com/.</label>
-                  <div>
-                  <textarea
-                      type="text"
-                      name="websites"
-                      defaultValue={this.state.websites.join(',')} />
-                  </div>
-                  <button type="submit">Save</button>
-                </div>
-              </fieldset>
-
+              <label>Enter the websites you want to block separated by a comma. Enter <b>only</b> the domain name and extension. For example, enter facebook.com, snapchat.com, instagram.com <b>not</b> https://www.facebook.com/, https://www.snapchat.com/, https://www.instagram.com/.</label>
+              <div>
+              {typeof this.props.websites === 'string' &&
+                (<textarea
+                  type="text"
+                  name="websites"
+                  defaultValue={this.props.websites}
+                  />)
+              }
+              </div>
             </div>
-          </form>
-        </div>
+          </fieldset>
+          <button type="submit">Save</button>
+        </form>
+      </div>
+      </div>
         <div className="mode_switch">
         <h2>Modes:</h2>
           <div>
