@@ -17,7 +17,7 @@ class App extends Component {
     const websites = evt.target.websites.value;
     evt.preventDefault();
     this.props.dispatch(setWebsites(websites));
-    updateWebsites(websites);
+    //updateWebsites(websites);
   }
 
 

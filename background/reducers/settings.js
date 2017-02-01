@@ -43,13 +43,13 @@ export function reducer (state = initialState, action) {
 }
 
 
-export const updateWebsites = (websites) => {
+// export const updateWebsites = (websites) => {
 
-	console.log("HEY!");
-	chrome.storage.sync.set({
-	       websites: websites
-	   }, function() {
-	   		console.log("in the callback function")
-	   })
-}
+// 	console.log("HEY!");
+// 	chrome.storage.sync.set({
+// 	       websites: websites
+// 	   }, function() {
+// 	   		console.log("in the callback function")
+// 	   })
+// }
 
