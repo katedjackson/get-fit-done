@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 class Settings extends Component {
   constructor(props) {
     super(props);
+   
 
   }
 
@@ -10,8 +11,10 @@ class Settings extends Component {
   //   chrome.storage.sync.get({ websites: '' }, (items) => this.setState({ websites: items.websites }));
   // }
 
+
   render() {
     console.log("settings Component: ",this.props.websites);
+    console.log(typeof this.props.websites);
     return (
       <div onSubmit={this.props.handleWebsiteSubmit}>
         <form >
@@ -20,11 +23,13 @@ class Settings extends Component {
             <div>
               <label>Enter the websites you want to block separated by a comma. Enter <b>only</b> the domain name and extension. For example, enter facebook.com, snapchat.com, instagram.com <b>not</b> https://www.facebook.com/, https://www.snapchat.com/, https://www.instagram.com/.</label>
               <div>
-                <textarea
+              {this.props.websites && 
+                (<textarea
                   type="text"
                   name="websites"
                   defaultValue={this.props.websites}
-                  />
+                  />)
+              }
               </div>
             </div>
           </fieldset>

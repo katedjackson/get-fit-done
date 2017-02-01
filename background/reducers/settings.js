@@ -12,7 +12,7 @@ export const setCount  = count => ({ type: 'SET_COUNT', count });
 
 /* ------------------    REDUCER    --------------------- */
 const initialState = {
-  websites: '',
+  websites: 'facebook.com',
   hourlySteps: 100,
   count: 0
 }
