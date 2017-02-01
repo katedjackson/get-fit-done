@@ -11,7 +11,6 @@ class Settings extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      websites: [],
       blacklist: false,
       disable: false,
       hourlySteps: false,
@@ -20,14 +19,14 @@ class Settings extends Component {
       waterLog: false,
 
       hourlyStepsNum: '250',
-      dailyStepsNum: 0,
+      dailyStepsNum: '0',
 
       disabledTime: [], //[start, end]
       dailyGoalTime: null,
       foodLogTime: [],
       waterLogTime: []
     }
-    this.onLoad = this.onLoad.bind(this);
+    //this.onLoad = this.onLoad.bind(this);
     this.handleTextChange = this.handleTextChange.bind(this);
     this.handleChangeTimeLog = this.handleChangeTimeLog.bind(this);
 
@@ -36,13 +35,13 @@ class Settings extends Component {
 
   }
 
-  onLoad =() => {
-    chrome.storage.sync.get({ websites: '' }, (items) => this.setState({ websites: items.websites }));
-  };
+  // onLoad =() => {
+  //   chrome.storage.sync.get({ websites: '' }, (items) => this.setState({ websites: items.websites }));
+  // };
 
   handleTextChange = (event) => {
     this.setState({
-      [`${event.target.id}Num`]: event.target.value,
+      [event.target.id]: event.target.value,
     });
   };
 
@@ -97,8 +96,8 @@ class Settings extends Component {
   render() {
     return (
       <div>
-        <div  className="setting_div">
-          <form onSubmit={this.props.handleWebsiteSubmit}>
+        <div  className="setting_div" onSubmit={this.props.handleWebsiteSubmit}>
+          <form>
             <fieldset>
               <legend>
                 {this.renderModes('blacklist', `Websites I want to ${this.state.blacklist ? 'block: ' : 'allow: '}`)}
@@ -107,15 +106,19 @@ class Settings extends Component {
                 <label>Enter the websites you want to block/allow separated by a comma. Enter <b>only</b> the domain name and extension. For example, enter facebook.com, snapchat.com, instagram.com <b>not</b> https://www.facebook.com/, https://www.snapchat.com/, https://www.instagram.com/.
                 </label>
                 <div>
-                  <TextField
+                  {typeof this.props.websites === 'string' &&
+                    (<TextField
                       name="websites"
+                      id="websites"
                       hintText="Put your websites"
-                      defaultValue= {this.state.websites.join(',')}
+                      defaultValue= {this.props.websites}
                       multiLine={true}
                       rows={2}
                       rowsMax={4}
-                    />
-                  <RaisedButton label="Save" primary={true} style ={{margin: 12}} type="submit" />
+                    />)}
+                  <button type="submit">Save</button>
+
+                  {/*<RaisedButton label="Save" type="submit" primary={true} style ={{margin: 12}}/>*/}
                 </div>
               </div>
             </fieldset>
@@ -138,14 +141,14 @@ class Settings extends Component {
                     {this.renderModes('hourlySteps', ' Hourly Steps')}
                     {this.state.hourlySteps ? (
                             <div>
-                            <TextField id="hourlySteps" value={this.state.hourlyStepsNum} onChange={this.handleTextChange}/>
+                            <TextField id="hourlyStepsNum" value={this.state.hourlyStepsNum} onChange={this.handleTextChange}/>
                             </div>) : null}
                   </div>
                   <div>
                   {this.renderModes('dailySteps', ' Daily Steps')}
                   {this.state.dailySteps ? (
                             <div>
-                            <TextField id="dailySteps" value={this.state.dailyStepsNum} onChange={this.handleTextChange}/>
+                            <TextField id="dailyStepsNum" value={this.state.dailyStepsNum} onChange={this.handleTextChange}/>
                             {this.renderTimeSelect('dailyGoalTime', 'By')}
                             </div>) : null}
                   </div>
