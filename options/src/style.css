@@ -26,6 +26,22 @@ div .tabs {
   height: 90%;
 }
 
+h3 {
+  border-bottom: 1px solid #dddddd;
+  margin: 0 0 1em;
+}
+
+.mode_switch {
+    border: 1px solid #dddddd;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 1em;
+
+    p {
+      margin: 0;
+    }
+  }
+
 .tabs_labels li {
   border-bottom: 1px solid grey;
   display: inline;
@@ -45,6 +61,7 @@ div .tabs {
   padding-top: 20px;
 }
 
+<<<<<<< HEAD
 /*div .col-lg-6 {
   display: inline-block;
   margin: 25px;
@@ -56,3 +73,9 @@ div .col-md-6 {
   margin: 25px;
   height: 100%;
 }*/
+=======
+.switch {
+  float: none;
+  margin-top: 1em;
+}
+>>>>>>> origin/setting-visualization

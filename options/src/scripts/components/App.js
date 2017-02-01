@@ -3,6 +3,7 @@ import Settings from './Settings';
 import Achievements from './Achievements';
 import Tabs from './Tabs';
 import Pane from './Pane';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 class App extends Component {
   constructor(props) {
@@ -21,6 +22,7 @@ class App extends Component {
 
   render() {
     return (
+<<<<<<< HEAD
       <div>
         <h1>Get [F]it Done</h1>
         <Tabs selected={0}>
@@ -32,6 +34,20 @@ class App extends Component {
           </Pane>
         </Tabs>
       </div>
+=======
+      <MuiThemeProvider>
+        <div>
+          <Tabs selected={0}>
+            <Pane label="Settings">
+              <Settings handleWebsiteSubmit={this.handleWebsiteSubmit}/>
+            </Pane>
+            <Pane label="Achievements">
+              <Achievements />
+            </Pane>
+          </Tabs>
+        </div>
+      </MuiThemeProvider>
+>>>>>>> origin/setting-visualization
     );
   }
 };

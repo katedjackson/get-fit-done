@@ -3,8 +3,8 @@ import {Grid, Col, Row} from 'react-bootstrap';
 import {Line} from 'react-chartjs-2';
 
 let stepData = {
-  1: 5,
-  2: 8
+  1: 1,
+  2: 1
 };
 
 const Achievements = (props) => {
