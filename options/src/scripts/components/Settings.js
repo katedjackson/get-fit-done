@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Toggle, TextField, TimePicker,
          SelectField, MenuItem, RaisedButton } from 'material-ui';
-
+import { Field, reduxForm } from 'redux-form';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import { Col, Row } from 'react-bootstrap';
 
@@ -17,7 +17,7 @@ class Settings extends Component {
       dailySteps: false,
       foodLog: false,
       waterLog: false,
-
+      
       hourlyStepsNum: '250',
       dailyStepsNum: '0',
 
@@ -38,6 +38,7 @@ class Settings extends Component {
   // onLoad =() => {
   //   chrome.storage.sync.get({ websites: '' }, (items) => this.setState({ websites: items.websites }));
   // };
+
 
   handleTextChange = (event) => {
     this.setState({
@@ -94,6 +95,9 @@ class Settings extends Component {
   }
 
   render() {
+    console.log("settings Component: ",this.props.websites);
+    console.log(typeof this.props.websites);
+    
     return (
       <div>
         <div  className="setting_div" onSubmit={this.props.handleWebsiteSubmit}>
