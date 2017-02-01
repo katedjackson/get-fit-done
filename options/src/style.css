@@ -1,6 +1,7 @@
 div .tabs {
-  border: 1px solid;
+
   border-color: grey;
+  margin: 15px;
 }
 
 h3 {
@@ -8,17 +9,20 @@ h3 {
   margin: 0 0 1em;
 }
 
-.mode_switch {
-    border: 1px solid #dddddd;
-    padding: 15px;
-    border-radius: 10px;
-    margin-bottom: 1em;
+.tab {
+  margin: 15px;
+}
 
-    p {
-      margin: 0;
-    }
-  }
+.tabs>div {
+  border-top-left-radius: 2em;
+  border-top-right-radius: 2em;
+}
 
+.setting_div {
+  padding-top: 15px;
+}
+
+/* tabs.. we might not need them */
 .tabs_labels li {
   border-bottom: 1px solid grey;
   display: inline;
@@ -36,9 +40,4 @@ h3 {
   display: block;
   margin: 15px;
   padding-top: 20px;
-}
-
-.switch {
-  float: none;
-  margin-top: 1em;
 }

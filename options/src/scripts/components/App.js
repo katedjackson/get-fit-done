@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import Settings from './Settings';
 import Achievements from './Achievements';
-import Tabs from './Tabs';
-import Pane from './Pane';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import {Tabs, Tab} from 'material-ui/Tabs';
 
 class App extends Component {
   constructor(props) {
@@ -24,18 +23,18 @@ class App extends Component {
     return (
       <MuiThemeProvider>
         <div>
-          <Tabs selected={0}>
-            <Pane label="Settings">
+          <Tabs selected={0} className="tabs">
+            <Tab label="Settings" className="tab">
               <Settings handleWebsiteSubmit={this.handleWebsiteSubmit}/>
-            </Pane>
-            <Pane label="Achievements">
+            </Tab>
+            <Tab label="Achievements" className="tab">
               <Achievements />
-            </Pane>
+            </Tab>
           </Tabs>
         </div>
       </MuiThemeProvider>
     );
   }
-};
+}
 
 export default App;

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Toggle, TextField, TimePicker,
-         SelectField, MenuItem } from 'material-ui';
+         SelectField, MenuItem, RaisedButton } from 'material-ui';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import { Col, Row } from 'react-bootstrap';
@@ -12,7 +12,7 @@ class Settings extends Component {
     super(props);
     this.state = {
       websites: [],
-      blacklist: true,
+      blacklist: false,
       disable: false,
       hourlySteps: false,
       dailySteps: false,
@@ -22,40 +22,28 @@ class Settings extends Component {
       hourlyStepsNum: '250',
       dailyStepsNum: 0,
 
-      disabledTimeStart: null,
-      disabledTimeEnd: null,
+      disabledTime: [], //[start, end]
       dailyGoalTime: null,
       foodLogTime: [],
       waterLogTime: []
     }
     this.onLoad = this.onLoad.bind(this);
-    this.handleChangeTimePicker = this.handleChangeTimePicker.bind(this);
     this.handleTextChange = this.handleTextChange.bind(this);
     this.handleChangeTimeLog = this.handleChangeTimeLog.bind(this);
+
     this.renderModes = this.renderModes.bind(this);
-    this.renderTimePicker = this.renderTimePicker.bind(this);
     this.renderTimeSelect = this.renderTimeSelect.bind(this);
 
   }
 
-  onLoad() {
+  onLoad =() => {
     chrome.storage.sync.get({ websites: '' }, (items) => this.setState({ websites: items.websites }));
-  }
-
-  //[`${}`]:value
-  handleChangeTimePicker = (event, date) => {
-    console.log('timer...', date, event);
-    console.log('id: disabledTime', disabledTime);
-    this.setState({disabledTimeStart: date});
-    //this.setState({[`${disabledTime.name}`]: date});
-    console.log('time picker', this.state.disabledTimeStart);
   };
 
   handleTextChange = (event) => {
     this.setState({
       [`${event.target.id}Num`]: event.target.value,
     });
-    console.log('text change', this.state[`${event.target.id}Num`]);
   };
 
   handleChangeTimeLog= (event, index, value) => {
@@ -70,23 +58,12 @@ class Settings extends Component {
   renderModes = (name, label) => {
     return (<Toggle name={name} label={label}
                    labelPosition="right"
-                   onToggle={() => this.setState({[`${name}`]: !this.state[`${name}`]})}
-                   toggled = {this.state[`${name}`]} />)
+                   onToggle={(event, toggled) => this.setState({[event.target.name]: toggled})} />)
   };
 
-  renderTimePicker = (id, name) => {
-    return (<TimePicker id={id}
-                name={name}
-                format="24hr"
-                hintText="24hr Format"
-                value={this.state[`${name}`]}
-                onChange={this.handleChangeTimePicker}/>
-            )
-  };
-
-  renderTimeSelect = (id) => {
+  renderTimeSelect = (id, label) => {
     return (<SelectField id={id}
-                         floatingLabelText="Select Time"
+                         floatingLabelText={label}
                          onChange={this.handleChangeTimeLog}
                          maxHeight ={200}>
               <MenuItem value={0} primaryText="12:00 am" />
@@ -120,8 +97,8 @@ class Settings extends Component {
   render() {
     return (
       <div>
-        <div onSubmit={this.props.handleWebsiteSubmit}>
-          <form >
+        <div  className="setting_div">
+          <form onSubmit={this.props.handleWebsiteSubmit}>
             <fieldset>
               <legend>
                 {this.renderModes('blacklist', `Websites I want to ${this.state.blacklist ? 'block: ' : 'allow: '}`)}
@@ -130,64 +107,68 @@ class Settings extends Component {
                 <label>Enter the websites you want to block/allow separated by a comma. Enter <b>only</b> the domain name and extension. For example, enter facebook.com, snapchat.com, instagram.com <b>not</b> https://www.facebook.com/, https://www.snapchat.com/, https://www.instagram.com/.
                 </label>
                 <div>
-                  <textarea
-                      type="text"
+                  <TextField
                       name="websites"
-                      defaultValue={this.state.websites.join(',')} />
-                  <button type="submit">Save</button>
+                      hintText="Put your websites"
+                      defaultValue= {this.state.websites.join(',')}
+                      multiLine={true}
+                      rows={2}
+                      rowsMax={4}
+                    />
+                  <RaisedButton label="Save" primary={true} style ={{margin: 12}} type="submit" />
                 </div>
               </div>
             </fieldset>
           </form>
         </div>
-        <fieldset>
-          <legend>Modes: </legend>
-            <Row>
-              <Col xs={12} sm={12} md={6} lg={6}>
-                <div>
-                  {this.renderModes('disable', ' Disable')}
-                  {this.state.disable ? (
-                          <div>
-                          {this.renderTimePicker('disabledTime', 'disabledTimeStart')}
-                          ~
-                          {this.renderTimePicker('disabledTime', 'disabledTimeEnd')}
-                          </div>) : null}
-                </div>
-                <div>
-                  {this.renderModes('hourlySteps', ' Hourly Steps')}
-                  {this.state.hourlySteps ? (
-                          <div>
-                          <TextField id="hourlySteps" value={this.state.hourlyStepsNum} onChange={this.handleTextChange}/>
-                          </div>) : null}
-                </div>
-                <div>
-                {this.renderModes('dailySteps', ' Daily Steps')}
-                {this.state.dailySteps ? (
-                          <div>
-                          <TextField id="dailySteps" value={this.state.dailyStepsNum} onChange={this.handleTextChange}/> by
-                          {this.renderTimePicker('dailyGoalTime',
-                                                 'dailyGoalTime')}
-                          </div>) : null}
-                </div>
-              </Col>
-              <Col xs={12} sm={12} md={6} lg={6}>
-                <div>
-                  {this.renderModes('foodLog', ' Food Log')}
-                          {this.state.foodLog ? (
-                          <div>
-                          {this.renderTimeSelect('foodLogTime')}
-                          </div>) : null}
-                </div>
-                <div>
-                  {this.renderModes('waterLog', ' Water Log')}
-                          {this.state.waterLog ? (
-                          <div>
-                          {this.renderTimeSelect('waterLogTime')}
-                          </div>) : null}
-                </div>
-              </Col>
-            </Row>
-        </fieldset>
+        <div className="setting_div">
+          <fieldset>
+            <legend><label>Modes: </label></legend>
+              <Row>
+                <Col xs={12} sm={12} md={6} lg={6}>
+                  <div>
+                    {this.renderModes('disable', ' Disable')}
+                    {this.state.disable ? (
+                            <div>
+                            {this.renderTimeSelect('disabledTime', 'From')}
+                            {this.renderTimeSelect('disabledTime', 'To')}
+                            </div>) : null}
+                  </div>
+                  <div>
+                    {this.renderModes('hourlySteps', ' Hourly Steps')}
+                    {this.state.hourlySteps ? (
+                            <div>
+                            <TextField id="hourlySteps" value={this.state.hourlyStepsNum} onChange={this.handleTextChange}/>
+                            </div>) : null}
+                  </div>
+                  <div>
+                  {this.renderModes('dailySteps', ' Daily Steps')}
+                  {this.state.dailySteps ? (
+                            <div>
+                            <TextField id="dailySteps" value={this.state.dailyStepsNum} onChange={this.handleTextChange}/>
+                            {this.renderTimeSelect('dailyGoalTime', 'By')}
+                            </div>) : null}
+                  </div>
+                </Col>
+                <Col xs={12} sm={12} md={6} lg={6}>
+                  <div>
+                    {this.renderModes('foodLog', ' Food Log')}
+                            {this.state.foodLog ? (
+                            <div>
+                            {this.renderTimeSelect('foodLogTime', 'Select Time')}
+                            </div>) : null}
+                  </div>
+                  <div>
+                    {this.renderModes('waterLog', ' Water Log')}
+                            {this.state.waterLog ? (
+                            <div>
+                            {this.renderTimeSelect('waterLogTime', 'Select Time')}
+                            </div>) : null}
+                  </div>
+                </Col>
+              </Row>
+          </fieldset>
+        </div>
       </div>
 
     );
