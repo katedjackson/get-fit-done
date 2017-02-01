@@ -39,6 +39,7 @@
   "web_accessible_resources": [
       "background/index.html",
       "content/src/scripts/style.css",
-      "content/src/bundle.js"
+      "content/src/bundle.js",
+      "options/src/index.html"
   ]
 }
