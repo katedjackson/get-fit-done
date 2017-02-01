@@ -1,8 +1,9 @@
 import {combineReducers} from 'redux';
+import { outerReducer } from 'redux-async-initial-state';
 
-import settings from './settings';
+import websites from './settings';
 
 
-export default combineReducers({
-  settings
-});
+export default outerReducer(combineReducers({
+  websites
+}));

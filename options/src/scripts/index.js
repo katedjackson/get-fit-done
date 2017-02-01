@@ -9,6 +9,8 @@ const store = new Store({
   portName: 'GET_FIT_DONE' // communication port name
 });
 
+window.store = store;
+
 render(
   <Provider store={store}>
     <App/>

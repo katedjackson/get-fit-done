@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 class Settings extends Component {
   constructor(props) {
     super(props);
-   
+
 
   }
 
@@ -23,7 +23,7 @@ class Settings extends Component {
             <div>
               <label>Enter the websites you want to block separated by a comma. Enter <b>only</b> the domain name and extension. For example, enter facebook.com, snapchat.com, instagram.com <b>not</b> https://www.facebook.com/, https://www.snapchat.com/, https://www.instagram.com/.</label>
               <div>
-              {this.props.websites && 
+              {typeof this.props.websites === 'string' &&
                 (<textarea
                   type="text"
                   name="websites"

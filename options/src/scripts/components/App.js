@@ -39,9 +39,8 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return{
-    count: state.count,
     websites: state.websites,
-    hourlySteps: state.hourlySteps
+    //hourlySteps: state.hourlySteps
   };
 };
 

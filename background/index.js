@@ -1,7 +1,7 @@
 'use strict';
 
 import {wrapStore} from 'react-chrome-redux';
-import { reducer } from './reducers/settings';
+import rootReducer from './reducers';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger'
@@ -28,7 +28,7 @@ const loadStore = (currentState) => {
     }));
 };
 
-const store = createStore(reducer, applyMiddleware(createLogger(), chromeStorage(keysToPersistInChrome), thunk, middleware(loadStore))); // a normal Redux store
+const store = createStore(rootReducer, applyMiddleware(createLogger(), chromeStorage(keysToPersistInChrome), thunk, middleware(loadStore))); // a normal Redux store
 
 window.store = store;
 wrapStore(store, {portName: 'GET_FIT_DONE'});
@@ -52,3 +52,14 @@ chrome.storage.sync.get({
     })
   })
 });
+// console.log(store.getState().websites);
+// var urlsArray = store.getState().websites.split(",").map(function(url){return url.trim() + "/*"});
+// chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
+//   urlsArray.forEach(function(url){
+//     let regexp = new RegExp(url);
+//     if(regexp.test(tab.url)){
+//       chrome.tabs.executeScript(tabId, {file: "content/src/bundle.js"});
+//       chrome.tabs.insertCSS(tabId, {file: "content/src/scripts/style.css"});
+//     }
+//   })
+// })
