@@ -3,6 +3,9 @@ import Settings from './Settings';
 import Achievements from './Achievements';
 import Tabs from './Tabs';
 import Pane from './Pane';
+import { connect } from 'react-redux';
+
+import { setWebsites, updateWebsites } from '../../../../background/reducers/settings'
 
 class App extends Component {
   constructor(props) {
@@ -12,19 +15,18 @@ class App extends Component {
 
   handleWebsiteSubmit (evt) {
     const websites = evt.target.websites.value;
-    chrome.storage.sync.set({
-        websites: websites
-    }, function() {
-      // chrome.runtime.reload();
-    })
+    evt.preventDefault();
+    this.props.dispatch(setWebsites(websites));
+    //updateWebsites(websites);
   }
+
 
   render() {
     return (
       <div>
         <Tabs selected={0}>
           <Pane label="Settings">
-            <Settings handleWebsiteSubmit={this.handleWebsiteSubmit}/>
+            <Settings handleWebsiteSubmit={this.handleWebsiteSubmit} websites={this.props.websites}/>
           </Pane>
           <Pane label="Achievements">
             <Achievements />
@@ -35,4 +37,18 @@ class App extends Component {
   }
 };
 
-export default App;
+const mapStateToProps = (state) => {
+  return{
+    websites: state.websites,
+    //hourlySteps: state.hourlySteps
+  };
+};
+
+
+export default connect(mapStateToProps)(App);
+
+
+
+
+
+
