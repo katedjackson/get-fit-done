@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import Switch from 'react-toggle-switch';
 import { Field, reduxForm } from 'redux-form';
 import { Toggle, TextField } from 'material-ui';
 

@@ -21,8 +21,6 @@ h1 {
 }
 
 div .tabs {
-  border: 1px solid;
-  border-color: grey;
   height: 90%;
 }
 
@@ -56,7 +54,6 @@ h3 {
 }
 
 .tabs_content {
-  display: block;
   margin: 15px;
   padding-top: 20px;
 }
@@ -64,4 +61,12 @@ h3 {
 .switch {
   float: none;
   margin-top: 1em;
+}
+
+.badges {
+  padding: 20px;
+}
+
+h2 {
+  text-align: center;
 }
