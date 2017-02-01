@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import Settings from './Settings';
 import Achievements from './Achievements';
-import Tabs from './Tabs';
-import Pane from './Pane';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import {Tabs, Tab} from 'material-ui/Tabs';
 import { connect } from 'react-redux';
 
 import { setWebsites, updateWebsites } from '../../../../background/reducers/settings';
@@ -26,19 +25,19 @@ class App extends Component {
       <MuiThemeProvider>
         <div>
           <h1>Get [F]it Done</h1>
-          <Tabs selected={0}>
-            <Pane label="Settings">
+          <Tabs selected={0} className="tabs">
+            <Tab label="Settings" className="tab">
               <Settings handleWebsiteSubmit={this.handleWebsiteSubmit} websites={this.props.websites}/>
-            </Pane>
-            <Pane label="Achievements">
+            </Tab>
+            <Tab label="Achievements" className="tab">
               <Achievements />
-            </Pane>
+            </Tab>
           </Tabs>
         </div>
       </MuiThemeProvider>
     );
   }
-};
+}
 
 const mapStateToProps = (state) => {
   return{

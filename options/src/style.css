@@ -21,6 +21,8 @@ h1 {
 }
 
 div .tabs {
+  border-color: grey;
+  margin: 15px;
   height: 90%;
 }
 
@@ -29,17 +31,22 @@ h3 {
   margin: 0 0 1em;
 }
 
-.mode_switch {
-  border: 1px solid #dddddd;
-  padding: 15px;
-  border-radius: 10px;
-  margin-bottom: 1em;
 
-  p {
-    margin: 0;
-  }
+.tab {
+  margin: 15px;
 }
 
+.tabs>div {
+  border-top-left-radius: 2em;
+  border-top-right-radius: 2em;
+
+}
+
+.setting_div {
+  padding-top: 15px;
+}
+
+/* tabs.. we might not need them */
 .tabs_labels li {
   border-bottom: 1px solid grey;
   display: inline;
@@ -70,3 +77,4 @@ h3 {
 h2 {
   text-align: center;
 }
+

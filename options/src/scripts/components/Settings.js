@@ -1,47 +1,98 @@
 import React, { Component, PropTypes } from 'react';
+import { Toggle, TextField, TimePicker,
+         SelectField, MenuItem, RaisedButton } from 'material-ui';
 import { Field, reduxForm } from 'redux-form';
-import { Toggle, TextField } from 'material-ui';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+import { Col, Row } from 'react-bootstrap';
 
-import TimePickerComponent from './TimePickerComponent'
-import TextFieldComponent from './TextFieldComponent'
+injectTapEventPlugin();
 
 class Settings extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      websites: [],
-      blacklist: true,
+      blacklist: false,
       disable: false,
       hourlySteps: false,
       dailySteps: false,
       foodLog: false,
       waterLog: false,
-      disabledTimeStart: null,
-      disabledTimeEnd: null,
+      
       hourlyStepsNum: '250',
-      dailyStepsNum: 0,
+      dailyStepsNum: '0',
+
+      disabledTime: [], //[start, end]
       dailyGoalTime: null,
       foodLogTime: [],
       waterLogTime: []
     }
-    this.onLoad = this.onLoad.bind(this);
+    //this.onLoad = this.onLoad.bind(this);
     this.handleTextChange = this.handleTextChange.bind(this);
+    this.handleChangeTimeLog = this.handleChangeTimeLog.bind(this);
+
+    this.renderModes = this.renderModes.bind(this);
+    this.renderTimeSelect = this.renderTimeSelect.bind(this);
+
   }
 
-  handleChangeTimePickerStart = (event, date) => {
-    this.setState({disabledTimeStart: date});
-  };
+  // onLoad =() => {
+  //   chrome.storage.sync.get({ websites: '' }, (items) => this.setState({ websites: items.websites }));
+  // };
 
-  handleChangeTimePickerEnd = (event, date) => {
-    this.setState({disabledTimeEnd: date});
-  };
 
   handleTextChange = (event) => {
-    console.log(event);
     this.setState({
-      hourlyStepsNum: event.target.value,
+      [event.target.id]: event.target.value,
     });
   };
+
+  handleChangeTimeLog= (event, index, value) => {
+    console.log("time log event, key, payload:", event.target, index, value);
+    this.setState(
+      {
+        foodLogTime: this.state.foodLogTime.push(value)
+      });
+    console.log('foodlogtime', this.state.foodLogTime)
+  };
+
+  renderModes = (name, label) => {
+    return (<Toggle name={name} label={label}
+                   labelPosition="right"
+                   onToggle={(event, toggled) => this.setState({[event.target.name]: toggled})} />)
+  };
+
+  renderTimeSelect = (id, label) => {
+    return (<SelectField id={id}
+                         floatingLabelText={label}
+                         onChange={this.handleChangeTimeLog}
+                         maxHeight ={200}>
+              <MenuItem value={0} primaryText="12:00 am" />
+              <MenuItem value={1} primaryText="1:00 am"/>
+              <MenuItem value={2} primaryText="2:00 am"/>
+              <MenuItem value={3} primaryText="3:00 am"/>
+              <MenuItem value={4} primaryText="4:00 am"/>
+              <MenuItem value={5} primaryText="5:00 am"/>
+              <MenuItem value={6} primaryText="6:00 am"/>
+              <MenuItem value={7} primaryText="7:00 am"/>
+              <MenuItem value={8} primaryText="8:00 am"/>
+              <MenuItem value={9} primaryText="9:00 am"/>
+              <MenuItem value={10} primaryText="10:00 am" />
+              <MenuItem value={11} primaryText="11:00 am" />
+              <MenuItem value={12} primaryText="12:00 pm" />
+              <MenuItem value={13} primaryText="1:00 pm"/>
+              <MenuItem value={14} primaryText="2:00 pm"/>
+              <MenuItem value={15} primaryText="3:00 pm"/>
+              <MenuItem value={16} primaryText="4:00 pm"/>
+              <MenuItem value={17} primaryText="5:00 pm"/>
+              <MenuItem value={18} primaryText="6:00 pm"/>
+              <MenuItem value={19} primaryText="7:00 pm"/>
+              <MenuItem value={20} primaryText="8:00 pm"/>
+              <MenuItem value={21} primaryText="9:00 pm"/>
+              <MenuItem value={22} primaryText="10:00 pm" />
+              <MenuItem value={23} primaryText="11:00 pm" />
+            </SelectField>
+            );
+  }
 
   render() {
     console.log("settings Component: ",this.props.websites);
@@ -49,83 +100,83 @@ class Settings extends Component {
     
     return (
       <div>
-        <div onSubmit={this.props.handleWebsiteSubmit}>
+        <div  className="setting_div" onSubmit={this.props.handleWebsiteSubmit}>
           <form>
-            <div>
-              <fieldset>
-                <legend>
-                <Toggle name="blacklist"
-                      label= {`Websites I want to ${this.state.blacklist ? 'block:' : 'allow:'}`}
-                      onToggle={() => this.setState({blacklist: !this.state.blacklist})}
-                      toggled = {this.state.blacklist} labelPosition="right"/>
-                </legend>
-                <div>
-              <label>Enter the websites you want to block separated by a comma. Enter <b>only</b> the domain name and extension. For example, enter facebook.com, snapchat.com, instagram.com <b>not</b> https://www.facebook.com/, https://www.snapchat.com/, https://www.instagram.com/.</label>
+            <fieldset>
+              <legend>
+                {this.renderModes('blacklist', `Websites I want to ${this.state.blacklist ? 'block: ' : 'allow: '}`)}
+              </legend>
               <div>
-              {typeof this.props.websites === 'string' &&
-                (<textarea
-                  type="text"
-                  name="websites"
-                  defaultValue={this.props.websites}
-                  />)
-              }
+                <label>Enter the websites you want to block/allow separated by a comma. Enter <b>only</b> the domain name and extension. For example, enter facebook.com, snapchat.com, instagram.com <b>not</b> https://www.facebook.com/, https://www.snapchat.com/, https://www.instagram.com/.
+                </label>
+                <div>
+                  {typeof this.props.websites === 'string' &&
+                    (<TextField
+                      name="websites"
+                      id="websites"
+                      hintText="Put your websites"
+                      defaultValue= {this.props.websites}
+                      multiLine={true}
+                      rows={2}
+                      rowsMax={4}
+                    />)}
+                  <button type="submit">Save</button>
+
+                  {/*<RaisedButton label="Save" type="submit" primary={true} style ={{margin: 12}}/>*/}
+                </div>
               </div>
-            </div>
-          </fieldset>
-          <button type="submit">Save</button>
-        </form>
-      </div>
-      </div>
-        <div className="mode_switch">
-        <h2>Modes:</h2>
-          <div>
-            <Toggle name="disable" label="Disable:"
-                    onToggle={() => this.setState({disable: !this.state.disable})}
-                    toggled = {this.state.disable} />
-            {this.state.disable ? (
-                    <div>
-                    <TimePickerComponent value24={this.state.disabledTimeStart} onChnage={this.handleChangeTimePickerStart}/>
-                    ~
-                    <TimePickerComponent value24={this.state.disabledTimeEnd}onChnage={this.handleChangeTimePickerEnd}/>
-                    </div>) : null}
-          </div>
-          <div>
-            <Toggle name="hourlySteps" label="Hourly Steps:"
-                    onToggle={() => this.setState({hourlySteps: !this.state.hourlySteps})}
-                    toggled = {this.state.hourlySteps} />
-            {this.state.hourlySteps ? (
-                    <div>
-                    <TextField id="hourlyStepText" value={this.state.hourlyStepsNum} onChange={this.handleTextChange}/>
-                    </div>) : null}
-            <p> {this.state.hourlyStepsNum} steps per hour </p>
-          </div>
-          <div>
-          <Toggle name="dailySteps" label="Daily Steps:"
-                  onToggle={() => this.setState({dailySteps: !this.state.dailySteps})}
-                  toggled = {this.state.dailySteps} />
-          {this.state.dailySteps ? (
-                    <div>
-                    <TextField id="dailyStepText" value={this.state.dailyStepsNum} onChange={this.handleTextChange}/>
-                    </div>) : null}
-            <p> {this.state.dailyStepsNum} steps per hour </p>
-            by
-            {this.state.dailySteps ? (
-                    <div>
-                    <TimePickerComponent value24={this.state.dailyGoalTime}/>
-                    </div>) : null}
-          </div>
-          <div>
-            <Toggle name="foodLog" label="Food Log:"
-                    onToggle={() => this.setState({foodLog: !this.state.foodLog})}
-                    toggled = {this.state.foodLog} />
-          </div>
-          <div>
-            <Toggle name="waterLog" label="Water Log:"
-                    onToggle={() => this.setState({waterLog: !this.state.waterLog})}
-                    toggled = {this.state.waterLog} />
-          </div>
+            </fieldset>
+          </form>
         </div>
-    </div>
+        <div className="setting_div">
+          <fieldset>
+            <legend><label>Modes: </label></legend>
+              <Row>
+                <Col xs={12} sm={12} md={6} lg={6}>
+                  <div>
+                    {this.renderModes('disable', ' Disable')}
+                    {this.state.disable ? (
+                            <div>
+                            {this.renderTimeSelect('disabledTime', 'From')}
+                            {this.renderTimeSelect('disabledTime', 'To')}
+                            </div>) : null}
+                  </div>
+                  <div>
+                    {this.renderModes('hourlySteps', ' Hourly Steps')}
+                    {this.state.hourlySteps ? (
+                            <div>
+                            <TextField id="hourlyStepsNum" value={this.state.hourlyStepsNum} onChange={this.handleTextChange}/>
+                            </div>) : null}
+                  </div>
+                  <div>
+                  {this.renderModes('dailySteps', ' Daily Steps')}
+                  {this.state.dailySteps ? (
+                            <div>
+                            <TextField id="dailyStepsNum" value={this.state.dailyStepsNum} onChange={this.handleTextChange}/>
+                            {this.renderTimeSelect('dailyGoalTime', 'By')}
+                            </div>) : null}
+                  </div>
+                </Col>
+                <Col xs={12} sm={12} md={6} lg={6}>
+                  <div>
+                    {this.renderModes('foodLog', ' Food Log')}
+                            {this.state.foodLog ? (
+                            <div>
+                            {this.renderTimeSelect('foodLogTime', 'Select Time')}
+                            </div>) : null}
+                  </div>
+                  <div>
+                    {this.renderModes('waterLog', ' Water Log')}
+                            {this.state.waterLog ? (
+                            <div>
+                            {this.renderTimeSelect('waterLogTime', 'Select Time')}
+                            </div>) : null}
+                  </div>
+                </Col>
+              </Row>
+          </fieldset>
+        </div>
+      </div>
 
     );
   }
