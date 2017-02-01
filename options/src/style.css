@@ -32,15 +32,15 @@ h3 {
 }
 
 .mode_switch {
-    border: 1px solid #dddddd;
-    padding: 15px;
-    border-radius: 10px;
-    margin-bottom: 1em;
+  border: 1px solid #dddddd;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 1em;
 
-    p {
-      margin: 0;
-    }
+  p {
+    margin: 0;
   }
+}
 
 .tabs_labels li {
   border-bottom: 1px solid grey;
@@ -61,21 +61,7 @@ h3 {
   padding-top: 20px;
 }
 
-<<<<<<< HEAD
-/*div .col-lg-6 {
-  display: inline-block;
-  margin: 25px;
-  height: 100%;
-}
-
-div .col-md-6 {
-  display: inline-block;
-  margin: 25px;
-  height: 100%;
-}*/
-=======
 .switch {
   float: none;
   margin-top: 1em;
 }
->>>>>>> origin/setting-visualization
