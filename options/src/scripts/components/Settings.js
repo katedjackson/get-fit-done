@@ -3,17 +3,15 @@ import React, {Component} from 'react';
 class Settings extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      websites: []
-    }
-    this.onLoad = this.onLoad.bind(this);
+
   }
 
-  onLoad() {
-    chrome.storage.sync.get({ websites: '' }, (items) => this.setState({ websites: items.websites }));
-  }
+  // onLoad() {
+  //   chrome.storage.sync.get({ websites: '' }, (items) => this.setState({ websites: items.websites }));
+  // }
 
   render() {
+    console.log("settings Component: ",this.props.websites);
     return (
       <div onSubmit={this.props.handleWebsiteSubmit}>
         <form >
@@ -25,7 +23,8 @@ class Settings extends Component {
                 <textarea
                   type="text"
                   name="websites"
-                  defaultValue={this.state.websites.join(',')} />
+                  defaultValue={this.props.websites}
+                  />
               </div>
             </div>
           </fieldset>

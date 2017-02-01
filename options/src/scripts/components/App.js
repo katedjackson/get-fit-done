@@ -5,7 +5,7 @@ import Tabs from './Tabs';
 import Pane from './Pane';
 import { connect } from 'react-redux';
 
-import { setCount } from '../../../../background/reducers/settings'
+import { setCount, setWebsites, updateWebsites } from '../../../../background/reducers/settings'
 
 class App extends Component {
   constructor(props) {
@@ -21,8 +21,10 @@ class App extends Component {
     // }, function() {
     //   // chrome.runtime.reload();
     // })
-    this.props.dispatch(setCount(500));
     console.log(this.props)
+    //this.props.dispatch(setCount(500));
+    this.props.dispatch(setWebsites(websites));
+    updateWebsites(websites);
   }
 
   componentWillReceiveProps () {
@@ -34,7 +36,7 @@ class App extends Component {
       <div>
         <Tabs selected={0}>
           <Pane label="Settings">
-            <Settings handleWebsiteSubmit={this.handleWebsiteSubmit}/>
+            <Settings handleWebsiteSubmit={this.handleWebsiteSubmit} websites={this.props.websites}/>
           </Pane>
           <Pane label="Achievements">
             <Achievements />
@@ -53,10 +55,12 @@ const mapStateToProps = (state) => {
   };
 };
 
+//const mapDispatch = { updateWebsites }
+
 // const mapDispatchToProps = (dispatch) => {
 //   return{
-//       incrementCount (count) {
-//         dispatch(setCount(count))
+//       updateWebsites (websites) {
+//         dispatch(updateWebsites(websites))
 //       }
 //     }
 //   );
