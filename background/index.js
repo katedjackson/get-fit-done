@@ -49,8 +49,8 @@ chrome.storage.sync.get({
     urlsArray.forEach(function(url){
       let regexp = new RegExp(url);
       if(regexp.test(tab.url)){
-        chrome.tabs.executeScript(tabId, {file: "content/src/bundle.js"});
-        chrome.tabs.insertCSS(tabId, {file: "content/src/scripts/style.css"});
+        chrome.tabs.executeScript(tabId, {file: "build/content.js"});
+        chrome.tabs.insertCSS(tabId, {file: "content/style.css"});
       }
     })
   })

@@ -1,13 +1,17 @@
-
 'use strict';
-
+var path = require("path");
 var webpack = require('webpack');
 
 module.exports = {
-  entry: './src/scripts/index.js',
+  entry: {
+      background: "./background/index.js",
+      content: "./content/index.js",
+      options: "./options/index.js",
+      popup: "./popup/index.js"
+  },
   output: {
-    path: __dirname,
-    filename: './src/bundle.js'
+      path: path.join(__dirname, "build"),
+      filename: "[name].js"
   },
   context: __dirname,
   devtool: 'source-map',

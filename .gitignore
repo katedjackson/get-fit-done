@@ -1,7 +1,2 @@
 node_modules
-bundle.js
-bundle.js.map
-popup/src/bundle.js
-popup/src/bundle.js.map
-options/src/bundle.js
-options/src/bundle.js.map
+build

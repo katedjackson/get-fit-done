@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack -w",
-    "start": "(cd background && webpack -w) & (cd content && npm start) & (cd popup && npm start) & (cd options && npm start)",
     "test": "mocha --watch --compilers js:babel-register server/api/**/*.test.js",
     "seed": "node seed.js"
   },
@@ -20,12 +19,50 @@
   },
   "homepage": "https://github.com/katedjackson/get-fit-done#readme",
   "dependencies": {
+    "babel": "^6.5.2",
+    "babel-core": "^6.18.2",
+    "babel-loader": "^6.2.7",
+    "babel-plugin-lodash": "^3.2.10",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.16.0",
+    "babel-preset-stage-2": "^6.18.0",
+    "chalk": "^1.1.3",
+    "friendly-errors-webpack-plugin": "^1.1.0",
+    "node-oauth": "^0.1.3",
+    "npm-install-webpack-plugin": "^4.0.4",
+    "progress-bar-webpack-plugin": "^1.9.0",
     "react-chrome-redux": "^1.2.0",
     "react-simpletabs": "^0.7.0",
-    "redux-logger": "^2.7.4"
+    "redux-logger": "^2.7.4",
+    "webpack": "^1.13.3"
   },
   "devDependencies": {
-    "oauth2": "0.0.1",
-    "webpack": "^1.14.0"
+    "axios": "^0.15.2",
+    "bluebird": "^3.4.7",
+    "chart.js": "^2.4.0",
+    "css-loader": "^0.26.0",
+    "file-loader": "^0.9.0",
+    "lodash": "^4.17.4",
+    "material-ui": "^0.16.7",
+    "node-sass": "^3.13.0",
+    "react": "^15.4.0",
+    "react-bootstrap": "^0.30.7",
+    "react-chartjs-2": "^2.0.0",
+    "react-chrome-redux": "^1.2.0",
+    "react-dom": "^15.4.0",
+    "react-motion": "^0.4.5",
+    "react-progressbar.js": "^0.2.0",
+    "react-redux": "^4.4.6",
+    "react-tap-event-plugin": "^2.0.1",
+    "redux": "^3.6.0",
+    "redux-actions": "^0.13.0",
+    "redux-async-initial-state": "^0.2.0",
+    "redux-form": "^6.5.0",
+    "redux-logger": "^2.7.4",
+    "redux-thunk": "^2.2.0",
+    "sass-loader": "^4.0.2",
+    "semantic-ui-react": "^0.64.4",
+    "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7"
   }
 }
