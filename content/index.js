@@ -9,7 +9,6 @@ const store = new Store({
   portName: 'GET_FIT_DONE' // communication port name
 });
 
-window.store = store;
 
 if (!document.getElementById('rcr-anchor')) {
   const anchor = document.createElement('div');
