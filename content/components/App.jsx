@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ProgressBar from './ProgressBar';
+import {connect} from 'react-redux';
 
 
 class App extends Component {
@@ -34,4 +35,12 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  console.log('state: ', state);
+  return {
+    steps: state.user.steps,
+    stepGoal: state.settings.stepGoal
+  };
+};
+
+export default connect(mapStateToProps)(App);

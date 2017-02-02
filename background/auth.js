@@ -20,8 +20,3 @@ export const fitbitAuth = () => {
       });
   });
 };
-
-// axios.get('https://api.fitbit.com/1/user/-/activities/date/2017-01-26.json', { headers: {'Authorization': 'Bearer ' + accessToken}})
-// .then(response => {
-//   console.log(response.data.summary.steps);
-// })
