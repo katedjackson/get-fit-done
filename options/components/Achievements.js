@@ -8,10 +8,10 @@ class Achievements extends Component {
     this.state = {
       data: [3750, 2469, 8762, 9883, 11786, 3982, 1984],
       badges: [
-        { id: 1, url: "/options/src/badges/steps1.png" },
-        { id: 2, url: "/options/src/badges/steps2.png" },
-        { id: 3, url: "/options/src/badges/streak1.png" },
-        { id: 4, url: "/options/src/badges/streak2.png" }
+        { id: 1, url: "/options/badges/steps1.png" },
+        { id: 2, url: "/options/badges/steps2.png" },
+        { id: 3, url: "/options/badges/streak1.png" },
+        { id: 4, url: "/options/badges/streak2.png" }
       ]
     };
     this.getDate = this.getDate.bind(this);
