@@ -20,9 +20,9 @@ export const addNewAchievement = createAction(ADD_ACHIEVEMENT);
 
 export const addFailure = createAction(ADD_FAILURE);
 
-export const loginUser = createAction(GET_STEPS);
+export const getSteps = createAction(GET_STEPS);
 
-export const logoutUser = createAction(GET_WEEKLY_STEPS);
+export const getWeeklySteps = createAction(GET_WEEKLY_STEPS);
 
 /* ------------------    REDUCER    --------------------- */
 
@@ -60,7 +60,7 @@ export default handleActions({
     let date = d.toISOString().slice(0, 10);
     axios.get(`https://api.fitbit.com/1/user/-/activities/date/${date}/1w.json`, { headers: {'Authorization': 'Bearer ' + state.user.accessToken}})
     .then(response => {
-      return { weeklySteps: response.data.activities-log-steps };
+      return { weeklySteps: response.data[`activities-log-steps`] };
     })
   }
 }, initialState);
