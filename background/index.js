@@ -38,10 +38,10 @@ wrapStore(store, {portName: 'GET_FIT_DONE'});
 
 var websites;
 chrome.storage.sync.get({
-  websites: '',
+  settings: {},
 }, function(items) {
   console.log("test!")
-  websites = items.websites;
+  websites = items.settings.websites;
   console.log('background websites: ', websites);
   var urlsArray = websites.split(",").map(function(url){return url.trim() + "/*"});
 
