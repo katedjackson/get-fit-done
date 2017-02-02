@@ -9,7 +9,7 @@ const store = new Store({
   portName: 'GET_FIT_DONE' // communication port name
 });
 
-console.log('from content script store: ', store.getState().websites)
+window.store = store;
 
 if (!document.getElementById('rcr-anchor')) {
   const anchor = document.createElement('div');
@@ -18,8 +18,9 @@ if (!document.getElementById('rcr-anchor')) {
   document.body.insertBefore(anchor, document.body.childNodes[0]);
 
   render(
-    <Provider store={store}>
-      <App/>
-    </Provider>
+   <Provider store={store}>
+     <App/>
+   </Provider>
     , document.getElementById('rcr-anchor'));
 }
+
