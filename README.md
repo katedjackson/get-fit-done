@@ -1,45 +1,21 @@
-#Get [F]it Done.
+# Get [F]it Done
+> Get [F]it Done is a chrome extension that utilizes your personal Fitbit data to encourage healthy habits by blocking browser usage. Adjust the settings to fit your needs and allow the extension to gently nudge you to stretch your legs, exercise, eat, drink, and sleep.
 
-MVP
+## Get started
 
-Goals:
-  - Blocking pages the user adds to the blacklist
-  - Fitbit oauth2
-  - Grabbing data from fitbit
+### Deployed Apps
+The Get [F]it Done chrome extension (beta) is available on the Chrome Web Store.
 
-Parts working:
-  - Blocking pages the user adds to blacklist
-  - Fitbit oauth2 (we think)
+https://chrome.google.com/webstore/detail/idkfitbit/fecjgkehmgognabbnohaoombfboddooo
 
-Parts not working:
-  - Not grabbing data from fitbit yet
+See the instructions below if you would rather delve into the developer side of flow.
 
-Open questions:
-  - How to test our oauth without publishing
-  - Does blocked page html (background/index.html) even belong in background
-
-Code to look at:
-  - General file structure? Ours has a lot of layers possibly suggest a better way to modularize
-  - Gulp to handle all the package.jsons/webpacks at once?
-
-Instructions for building project:
-
-
-
-
-  - git clone https://github.com/katedjackson/get-fit-done.git
-  - cd get-fit-done
-  - npm install
-  - cd popup
-  - npm install
-  - npm start
-  - cd ../options
-  - npm install
-  - npm start
-
-  - go to chrome://extensions/ in Chrome browser
-  - check off developer mode
-  - click load unpacked extension
-  - select get-fit-done directory
-
-#Published extension: https://chrome.google.com/webstore/detail/idkfitbit/fecjgkehmgognabbnohaoombfboddooo
+### Web App
+```shell
+npm install
+npm run build
+```
+* In a chrome browser, go to chrome extensions (chrome://extensions/)
+* Check the 'Developer Mode' box
+* Load unpacked extension and select the root extension folder
+* Open a new tab and enjoy!
