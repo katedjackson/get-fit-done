@@ -12,9 +12,6 @@ class App extends Component {
     this.giveUpToggle = this.giveUpToggle.bind(this);
   }
 
-  componentDidMount(){
-    console.log('block mounted')
-  }
 
   giveUpToggle(){
     this.setState({showPopup: this.state.showPopup ? false : true})

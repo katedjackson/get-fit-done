@@ -36,6 +36,11 @@ wrapStore(store, {portName: 'GET_FIT_DONE'});
 
 /* doesn't block page that was added until extension reloaded */
 
+
+
+
+
+
 // var websites;
 // chrome.storage.sync.get({
 //   settings: {},
