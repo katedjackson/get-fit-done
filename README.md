@@ -8,9 +8,9 @@ The Get [F]it Done chrome extension (beta) is available on the Chrome Web Store.
 
 https://chrome.google.com/webstore/detail/idkfitbit/fecjgkehmgognabbnohaoombfboddooo
 
-See the instructions below if you would rather delve into the developer side of flow.
+See the instructions below if you would rather delve into the developer side.
 
-### Web App
+### Development Mode
 ```shell
 npm install
 npm run build
