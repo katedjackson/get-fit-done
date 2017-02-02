@@ -40,9 +40,7 @@ var websites;
 chrome.storage.sync.get({
   settings: {}
 }, function(items) {
-  console.log("test!")
   websites = items.settings.websites;
-  console.log('background websites: ', websites);
   var urlsArray = websites.split(",").map(function(url){return url.trim() + "/*"});
 
   chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){

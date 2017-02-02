@@ -11,14 +11,17 @@ const auth_url = "https://www.fitbit.com/oauth2/authorize/?" +
     "&expires_in=120";
 
 export const fitbitAuth = () => {
-  chrome.identity.launchWebAuthFlow({'url':auth_url, 'interactive': true},
-  function(redirect_url) {
-     // extract the token from this url and use it for future requests
-     const accessToken = redirect_url.substring(redirect_url.indexOf("=") + 1, redirect_url.indexOf("&user_id"));
-
-     axios.get('https://api.fitbit.com/1/user/-/activities/date/2017-01-26.json', { headers: {'Authorization': 'Bearer ' + accessToken}})
-     .then(response => {
-       console.log(response.data.summary.steps);
-     })
+  return new Promise(function (resolve, reject) {
+    chrome.identity.launchWebAuthFlow({'url':auth_url, 'interactive': true},
+      function(redirect_url) {
+         // extract the token from this url and use it for future requests
+         let accessToken = redirect_url.substring(redirect_url.indexOf("=") + 1, redirect_url.indexOf("&user_id"));
+         resolve(accessToken);
+      });
   });
 };
+
+// axios.get('https://api.fitbit.com/1/user/-/activities/date/2017-01-26.json', { headers: {'Authorization': 'Bearer ' + accessToken}})
+// .then(response => {
+//   console.log(response.data.summary.steps);
+// })

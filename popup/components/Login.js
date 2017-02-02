@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { Button } from 'semantic-ui-react';
 import {fitbitAuth} from '../../background/auth';
+import { loginUser } from '../../background/reducers/user';
 
 
 class Login extends Component {
@@ -11,7 +12,11 @@ class Login extends Component {
   }
 
   onClick() {
-    fitbitAuth();
+    console.log(this.props)
+    const dispatch = this.props.dispatch;
+    fitbitAuth().then( accessToken => {
+      dispatch(loginUser(accessToken));
+    })
   }
 
   render() {
@@ -23,4 +28,9 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapStateToProps = (state) => {
+  console.log('state: ', state);
+  return {};
+};
+
+export default connect(mapStateToProps)(Login);

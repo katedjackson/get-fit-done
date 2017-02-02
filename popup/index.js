@@ -9,8 +9,8 @@ const store = new Store({
   portName: 'GET_FIT_DONE' // communication port name
 });
 
-// The store implements the same interface as Redux's store
-// so you can use tools like `react-redux` no problem!
+window.store = store;
+
 render(
   <Provider store={store}>
     <App/>
