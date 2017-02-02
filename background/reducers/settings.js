@@ -26,7 +26,7 @@ export const setWebsites = createAction(SET_WEBSITES);
 
 export default handleActions({
 	SET_WEBSITES: (state, { payload }) => {
-		return payload;
+		return {websites: payload};
 	}
 }, initialState);
 
