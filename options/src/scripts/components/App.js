@@ -21,6 +21,7 @@ class App extends Component {
   }
 
   render() {
+    console.log('from app.js: ', this.props)
     return (
       <MuiThemeProvider>
         <div>
@@ -40,6 +41,7 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {
+  console.log('state: ', state)
   return{
     websites: state.websites,
     //hourlySteps: state.hourlySteps
