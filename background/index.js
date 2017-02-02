@@ -38,7 +38,7 @@ wrapStore(store, {portName: 'GET_FIT_DONE'});
 
 var websites;
 chrome.storage.sync.get({
-  settings: '',
+  settings: {}
 }, function(items) {
   console.log("test!")
   websites = items.settings.websites;
