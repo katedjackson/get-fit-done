@@ -1,21 +1,18 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { Icon } from 'semantic-ui-react';
-
-// var ProgressBar = require('react-progressbar')
-// var Circle = ProgressBar.Circle;
-
 import { Circle } from 'react-progressbar.js'
 
-const Blocked = React.createClass({
-  getInitialState() {
-    return {
-      progress: 0.5,
-    };
-  },
+class Blocked extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      progress: 0.5
+    }
+  }
 
   render() {
-    var options = {
+    const options = {
         strokeWidth: 20,
         trailWidth: 20,
         easing: 'easeInOut',
@@ -26,7 +23,7 @@ const Blocked = React.createClass({
         color: '#00B0B9'
     };
 
-    var containerStyle = {
+    const containerStyle = {
         width: '200px',
         height: '200px'
     };
@@ -40,7 +37,7 @@ const Blocked = React.createClass({
           containerStyle={containerStyle}
           containerClassName={'.progressbar'} />
     );
-  },
-});
+  }
+}
 
 export default Blocked;

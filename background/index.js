@@ -9,7 +9,7 @@ import chromeStorage, { loadFromStorage } from './redux/chromeStorage';
 import { middleware } from 'redux-async-initial-state';
 
 
-const keysToPersistInChrome = ['settings'];
+const keysToPersistInChrome = ['settings', 'user'];
 
 // load values for keys to persist from storage into redux store
 // perform any initial server requests that are independent
@@ -38,10 +38,10 @@ wrapStore(store, {portName: 'GET_FIT_DONE'});
 
 var websites;
 chrome.storage.sync.get({
-  websites: '',
+  settings: '',
 }, function(items) {
   console.log("test!")
-  websites = items.websites;
+  websites = items.settings.websites;
   console.log('background websites: ', websites);
   var urlsArray = websites.split(",").map(function(url){return url.trim() + "/*"});
 

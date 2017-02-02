@@ -12,7 +12,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Login />
+        {this.props.user ? <Blocked /> : <Login />}
       </div>
     );
   }
