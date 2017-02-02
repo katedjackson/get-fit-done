@@ -43,7 +43,7 @@ class App extends Component {
 const mapStateToProps = (state) => {
   console.log('state: ', state)
   return{
-    websites: state.websites,
+    websites: state.settings && state.settings.websites
     //hourlySteps: state.hourlySteps
   };
 };

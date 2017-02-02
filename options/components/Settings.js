@@ -17,7 +17,7 @@ class Settings extends Component {
       dailySteps: false,
       foodLog: false,
       waterLog: false,
-      
+
       hourlyStepsNum: '250',
       dailyStepsNum: '0',
 
@@ -97,7 +97,7 @@ class Settings extends Component {
   render() {
     console.log("settings Component: ",this.props.websites);
     console.log(typeof this.props.websites);
-    
+
     return (
       <div>
         <div  className="setting_div" onSubmit={this.props.handleWebsiteSubmit}>
@@ -110,16 +110,16 @@ class Settings extends Component {
                 <label>Enter the websites you want to block/allow separated by a comma. Enter <b>only</b> the domain name and extension. For example, enter facebook.com, snapchat.com, instagram.com <b>not</b> https://www.facebook.com/, https://www.snapchat.com/, https://www.instagram.com/.
                 </label>
                 <div>
-                  {typeof this.props.websites === 'string' &&
-                    (<TextField
+                  {console.log('didRender with websites:', this.props.websites)}
+                  {typeof this.props.websites === 'string' && <TextField
                       name="websites"
                       id="websites"
                       hintText="Put your websites"
-                      defaultValue= {this.props.websites}
+                      defaultValue={this.props.websites}
                       multiLine={true}
                       rows={2}
                       rowsMax={4}
-                    />)}
+                    />}
                   <button type="submit">Save</button>
 
                   {/*<RaisedButton label="Save" type="submit" primary={true} style ={{margin: 12}}/>*/}

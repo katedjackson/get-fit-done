@@ -9,7 +9,7 @@ import chromeStorage, { loadFromStorage } from './redux/chromeStorage';
 import { middleware } from 'redux-async-initial-state';
 
 
-const keysToPersistInChrome = ['websites'];
+const keysToPersistInChrome = ['settings'];
 
 // load values for keys to persist from storage into redux store
 // perform any initial server requests that are independent
