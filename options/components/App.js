@@ -5,7 +5,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import { connect } from 'react-redux';
 
-import { setWebsites, updateWebsites } from '../../../../background/reducers/settings';
+import { setWebsites, updateWebsites } from '../../background/reducers/settings';
 
 class App extends Component {
   constructor(props) {

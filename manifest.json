@@ -6,23 +6,16 @@
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApjR3Sh9CmGrJP+XLBF6IraqQAqXxg1MtZ/WcgnN/0HR2w1LWw2DfW/uxSrHU/xIFn1OXKDcBJEeWtpF0Z9sfaKYsHGoBhMQ9622GJYnsCRZZeGuXCe5mYnw0A2p7eh1+YWGHV5CM85n7KGb9pMpvhYy5JoYGl49sKsQlgfFxPDuMThGZ9dlHXHvtUBa0tJEMcfv9OtUdrY5F8GHDIBGxWfprgjEpsr9r4HRDYQ87U0AuGx2Mo4IEOeplHDPyqQVW/eq35icMA0G/tiyjIbEma0dbzTMjDRfFFQN0rE1WKf+IFPGRx/j44WBruQFI2IJun7mSDXTND842Izl3l3e6eQIDAQAB",
   "browser_action":{
     "default_title": "Get Fit Done",
-    "default_popup" : "popup/src/index.html"
+    "default_popup" : "popup/index.html"
   },
-  // "content_scripts": [
-  //   {
-  //     "matches": ["http://*/*", "https://*/*"],
-  //     "css": ["content/src/scripts/style.css"],
-  //     "js": ["content/src/bundle.js"]
-  //   }
-  // ],
   "options_ui": {
-    "page": "options/src/index.html",
+    "page": "options/index.html",
     "chrome_style": true,
     "open_in_tab": true
   },
   "background": {
     "scripts": [
-      "background/bundle.js"
+      "build/background.js"
     ]
   },
   "permissions": [
@@ -37,9 +30,6 @@
     "identity"
   ],
   "web_accessible_resources": [
-      "background/index.html",
-      "content/src/scripts/style.css",
-      "content/src/bundle.js",
-      "options/src/index.html"
+      "content/style.css"
   ]
 }
