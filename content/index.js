@@ -18,8 +18,9 @@ if (!document.getElementById('rcr-anchor')) {
   document.body.insertBefore(anchor, document.body.childNodes[0]);
 
   render(
-    <Provider store={store}>
-      <App/>
-    </Provider>
+   <Provider store={store}>
+     <App/>
+   </Provider>
     , document.getElementById('rcr-anchor'));
 }
+

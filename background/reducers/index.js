@@ -3,11 +3,10 @@ import { outerReducer } from 'redux-async-initial-state';
 
 import settings from './settings';
 import user from './user';
-import fitbit-data from './fitbit-data'
-
+import block from './block';
 
 export default outerReducer(combineReducers({
   settings,
   user,
-  fitbit-data
+  block
 }));
