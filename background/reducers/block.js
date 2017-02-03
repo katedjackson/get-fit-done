@@ -2,7 +2,7 @@ import {createAction, handleActions } from 'redux-actions';
 import { PropTypes } from 'react';
 
 const initialState = {
-  showBlock: true
+  showBlock: false
 }
 
 export const SET_BLOCK = 'SET_BLOCK';
