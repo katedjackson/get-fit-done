@@ -11,6 +11,7 @@ import { getDailyThunk, getWeeklyThunk, getHourlyThunk } from './reducers/user';
 
 import { setBlock, unblock } from './reducers/block';
 import { getTimeLeft, resetTime, decrementTime } from './reducers/time'
+// import { getSteps } from './reducers/user'
 
 const keysToPersistInChrome = ['settings', 'user'];
 
@@ -56,31 +57,35 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
     }
 });
 
-var steps = 200;
+
 
 //keeping track of time
 var pollInterval = 1000 * 60; // 1 minute, in milliseconds
 
 function startRequest() {
+  store.dispatch({type: 'getSteps'});
   var state = store.getState();
+  var steps = state.user.steps;
+  var lastSteps = state.user.lastSteps;
+  var hrSteps = steps-lastSteps
   var blockState = state.block.showBlock;
   var stepGoal = state.settings.stepGoal;
   var timeLeft = state.time.timeLeft;
   console.log ('step')
 
-  if(blockState && steps > 250){
+  if(blockState && hrSteps > stepGoal){
     store.dispatch(unblock());
     store.dispatch(resetTime());
   }
   else if (!blockState){
-    if(steps < stepGoal && timeLeft === 0) {
+    if(hrSteps < stepGoal && timeLeft === 0) {
       store.dispatch(setBlock());
     }
-    else if(steps < 250 && timeLeft <= 10) {
+    else if(hrSteps < stepGoal && timeLeft <= 10) {
       chrome.browserAction.setBadgeBackgroundColor({ color: 'red'});
       store.dispatch(decrementTime())
     }
-    else if(steps >= stepGoal && timeLeft === 0) {
+    else if(hrSteps >= stepGoal && timeLeft === 0) {
       store.dispatch(resetTime())
     }else{
       console.log('DECREMENT')
