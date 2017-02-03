@@ -9,14 +9,17 @@ import chromeStorage, { loadFromStorage } from './redux/chromeStorage';
 import { middleware } from 'redux-async-initial-state';
 import { getDailyThunk, getWeeklyThunk, getHourlyThunk } from './reducers/user';
 
-const keysToPersistInChrome = ['settings', 'users' , 'block'];
+import { setBlock, unblock } from './reducers/block';
+import { getTimeLeft, resetTime, decrementTime } from './reducers/time'
+
+const keysToPersistInChrome = ['settings', 'user'];
 
 // load values for keys to persist from storage into redux store
 // perform any initial server requests that are independent
 // from login state
 const loadStore = (currentState) => {
   const chromeStoragePromise = loadFromStorage(keysToPersistInChrome);
-  console.log('current state: ', currentState)
+  //console.log('current state: ', currentState)
   return Promise.all([
     chromeStoragePromise,
   ])
@@ -52,6 +55,55 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
         sendResponse(sender.tab.url);
     }
 });
+
+var steps = 200;
+
+//keeping track of time
+var pollInterval = 1000 * 60; // 1 minute, in milliseconds
+
+function startRequest() {
+  var state = store.getState();
+  var blockState = state.block.showBlock;
+  var stepGoal = state.settings.stepGoal;
+  var timeLeft = state.time.timeLeft;
+  console.log ('step')
+
+  if(blockState && steps > 250){
+    store.dispatch(unblock());
+    store.dispatch(resetTime());
+  }
+  else if (!blockState){
+    if(steps < stepGoal && timeLeft === 0) {
+      store.dispatch(setBlock());
+    }
+    else if(steps < 250 && timeLeft <= 10) {
+      chrome.browserAction.setBadgeBackgroundColor({ color: 'red'});
+      store.dispatch(decrementTime())
+    }
+    else if(steps >= stepGoal && timeLeft === 0) {
+      store.dispatch(resetTime())
+    }else{
+      console.log('DECREMENT')
+      store.dispatch(decrementTime())
+    }
+  }
+
+  //updateBadge();
+  // console.log("TEST!")
+  // console.log("state, ", store.getState())
+
+  window.setTimeout(startRequest, pollInterval);
+}
+
+
+// function stopRequest() {
+//   window.clearTimeout(timerId);
+// }
+
+startRequest();
+
+
+
 
 
 

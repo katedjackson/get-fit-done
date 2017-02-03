@@ -17,10 +17,14 @@ if (!document.getElementById('rcr-anchor')) {
 
   document.body.insertBefore(anchor, document.body.childNodes[0]);
 
-  render(
-   <Provider store={store}>
-     <App/>
-   </Provider>
-    , document.getElementById('rcr-anchor'));
+  const unsubscribe = store.subscribe(() => {
+    unsubscribe();
+    render(
+     <Provider store={store}>
+       <App/>
+     </Provider>
+      , document.getElementById('rcr-anchor'));
+  }
+  )
 }
 

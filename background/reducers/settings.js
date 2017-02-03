@@ -18,22 +18,21 @@ const initialState = {
   timeSleepMode: false,
   sleepTime: ['22:00', '6:00']
 }
-
+/*-------------------------ACTIONS----------------------------*/
 export const SET_WEBSITES = 'SET_WEBSITES';
 
 export const SET_STEP_GOAL= 'SET_STEP_GOAL';
 
 export const TOGGLE_BLACKLIST = 'TOGGLE_BLACKLIST';
 
+/*-------------------------ACTION CREATORS----------------------------*/
 export const setWebsites = createAction(SET_WEBSITES);
 
 export const setStepGoal = createAction(SET_STEP_GOAL);
 
 export const toggleBlacklist = createAction(TOGGLE_BLACKLIST);
 
-// export const TOGGLE_HRLY_STEP = 'TOGGLE_HRLY_STEP';
-// export const toggleHrlyStep = create
-
+/*-------------------------REDUCERS----------------------------*/
 export default handleActions({
 	SET_WEBSITES: (state, { payload }) => {
 		return {...state, websites: payload};
@@ -45,6 +44,3 @@ export default handleActions({
     return {...state, blacklist: !state.blacklist}
   }
 }, initialState);
-
-
-

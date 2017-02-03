@@ -60,7 +60,6 @@ const mapStateToProps = (state) => {
     stepGoal: state.settings && state.settings.stepGoal,
     websites: state.settings && state.settings.websites,
     block: state.block && state.block.showBlock
-    //hourlySteps: state.hourlySteps
   };
 };
 
