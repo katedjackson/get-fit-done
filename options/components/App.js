@@ -3,9 +3,9 @@ import Settings from './Settings';
 import Achievements from './Achievements';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {Tabs, Tab} from 'material-ui/Tabs';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 
-import { setWebsites, updateWebsites } from '../../background/reducers/settings';
+import { setWebsites } from '../../background/reducers/settings';
 
 class App extends Component {
   constructor(props) {
@@ -17,7 +17,6 @@ class App extends Component {
     const websites = evt.target.websites.value;
     evt.preventDefault();
     this.props.dispatch(setWebsites(websites));
-    //updateWebsites(websites);
   }
 
   render() {

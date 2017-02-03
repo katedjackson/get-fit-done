@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import ProgressBar from './ProgressBar';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 
 
 class App extends Component {
@@ -14,8 +14,6 @@ class App extends Component {
     this.checkWebsites = this.checkWebsites.bind(this);
   }
 
-
-
   giveUpToggle(){
     this.setState({showPopup: this.state.showPopup ? false : true})
   }
@@ -27,7 +25,7 @@ class App extends Component {
         var websites = this.props.websites;
 
         if(websites && websites.length){
-        var urlsArray = websites.split(",").map(function(url){return url.trim() + "/*"}); 
+        var urlsArray = websites.split(",").map(function(url){return url.trim() + "/*"});
         urlsArray.forEach( (url) => {
              let regexp = new RegExp(url);
              if(regexp.test(tabUrl)){
@@ -39,9 +37,8 @@ class App extends Component {
   }
 
   componentDidMount(){
-    this.checkWebsites(); 
+    this.checkWebsites();
   }
-
 
   render() {
     return (
@@ -66,8 +63,10 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log('state: ', state)
-  return{
+  console.log('state: ', state);
+  return {
+    steps: state.user.steps,
+    stepGoal: state.settings.stepGoal,
     websites: state.settings && state.settings.websites,
     block: state.block && state.block.showBlock
     //hourlySteps: state.hourlySteps

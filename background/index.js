@@ -8,7 +8,6 @@ import createLogger from 'redux-logger'
 import chromeStorage, { loadFromStorage } from './redux/chromeStorage';
 import { middleware } from 'redux-async-initial-state';
 
-
 const keysToPersistInChrome = ['settings', 'users' , 'block'];
 
 // load values for keys to persist from storage into redux store
@@ -34,12 +33,10 @@ const store = createStore(rootReducer, applyMiddleware(createLogger(), chromeSto
 window.store = store;
 wrapStore(store, {portName: 'GET_FIT_DONE'});
 
-
 chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
     if (msg === 'get-tabId') {
         sendResponse(sender.tab.url);
     }
-
 });
 
 

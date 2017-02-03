@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-
 import Blocked from './Blocked';
 import Login from './Login';
 
@@ -10,12 +9,18 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <div>
-        <Login />
+        {this.props.user ? <Blocked /> : <Login />}
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  console.log('state: ', state);
+  return {};
+};
+
+export default connect(mapStateToProps)(App);
