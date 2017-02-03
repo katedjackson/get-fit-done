@@ -6,21 +6,14 @@ class ProgressBar extends Component {
   constructor(props) {
     super(props);
     this.getProgress = this.getProgress.bind(this);
-    this.getSteps = this.getSteps.bind(this);
   }
 
-  componentDidMount() {
-    this.getSteps();
-  }
 
   getProgress() {
-    return this.props.steps/this.props.stepGoal;
+    return (this.props.steps - this.props.lastSteps) /this.props.stepGoal;
   }
 
-  getSteps() {
-    this.props.dispatch({ type: 'getSteps' });
-    this.props.dispatch({ type: 'getTimeoutSteps'});
-  }
+
 
   render() {
     var options = {
@@ -42,7 +35,7 @@ class ProgressBar extends Component {
     return (
       <Circle
           progress={this.getProgress()}
-          text={`${this.props.steps}/${this.props.stepGoal}`}
+          text={`${(this.props.steps - this.props.lastSteps)}/${this.props.stepGoal}`}
           options={options}
           initialAnimate={true}
           containerStyle={containerStyle}
@@ -56,6 +49,7 @@ const mapStateToProps = (state) => {
   return {
     accessToken: state.user.accessToken,
     steps: state.user.steps,
+    lastSteps: state.user.lastSteps,
     hourlySteps: state.user.hourlySteps,
     stepGoal: state.settings.stepGoal
   };

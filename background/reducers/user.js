@@ -34,8 +34,8 @@ const initialState = {
   badges: [],
   failures: [],
   steps: '',
-  weeklySteps: [],
-  hourlySteps: ''
+  lastSteps: '',
+  weeklySteps: []
 };
 
 export default handleActions({
@@ -52,7 +52,8 @@ export default handleActions({
     return {...state, failures: [...state.failures, payload]};
   },
   GET_DAILY_STEPS: (state, { payload }) => {
-    return {...state, steps: payload };
+    if (state.lastSteps) return {...state, steps: payload };
+    else return {...state, lastSteps: payload, steps: payload };
   },
   GET_WEEKLY_STEPS: (state, { payload }) => {
     return {...state, weeklySteps: payload };
@@ -68,7 +69,7 @@ export const getDailyThunk = () =>
   (dispatch, getState) => {
     let { accessToken } = getState().user;
     let d = new Date();
-    let date = d.toISOString().slice(0,10);
+    let date = d.toISOString().slice(0, 10);
     return axios.get(`https://api.fitbit.com/1/user/-/activities/date/${date}.json`,
       { headers: {'Authorization': 'Bearer ' + accessToken}})
     .then(response => {
@@ -86,6 +87,9 @@ export const getWeeklyThunk = () =>
     })
   };
 
+
+/**
+** intraday actiity data. need permission from fitbit..
 export const getHourlyThunk = () =>
   (dispatch, getState) => {
     let { accessToken } = getState().user;
@@ -97,3 +101,4 @@ export const getHourlyThunk = () =>
       dispatch(getHourlySteps(response.data));
     })
   };
+*/
