@@ -12,7 +12,6 @@ class Login extends Component {
   }
 
   onClick() {
-    console.log(this.props)
     const dispatch = this.props.dispatch;
     fitbitAuth().then( accessToken => {
       dispatch(loginUser(accessToken));
