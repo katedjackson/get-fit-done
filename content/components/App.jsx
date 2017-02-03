@@ -14,8 +14,6 @@ class App extends Component {
     this.checkWebsites = this.checkWebsites.bind(this);
   }
 
-
-
   giveUpToggle(){
     this.setState({showPopup: this.state.showPopup ? false : true})
   }
@@ -41,7 +39,6 @@ class App extends Component {
   componentDidMount(){
     this.checkWebsites();
   }
-
 
   render() {
     return (
@@ -69,7 +66,7 @@ const mapStateToProps = (state) => {
   console.log('state: ', state);
   return {
     steps: state.user.steps,
-    stepGoal: state.settings.stepGoal
+    stepGoal: state.settings.stepGoal,
     websites: state.settings && state.settings.websites,
     block: state.block && state.block.showBlock
     //hourlySteps: state.hourlySteps
