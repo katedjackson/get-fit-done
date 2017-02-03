@@ -26,7 +26,7 @@ class BlockModal extends Component {
           </div>
           <div id="block-giveup-button" className="block-cursor block-select block-giveup-button block-buttons" onClick={this.giveUpToggle}>Give Up</div>
           <div id="block-popup-mask" className="block-cursor block-select block-popup-mask block-disappear"></div>
-          <GiveUpPopUp />
+          <GiveUpPopUp {...this.props} showPopup={this.state.showPopup} giveUpToggle={this.giveUpToggle}/>
         </div>
       </div>
     </div>
