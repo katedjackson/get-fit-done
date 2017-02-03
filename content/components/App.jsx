@@ -3,8 +3,6 @@ import ProgressBar from './ProgressBar';
 import BlockModal from './BlockModal';
 import { connect } from 'react-redux';
 
-
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -57,11 +55,11 @@ class App extends Component {
 const mapStateToProps = (state) => {
   console.log('state: ', state);
   return {
-    // steps: state.user.steps,
-    // stepGoal: state.settings.stepGoal,
+    accessToken: state.user && state.user.accessToken,
+    steps: state.user && state.user.steps,
+    stepGoal: state.settings && state.settings.stepGoal,
     websites: state.settings && state.settings.websites,
     block: state.block && state.block.showBlock
-    //hourlySteps: state.hourlySteps
   };
 };
 

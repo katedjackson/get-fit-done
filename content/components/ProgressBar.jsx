@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Circle } from 'react-progressbar.js'
 
 class ProgressBar extends Component {
@@ -9,7 +9,7 @@ class ProgressBar extends Component {
   }
 
   getProgress() {
-    return (this.props.steps / this.props.stepGoal);
+    return (this.props.steps - this.props.lastSteps) /this.props.stepGoal;
   }
 
   render() {
@@ -32,7 +32,7 @@ class ProgressBar extends Component {
     return (
       <Circle
           progress={this.getProgress()}
-          text={`${this.props.steps}/${this.props.stepGoal}`}
+          text={`${(this.props.steps - this.props.lastSteps)}/${this.props.stepGoal}`}
           options={options}
           initialAnimate={true}
           containerStyle={containerStyle}
@@ -43,7 +43,13 @@ class ProgressBar extends Component {
 
 const mapStateToProps = (state) => {
   console.log('state: ', state);
-  return {};
+  return {
+    accessToken: state.user.accessToken,
+    steps: state.user.steps,
+    lastSteps: state.user.lastSteps,
+    hourlySteps: state.user.hourlySteps,
+    stepGoal: state.settings.stepGoal
+  };
 };
 
 export default connect(mapStateToProps)(ProgressBar);

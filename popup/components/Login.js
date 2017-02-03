@@ -12,7 +12,6 @@ class Login extends Component {
   }
 
   onClick() {
-    console.log(this.props)
     const dispatch = this.props.dispatch;
     fitbitAuth().then( accessToken => {
       dispatch(loginUser(accessToken));
@@ -21,16 +20,24 @@ class Login extends Component {
 
   render() {
     return (
-      <Button id="sign-in" onClick={this.onClick}>
-        Click to log in through Fitbit
-      </Button>
+      <div className="sign-in-div">
+        {this.props.accessToken ?
+        <Button id="sign-in">
+          Sign out
+        </Button> :
+        <Button id="sign-in" onClick={this.onClick}>
+          Sign in
+        </Button>}
+      </div>
     );
   }
 }
 
 const mapStateToProps = (state) => {
   console.log('state: ', state);
-  return {};
+  return {
+    accessToken: state.user && state.user.accessToken,
+  };
 };
 
 export default connect(mapStateToProps)(Login);

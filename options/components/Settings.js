@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 import { Toggle, TextField, TimePicker,
          SelectField, MenuItem, RaisedButton } from 'material-ui';
 import { Field, reduxForm } from 'redux-form';
@@ -128,53 +129,57 @@ class Settings extends Component {
             </fieldset>
           </form>
         </div>
-        <div className="setting_div">
-          <fieldset>
-            <legend><label>Modes: </label></legend>
-              <Row>
-                <Col xs={12} sm={12} md={6} lg={6}>
-                  <div>
-                    {this.renderModes('disable', ' Disable')}
-                    {this.state.disable ? (
-                            <div>
-                            {this.renderTimeSelect('disabledTime', 'From')}
-                            {this.renderTimeSelect('disabledTime', 'To')}
-                            </div>) : null}
-                  </div>
-                  <div>
-                    {this.renderModes('hourlySteps', ' Hourly Steps')}
-                    {this.state.hourlySteps ? (
-                            <div>
-                            <TextField id="hourlyStepsNum" value={this.state.hourlyStepsNum} onChange={this.handleTextChange}/>
-                            </div>) : null}
-                  </div>
-                  <div>
-                  {this.renderModes('dailySteps', ' Daily Steps')}
-                  {this.state.dailySteps ? (
-                            <div>
-                            <TextField id="dailyStepsNum" value={this.state.dailyStepsNum} onChange={this.handleTextChange}/>
-                            {this.renderTimeSelect('dailyGoalTime', 'By')}
-                            </div>) : null}
-                  </div>
-                </Col>
-                <Col xs={12} sm={12} md={6} lg={6}>
-                  <div>
-                    {this.renderModes('foodLog', ' Food Log')}
-                            {this.state.foodLog ? (
-                            <div>
-                            {this.renderTimeSelect('foodLogTime', 'Select Time')}
-                            </div>) : null}
-                  </div>
-                  <div>
-                    {this.renderModes('waterLog', ' Water Log')}
-                            {this.state.waterLog ? (
-                            <div>
-                            {this.renderTimeSelect('waterLogTime', 'Select Time')}
-                            </div>) : null}
-                  </div>
-                </Col>
-              </Row>
-          </fieldset>
+        <div className="setting_div" onSubmit={this.props.handleModesSubmit}>
+          <form>
+            <fieldset>
+              <legend><label>Modes: </label></legend>
+                <Row>
+                  <Col xs={12} sm={12} md={6} lg={6}>
+                    <div>
+                      {this.renderModes('disable', ' Disable')}
+                      {this.state.disable ? (
+                              <div>
+                              {this.renderTimeSelect('disabledTime', 'From')}
+                              {this.renderTimeSelect('disabledTime', 'To')}
+                              </div>) : null}
+                    </div>
+                    <div>
+                      {this.renderModes('hourlySteps', ' Hourly Steps')}
+                      {this.state.hourlySteps ? (
+                              <div>
+                              <TextField id="hourlyStepsNum"
+                                defaultValue={this.props.stepGoal} />
+                              </div>) : null}
+                    </div>
+                    <div>
+                    {this.renderModes('dailySteps', ' Daily Steps')}
+                    {this.state.dailySteps ? (
+                              <div>
+                              <TextField id="dailyStepsNum" defaultValue={this.props.stepGoal}/>
+                              {this.renderTimeSelect('dailyGoalTime', 'By')}
+                              </div>) : null}
+                    </div>
+                  </Col>
+                  <Col xs={12} sm={12} md={6} lg={6}>
+                    <div>
+                      {this.renderModes('foodLog', ' Food Log')}
+                              {this.state.foodLog ? (
+                              <div>
+                              {this.renderTimeSelect('foodLogTime', 'Select Time')}
+                              </div>) : null}
+                    </div>
+                    <div>
+                      {this.renderModes('waterLog', ' Water Log')}
+                              {this.state.waterLog ? (
+                              <div>
+                              {this.renderTimeSelect('waterLogTime', 'Select Time')}
+                              </div>) : null}
+                    </div>
+                  </Col>
+                </Row>
+                <button type="submit">Save</button>
+            </fieldset>
+          </form>
         </div>
       </div>
 
@@ -186,4 +191,14 @@ Settings.propTypes = {
   handleWebsiteSubmit: PropTypes.func
 }
 
-export default Settings;
+
+const mapStateToProps = (state) => {
+  console.log('state: ', state)
+  return{
+    websites: state.settings && state.settings.websites,
+    stepGoal: state.settings && state.settings.stepGoal
+  };
+};
+
+
+export default connect(mapStateToProps)(Settings);

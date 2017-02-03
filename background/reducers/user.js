@@ -7,8 +7,9 @@ const LOGIN_USER = 'LOGIN_USER';
 const LOGOUT_USER = 'LOGOUT_USER';
 const ADD_ACHIEVEMENT = 'ADD_ACHIEVEMENT';
 const ADD_FAILURE = 'ADD_FAILURE';
-const GET_STEPS = 'GET_STEPS';
+const GET_DAILY_STEPS = 'GET_DAILY_STEPS';
 const GET_WEEKLY_STEPS = 'GET_WEEKLY_STEPS';
+const GET_HOURLY_STEPS = 'GET_HOURLY_STEPS'
 
 /* --------------    ACTION CREATORS    ----------------- */
 
@@ -20,9 +21,11 @@ export const addNewAchievement = createAction(ADD_ACHIEVEMENT);
 
 export const addFailure = createAction(ADD_FAILURE);
 
-export const getSteps = createAction(GET_STEPS);
+const getDailySteps = createAction(GET_DAILY_STEPS);
 
-export const getWeeklySteps = createAction(GET_WEEKLY_STEPS);
+const getWeeklySteps = createAction(GET_WEEKLY_STEPS);
+
+const getHourlySteps = createAction(GET_HOURLY_STEPS);
 
 /* ------------------    REDUCER    --------------------- */
 
@@ -31,36 +34,71 @@ const initialState = {
   badges: [],
   failures: [],
   steps: '',
+  lastSteps: '',
   weeklySteps: []
 };
 
 export default handleActions({
   LOGIN_USER: (state, { payload }) => {
-    return { accessToken: payload };
+    return {...state, accessToken: payload };
   },
   LOGOUT_USER: (state, action) => {
-    return { accessToken: '' };
+    return {...state, accessToken: '' };
   },
   ADD_ACHIEVEMENT: (state, { payload }) => {
-    return { badges: [...state.badges, payload]};
+    return {...state, badges: [...state.badges, payload]};
   },
   ADD_FAILURE: (state, { payload }) => {
-    return { failures: [...state.failures, payload]};
+    return {...state, failures: [...state.failures, payload]};
   },
-  GET_STEPS: (state, action) => {
-    let d = new Date();
-    let date = d.toISOString().slice(0,10);
-    axios.get(`https://api.fitbit.com/1/user/-/activities/date/${date}.json`, { headers: {'Authorization': 'Bearer ' + state.user.accessToken}})
-    .then(response => {
-      return { steps: response.data.summary.steps };
-    })
+  GET_DAILY_STEPS: (state, { payload }) => {
+    if (state.lastSteps) return {...state, steps: payload };
+    else return {...state, lastSteps: payload, steps: payload };
   },
-  GET_WEEKLY_STEPS: (state, action) => {
-    let d = new Date();
-    let date = d.toISOString().slice(0, 10);
-    axios.get(`https://api.fitbit.com/1/user/-/activities/date/${date}/1w.json`, { headers: {'Authorization': 'Bearer ' + state.user.accessToken}})
-    .then(response => {
-      return { weeklySteps: response.data[`activities-log-steps`] };
-    })
+  GET_WEEKLY_STEPS: (state, { payload }) => {
+    return {...state, weeklySteps: payload };
+  },
+  GET_HOURLY_STEPS: (state, { payload }) => {
+    return {...state, hourlySteps: payload };
   }
 }, initialState);
+
+/* ------------------    THUNKS    --------------------- */
+
+export const getDailyThunk = () =>
+  (dispatch, getState) => {
+    let { accessToken } = getState().user;
+    let d = new Date();
+    let date = d.toISOString().slice(0, 10);
+    return axios.get(`https://api.fitbit.com/1/user/-/activities/date/${date}.json`,
+      { headers: {'Authorization': 'Bearer ' + accessToken}})
+    .then(response => {
+      dispatch(getDailySteps(response.data.summary.steps));
+    })
+  };
+
+export const getWeeklyThunk = () =>
+  (dispatch, getState) => {
+    let { accessToken } = getState().user;
+    return axios.get(`https://api.fitbit.com/1/user/-/activities/date/today/1w.json`,
+      { headers: {'Authorization': 'Bearer ' + accessToken}})
+    .then(response => {
+      dispatch(getWeeklySteps(response.data[`activities-log-steps`]));
+    })
+  };
+
+
+/**
+** intraday actiity data. need permission from fitbit..
+export const getHourlyThunk = () =>
+  (dispatch, getState) => {
+    let { accessToken } = getState().user;
+    console.log('gethourly thunk access token', accessToken)
+    return axios.get(`https://api.fitbit.com/1/user/-/activities/tracker/steps/date/today/1d/15min/time/10:30/10:45.json`,
+      { headers: {'Authorization': 'Bearer ' + accessToken}})
+    .then(response => {
+      console.log(response.data);
+      dispatch(getHourlySteps(response.data));
+    })
+  };
+*/

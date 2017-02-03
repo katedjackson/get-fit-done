@@ -1,43 +1,53 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React from 'react';
+import { connect } from 'react-redux';
 import { Icon } from 'semantic-ui-react';
 import { Circle } from 'react-progressbar.js'
+import Login from './Login';
 
-class Blocked extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      progress: 0.5
-    }
-  }
+const Blocked = (props) => {
 
-  render() {
-    const options = {
-        strokeWidth: 20,
-        trailWidth: 20,
-        easing: 'easeInOut',
-        duration: 1400,
-        text: {
-          autoStyleContainer: false
-        },
-        color: '#00B0B9'
-    };
+  const options = {
+      strokeWidth: 20,
+      trailWidth: 20,
+      easing: 'easeInOut',
+      duration: 1400,
+      text: {
+        autoStyleContainer: false
+      },
+      color: '#00B0B9'
+  };
 
-    const containerStyle = {
-        width: '200px',
-        height: '200px'
-    };
+  const containerStyle = {
+      width: '200px',
+      height: '200px'
+  };
 
-    return (
+  return (
+    <div>
       <Circle
-          progress={this.state.progress}
-          text={'150 Steps Left'}
+          progress = {(props.steps - props.lastSteps) / props.stepGoal}
+          text={`${(props.steps - props.lastSteps)}/${props.stepGoal}`}
           options={options}
           initialAnimate={true}
           containerStyle={containerStyle}
           containerClassName={'.progressbar'} />
-    );
-  }
+
+      <Login />
+    </div>
+  );
 }
 
-export default Blocked;
+const mapStateToProps = (state) => {
+  console.log('state: ', state);
+  return {
+    accessToken: state.user && state.user.accessToken,
+    steps: state.user && state.user.steps,
+    lastSteps: state.user && state.user.lastSteps,
+    hourlySteps: state.user && state.user.hourlySteps,
+    stepGoal: state.settings && state.settings.stepGoal
+  };
+};
+
+export default connect(mapStateToProps)(Blocked);
+
+
