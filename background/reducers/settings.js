@@ -17,14 +17,14 @@ const initialState = {
   waterTime: [],
   timeSleepMode: false,
   sleepTime: ['22:00', '6:00']
-
 }
 
 export const SET_WEBSITES = 'SET_WEBSITES';
 
+export const TOGGLE_BLACKLIST = 'TOGGLE_BLACKLIST';
+
 export const setWebsites = createAction(SET_WEBSITES);
 
-export const TOGGLE_BLACKLIST = 'TOGGLE_BLACKLIST';
 export const toggleBlacklist = createAction(TOGGLE_BLACKLIST);
 
 // export const TOGGLE_HRLY_STEP = 'TOGGLE_HRLY_STEP';
@@ -37,8 +37,7 @@ export default handleActions({
 	},
   TOGGLE_BLACKLIST: (state, { payload }) => {
     return {...state, blacklist: !state.blacklist}
-  },
-
+  }
 }, initialState);
 
 

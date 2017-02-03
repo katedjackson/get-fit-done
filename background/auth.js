@@ -1,6 +1,4 @@
 //--------Fitbit OAuth2 Integration--------//
-const axios = require('axios');
-
 const redirect_uri = chrome.identity.getRedirectURL();
 const client_id = "2284D2";
 const auth_url = "https://www.fitbit.com/oauth2/authorize/?" +

@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { Circle } from 'react-progressbar.js'
-import { getDailyThunk } from '../../background/reducers/user';
 
 class ProgressBar extends Component {
   constructor(props) {
@@ -15,12 +14,12 @@ class ProgressBar extends Component {
   }
 
   getProgress() {
-    return 0.5;
+    return this.props.steps/this.props.stepGoal;
   }
 
   getSteps() {
-    console.log('props in getSteps:', this.props);
-    this.props.dispatch(getDailyThunk(this.props.accessToken));
+    this.props.dispatch({ type: 'getSteps' });
+    this.props.dispatch({ type: 'getTimeoutSteps'});
   }
 
   render() {
@@ -55,7 +54,10 @@ class ProgressBar extends Component {
 const mapStateToProps = (state) => {
   console.log('state: ', state);
   return {
-    accessToken: state.user.accessToken
+    accessToken: state.user.accessToken,
+    steps: state.user.steps,
+    hourlySteps: state.user.hourlySteps,
+    stepGoal: state.settings.stepGoal
   };
 };
 
