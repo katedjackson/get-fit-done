@@ -1,17 +1,16 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-
-// var ProgressBar = require('react-progressbar')
-// var Circle = ProgressBar.Circle;
-
 import { Circle } from 'react-progressbar.js'
 
-const ProgressBar = React.createClass({
-  getInitialState() {
-    return {
-      progress: 0.63,
-    };
-  },
+class ProgressBar extends Component {
+  constructor(props) {
+    super(props);
+    this.getProgress = this.getProgress.bind(this);
+  }
+
+  getProgress() {
+    return (this.props.steps / this.props.stepGoal);
+  }
 
   render() {
     var options = {
@@ -32,14 +31,19 @@ const ProgressBar = React.createClass({
 
     return (
       <Circle
-          progress={this.state.progress}
-          text={'157/250'}
+          progress={this.getProgress()}
+          text={`${this.props.steps}/${this.props.stepGoal}`}
           options={options}
           initialAnimate={true}
           containerStyle={containerStyle}
           containerClassName={'.progressbar'} />
     );
-  },
-});
+  }
+}
 
-export default ProgressBar;
+const mapStateToProps = (state) => {
+  console.log('state: ', state);
+  return {};
+};
+
+export default connect(mapStateToProps)(ProgressBar);

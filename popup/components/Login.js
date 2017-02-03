@@ -1,22 +1,36 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { Button } from 'semantic-ui-react';
+import {fitbitAuth} from '../../background/auth';
+import { loginUser } from '../../background/reducers/user';
 
 
-const Login = React.createClass({
-  getInitialState() {
-    return {
-    };
-  },
+class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.onClick = this.onClick.bind(this);
+  }
+
+  onClick() {
+    console.log(this.props)
+    const dispatch = this.props.dispatch;
+    fitbitAuth().then( accessToken => {
+      dispatch(loginUser(accessToken));
+    })
+  }
 
   render() {
-
     return (
-      <Button id="sign-in">
+      <Button id="sign-in" onClick={this.onClick}>
         Click to log in through Fitbit
       </Button>
     );
-  },
-});
+  }
+}
 
-export default Login;
+const mapStateToProps = (state) => {
+  console.log('state: ', state);
+  return {};
+};
+
+export default connect(mapStateToProps)(Login);

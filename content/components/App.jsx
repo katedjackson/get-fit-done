@@ -4,6 +4,7 @@ import BlockModal from './BlockModal';
 import { connect } from 'react-redux';
 
 
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -14,8 +15,6 @@ class App extends Component {
     this.giveUpToggle = this.giveUpToggle.bind(this);
     this.checkWebsites = this.checkWebsites.bind(this);
   }
-
-
 
   giveUpToggle(){
     this.setState({showPopup: this.state.showPopup ? false : true})
@@ -43,7 +42,6 @@ class App extends Component {
     this.checkWebsites();
   }
 
-
   render() {
     return (
       <div>
@@ -57,8 +55,10 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log('state: ', state)
-  return{
+  console.log('state: ', state);
+  return {
+    steps: state.user.steps,
+    stepGoal: state.settings.stepGoal,
     websites: state.settings && state.settings.websites,
     block: state.block && state.block.showBlock
     //hourlySteps: state.hourlySteps
