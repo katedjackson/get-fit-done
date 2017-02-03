@@ -8,16 +8,17 @@ import createLogger from 'redux-logger'
 import chromeStorage, { loadFromStorage } from './redux/chromeStorage';
 import { middleware } from 'redux-async-initial-state';
 
-import { block, time } from './reducers/index.js'
+import { setBlock, unblock } from './reducers/block';
+import { getTimeLeft, resetTime, decrementTime } from './reducers/time'
 
-const keysToPersistInChrome = ['settings', 'users' , 'block'];
+const keysToPersistInChrome = ['settings', 'user' , 'time'];
 
 // load values for keys to persist from storage into redux store
 // perform any initial server requests that are independent
 // from login state
 const loadStore = (currentState) => {
   const chromeStoragePromise = loadFromStorage(keysToPersistInChrome);
-  console.log('current state: ', currentState)
+  //console.log('current state: ', currentState)
   return Promise.all([
     chromeStoragePromise,
   ])
@@ -47,35 +48,35 @@ var steps = 200;
 var pollInterval = 1000 * 60; // 1 minute, in milliseconds
 
 function startRequest() {
-  console.log("time", time);
   var state = store.getState();
   var blockState = state.block.showBlock;
   var stepGoal = state.settings.stepGoal;
   var timeLeft = state.time.timeLeft;
-  
+  console.log ('step')
 
-  if(blockState && steps > stepGoal){
-    store.dispatch(block.unblock());
-    store.dispatch(time.resetTime());
+  if(blockState && steps > 250){
+    store.dispatch(unblock());
+    store.dispatch(resetTime());
   }
   else if (!blockState){
     if(steps < stepGoal && timeLeft === 0) {
-      store.dispatch(block.setBlock());
+      store.dispatch(setBlock());
     }
-    else if(steps < stepGoal && timeLeft <= 10) {
+    else if(steps < 250 && timeLeft <= 10) {
       chrome.browserAction.setBadgeBackgroundColor({ color: 'red'});
-      store.dispatch(time.decrementTime())
+      store.dispatch(decrementTime())
     }
     else if(steps >= stepGoal && timeLeft === 0) {
-      store.dispatch(time.resetTime())
+      store.dispatch(resetTime())
     }else{
-      store.dispatch(time.decrementTime())
+      console.log('DECREMENT')
+      store.dispatch(decrementTime())
     }
   }
 
   //updateBadge();
-  console.log("TEST!")
-  console.log("state, ", store.getState())
+  // console.log("TEST!")
+  // console.log("state, ", store.getState())
 
   window.setTimeout(startRequest, pollInterval);
 }

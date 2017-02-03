@@ -18,18 +18,18 @@ export const decrementTime = createAction(DECREMENT_TIME);
 /* ------------------    REDUCER    --------------------- */
 
 const initialState = {
-  timeLeft: 12
+  timeLeft: 1
 };
 
 export default handleActions({
   GET_TIME_LEFT: (state, { payload }) => {
-    return { timeLeft: payload };
+    return {...state, timeLeft: payload };
   },
   RESET_TIME: (state, action) => {
-    return { timeLeft: 60 };
+    return {...state, timeLeft: 60 };
   },
   DECREMENT_TIME: (state, action) => {
-    if(state.timeLeft > 60) return { timeLeft: state.timeLeft-- };
-    return { timeLeft: 0}
+    console.log('state.timeLeft: ', state.timeLeft)
+    return {...state, timeLeft: --state.timeLeft}
   }
 }, initialState);

@@ -13,14 +13,16 @@ const chromeStorageMiddleware = (keys) => {
   return store => next => (action) => {
     const currState = store.getState();
     const result = next(action);
+    console.log('RESULT: ', result);
     const nextState = store.getState();
+
 
     for (const key of keys) {
       if (!_.isEqual(currState[key], nextState[key])) {
         chrome.storage.sync.set({ [key]: nextState[key] });
       }
     }
-
+    //console.log('Middleware result: ', result)
     return result;
   };
 };

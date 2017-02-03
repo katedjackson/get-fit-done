@@ -13,7 +13,7 @@ export const unblock = createAction(UNBLOCK);
 
 export default handleActions({
   SET_BLOCK: (state, { payload }) => {
-    return {showBlock: payload};
+    return {...state, showBlock: true};
   },
   UNBLOCK: (state, { payload }) => {
     return initialState;
