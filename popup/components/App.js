@@ -1,18 +1,22 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import Blocked from './Blocked';
-import Login from './Login';
+import Unblocked from './Unblocked';
+
 
 class App extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      blocked: true
+    }
   }
 
   render() {
     console.log(this.props);
     return (
       <div>
-        {this.props.user ? <Blocked /> : <Login />}
+        {this.state.blocked ? <Blocked /> : <Unblocked />}
       </div>
     );
   }
@@ -20,7 +24,9 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   console.log('state: ', state);
-  return {};
+  return {
+    accessToken: state.user && state.user.accessToken,
+  };
 };
 
 export default connect(mapStateToProps)(App);

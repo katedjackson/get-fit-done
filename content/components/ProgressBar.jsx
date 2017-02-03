@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Circle } from 'react-progressbar.js'
 
 class ProgressBar extends Component {
@@ -8,12 +8,9 @@ class ProgressBar extends Component {
     this.getProgress = this.getProgress.bind(this);
   }
 
-
   getProgress() {
     return (this.props.steps - this.props.lastSteps) /this.props.stepGoal;
   }
-
-
 
   render() {
     var options = {

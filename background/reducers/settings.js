@@ -21,9 +21,13 @@ const initialState = {
 
 export const SET_WEBSITES = 'SET_WEBSITES';
 
+export const SET_STEP_GOAL= 'SET_STEP_GOAL';
+
 export const TOGGLE_BLACKLIST = 'TOGGLE_BLACKLIST';
 
 export const setWebsites = createAction(SET_WEBSITES);
+
+export const setStepGoal = createAction(SET_STEP_GOAL);
 
 export const toggleBlacklist = createAction(TOGGLE_BLACKLIST);
 
@@ -32,9 +36,11 @@ export const toggleBlacklist = createAction(TOGGLE_BLACKLIST);
 
 export default handleActions({
 	SET_WEBSITES: (state, { payload }) => {
-    console.log('payload: ', payload)
 		return {...state, websites: payload};
 	},
+  SET_STEP_GOAL: (state, { payload }) => {
+    return {...state, stepGoal: payload};
+  },
   TOGGLE_BLACKLIST: (state, { payload }) => {
     return {...state, blacklist: !state.blacklist}
   }

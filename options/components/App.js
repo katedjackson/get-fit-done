@@ -5,18 +5,27 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import {connect} from 'react-redux';
 
-import { setWebsites } from '../../background/reducers/settings';
+import { setWebsites, setStepGoal } from '../../background/reducers/settings';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.handleWebsiteSubmit = this.handleWebsiteSubmit.bind(this);
+    this.handleModesSubmit = this.handleModesSubmit.bind(this);
   }
 
   handleWebsiteSubmit (evt) {
     const websites = evt.target.websites.value;
     evt.preventDefault();
     this.props.dispatch(setWebsites(websites));
+  }
+
+  handleModesSubmit (evt) {
+    //const websites = evt.target.websites.value;
+    //instead reset every state.settings
+    const stepGoal = evt.target.hourlyStepsNum.value;
+    evt.preventDefault();
+    this.props.dispatch(setStepGoal(stepGoal));
   }
 
   render() {
@@ -27,7 +36,7 @@ class App extends Component {
           <h1>Get [F]it Done</h1>
           <Tabs selected={0} className="tabs">
             <Tab label="Settings" className="tab">
-              <Settings handleWebsiteSubmit={this.handleWebsiteSubmit} websites={this.props.websites}/>
+              <Settings handleWebsiteSubmit={this.handleWebsiteSubmit} handleModesSubmit= {this.handleModesSubmit} websites={this.props.websites}/>
             </Tab>
             <Tab label="Achievements" className="tab">
               <Achievements />
