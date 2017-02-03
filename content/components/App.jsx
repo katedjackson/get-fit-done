@@ -57,8 +57,8 @@ class App extends Component {
 const mapStateToProps = (state) => {
   console.log('state: ', state);
   return {
-    steps: state.user.steps,
-    stepGoal: state.settings.stepGoal,
+    // steps: state.user.steps,
+    // stepGoal: state.settings.stepGoal,
     websites: state.settings && state.settings.websites,
     block: state.block && state.block.showBlock
     //hourlySteps: state.hourlySteps

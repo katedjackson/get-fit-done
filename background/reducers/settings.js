@@ -21,7 +21,6 @@ const initialState = {
 }
 
 export const SET_WEBSITES = 'SET_WEBSITES';
-
 export const setWebsites = createAction(SET_WEBSITES);
 
 export const TOGGLE_BLACKLIST = 'TOGGLE_BLACKLIST';
