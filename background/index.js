@@ -11,7 +11,7 @@ import { getDailyThunk, getWeeklyThunk, getHourlyThunk } from './reducers/user';
 
 import { setBlock, unblock } from './reducers/block';
 import { getTimeLeft, resetTime, decrementTime } from './reducers/time'
-// import { getSteps } from './reducers/user'
+import { resetLastSteps } from './reducers/user'
 
 const keysToPersistInChrome = ['settings', 'user'];
 
@@ -76,6 +76,7 @@ function startRequest() {
   if(blockState && hrSteps > stepGoal){
     store.dispatch(unblock());
     store.dispatch(resetTime());
+    store.dispatch(resetLastSteps());
   }
   else if (!blockState){
     if(hrSteps < stepGoal && timeLeft === 0) {
