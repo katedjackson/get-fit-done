@@ -18,6 +18,7 @@ const chromeStorageMiddleware = (keys) => {
 
 
     for (const key of keys) {
+      if (key === 'time') chrome.storage.sync.set( {[key]: nextState[key]})
       if (!_.isEqual(currState[key], nextState[key])) {
         chrome.storage.sync.set({ [key]: nextState[key] });
       }

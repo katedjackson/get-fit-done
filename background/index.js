@@ -13,7 +13,7 @@ import { setBlock, unblock } from './reducers/block';
 import { getTimeLeft, resetTime, decrementTime } from './reducers/time'
 import { resetLastSteps } from './reducers/user'
 
-const keysToPersistInChrome = ['settings', 'user', 'time'];
+const keysToPersistInChrome = ['settings', 'user', 'time', 'block'];
 
 // load values for keys to persist from storage into redux store
 // perform any initial server requests that are independent
@@ -63,36 +63,39 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
 var pollInterval = 1000 * 60; // 1 minute, in milliseconds
 
 function startRequest() {
-  store.dispatch({type: 'getSteps'});
-  var state = store.getState();
-  var steps = state.user.steps;
-  var lastSteps = state.user.lastSteps;
-  var hrSteps = steps-lastSteps
-  var blockState = state.block.showBlock;
-  var stepGoal = state.settings.stepGoal;
-  var timeLeft = state.time.timeLeft;
-  console.log ('step')
+  store.dispatch({type: 'getSteps'})
+    .then((response) => {
 
-  if(blockState && hrSteps > stepGoal){
-    store.dispatch(unblock());
-    store.dispatch(resetTime());
-  }
-  else if (!blockState){
-    if(hrSteps < stepGoal && timeLeft === 0) {
-      store.dispatch(setBlock());
-      store.dispatch(resetLastSteps());
-    }
-    else if(hrSteps < stepGoal && timeLeft <= 10) {
-      chrome.browserAction.setBadgeBackgroundColor({ color: 'red'});
-      store.dispatch(decrementTime())
-    }
-    else if(hrSteps >= stepGoal && timeLeft === 0) {
-      store.dispatch(resetTime())
-    }else{
-      console.log('DECREMENT')
-      store.dispatch(decrementTime())
-    }
-  }
+      var state = store.getState();
+      var steps = state.user.steps;
+      var lastSteps = state.user.lastSteps;
+      var hrSteps = steps-lastSteps
+      var blockState = state.block.showBlock;
+      var stepGoal = state.settings.stepGoal;
+      var timeLeft = state.time.timeLeft;
+
+
+      if(blockState && hrSteps > stepGoal){
+        store.dispatch(unblock());
+        store.dispatch(resetTime());
+        store.dispatch(resetLastSteps());
+      }
+      else if (!blockState){
+        if(hrSteps < stepGoal && timeLeft === 0) {
+          store.dispatch(setBlock());
+        }
+        else if(hrSteps < stepGoal && timeLeft <= 10) {
+          chrome.browserAction.setBadgeBackgroundColor({ color: 'red'});
+          store.dispatch(decrementTime())
+        }
+        else if(hrSteps >= stepGoal && timeLeft === 0) {
+          store.dispatch(resetTime())
+        }else{
+          store.dispatch(decrementTime())
+        }
+      }
+
+    })
 
   //updateBadge();
   // console.log("TEST!")
