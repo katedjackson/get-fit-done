@@ -38,9 +38,9 @@ class App extends Component {
             <Tab label="Settings" className="tab">
               <Settings handleWebsiteSubmit={this.handleWebsiteSubmit} handleModesSubmit= {this.handleModesSubmit} websites={this.props.websites}/>
             </Tab>
-            <Tab label="Achievements" className="tab">
+            {/*<Tab label="Achievements" className="tab">
               <Achievements />
-            </Tab>
+            </Tab>*/}
           </Tabs>
         </div>
       </MuiThemeProvider>

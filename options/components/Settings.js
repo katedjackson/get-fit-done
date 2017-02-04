@@ -104,9 +104,9 @@ class Settings extends Component {
         <div  className="setting_div" onSubmit={this.props.handleWebsiteSubmit}>
           <form>
             <fieldset>
-              <legend>
+              {/*<legend>
                 {this.renderModes('blacklist', `Websites I want to ${this.state.blacklist ? 'block: ' : 'allow: '}`)}
-              </legend>
+              </legend>*/}
               <div>
                 <label>Enter the websites you want to block/allow separated by a comma. Enter <b>only</b> the domain name and extension. For example, enter facebook.com, snapchat.com, instagram.com <b>not</b> https://www.facebook.com/, https://www.snapchat.com/, https://www.instagram.com/.
                 </label>
@@ -135,23 +135,24 @@ class Settings extends Component {
               <legend><label>Modes: </label></legend>
                 <Row>
                   <Col xs={12} sm={12} md={6} lg={6}>
-                    <div>
+                    {/*<div>
                       {this.renderModes('disable', ' Disable')}
                       {this.state.disable ? (
                               <div>
                               {this.renderTimeSelect('disabledTime', 'From')}
                               {this.renderTimeSelect('disabledTime', 'To')}
                               </div>) : null}
-                    </div>
+                    </div>*/}
                     <div>
-                      {this.renderModes('hourlySteps', ' Hourly Steps')}
+                      {/*{this.renderModes('hourlySteps', ' Hourly Steps')}
                       {this.state.hourlySteps ? (
-                              <div>
+                              <div>*/}
+                              <label>Hourly Step Goal: </label>
                               <TextField id="hourlyStepsNum"
-                                defaultValue={this.props.stepGoal} />
-                              </div>) : null}
+                                defaultValue={this.props.stepGoal} />{/*}
+                              </div>) : null}*/}
                     </div>
-                    <div>
+                    {/*<div>
                     {this.renderModes('dailySteps', ' Daily Steps')}
                     {this.state.dailySteps ? (
                               <div>
@@ -174,7 +175,7 @@ class Settings extends Component {
                               <div>
                               {this.renderTimeSelect('waterLogTime', 'Select Time')}
                               </div>) : null}
-                    </div>
+                    </div>*/}
                   </Col>
                 </Row>
                 <button type="submit">Save</button>
