@@ -11,7 +11,7 @@ import { getDailyThunk, getWeeklyThunk, getHourlyThunk } from './reducers/user';
 
 import { setBlock, unblock } from './reducers/block';
 import { getTimeLeft, resetTime, decrementTime } from './reducers/time'
-// import { getSteps } from './reducers/user'
+import { resetLastSteps } from './reducers/user'
 
 const keysToPersistInChrome = ['settings', 'user'];
 
@@ -80,6 +80,7 @@ function startRequest() {
   else if (!blockState){
     if(hrSteps < stepGoal && timeLeft === 0) {
       store.dispatch(setBlock());
+      store.dispatch(resetLastSteps());
     }
     else if(hrSteps < stepGoal && timeLeft <= 10) {
       chrome.browserAction.setBadgeBackgroundColor({ color: 'red'});

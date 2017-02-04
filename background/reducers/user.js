@@ -9,7 +9,8 @@ const ADD_ACHIEVEMENT = 'ADD_ACHIEVEMENT';
 const ADD_FAILURE = 'ADD_FAILURE';
 const GET_DAILY_STEPS = 'GET_DAILY_STEPS';
 const GET_WEEKLY_STEPS = 'GET_WEEKLY_STEPS';
-const GET_HOURLY_STEPS = 'GET_HOURLY_STEPS'
+const GET_HOURLY_STEPS = 'GET_HOURLY_STEPS';
+const RESET_LAST_STEPS = 'RESET_LAST_STEPS';
 
 /* --------------    ACTION CREATORS    ----------------- */
 
@@ -20,6 +21,8 @@ export const logoutUser = createAction(LOGOUT_USER);
 export const addNewAchievement = createAction(ADD_ACHIEVEMENT);
 
 export const addFailure = createAction(ADD_FAILURE);
+
+export const resetLastSteps = createAction(RESET_LAST_STEPS);
 
 const getDailySteps = createAction(GET_DAILY_STEPS);
 
@@ -60,6 +63,9 @@ export default handleActions({
   },
   GET_HOURLY_STEPS: (state, { payload }) => {
     return {...state, hourlySteps: payload };
+  },
+  RESET_LAST_STEPS: (state, { payload }) => {
+    return {...state, lastSteps: state.steps }
   }
 }, initialState);
 
