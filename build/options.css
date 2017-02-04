@@ -1,0 +1,80 @@
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+}
+
+#app {
+  height: 100%;
+}
+
+#app > div {
+  height: 100%;
+}
+
+h1 {
+  text-align: center;
+  font-size: 3em;
+  font-family: Helvetica;
+}
+
+div .tabs {
+  border-color: grey;
+  margin: 15px;
+  height: 90%;
+}
+
+h3 {
+  border-bottom: 1px solid #dddddd;
+  margin: 0 0 1em;
+}
+
+
+.tab {
+  margin: 15px;
+}
+
+.tabs>div {
+  border-top-left-radius: 2em;
+  border-top-right-radius: 2em;
+
+}
+
+.setting_div {
+  padding-top: 15px;
+}
+
+/* tabs.. we might not need them */
+.tabs_labels li {
+  border-bottom: 1px solid grey;
+  display: inline;
+  margin: 15px;
+  padding: 10px 15px 15px 15px;
+  font-size: 20px;
+}
+
+.tabs_labels li a {
+  color: black;
+  text-decoration: none;
+}
+
+.tabs_content {
+  margin: 15px;
+  padding-top: 20px;
+}
+
+.switch {
+  float: none;
+  margin-top: 1em;
+}
+
+.badges {
+  padding: 20px;
+}
+
+h2 {
+  text-align: center;
+}
+
