@@ -23,6 +23,7 @@ h1 {
 div .tabs {
   border-color: grey;
   margin: 15px;
+  padding: 15px;
   height: 90%;
 }
 
@@ -43,7 +44,7 @@ h3 {
 }
 
 .setting_div {
-  padding-top: 15px;
+  padding: 15px;
 }
 
 /* tabs.. we might not need them */

@@ -6,13 +6,14 @@ import { Field, reduxForm } from 'redux-form';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import { Col, Row } from 'react-bootstrap';
 
+import { setBlacklist, setWhitelist } from '../../background/reducers/settings'
+
 injectTapEventPlugin();
 
 class Settings extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      blacklist: false,
       disable: false,
       hourlySteps: false,
       dailySteps: false,
@@ -30,9 +31,12 @@ class Settings extends Component {
     //this.onLoad = this.onLoad.bind(this);
     this.handleTextChange = this.handleTextChange.bind(this);
     this.handleChangeTimeLog = this.handleChangeTimeLog.bind(this);
+    this.toggleBlacklist = this.toggleBlacklist.bind(this);
+
 
     this.renderModes = this.renderModes.bind(this);
     this.renderTimeSelect = this.renderTimeSelect.bind(this);
+    this.renderBlacklistSelect = this.renderBlacklistSelect.bind(this);
 
   }
 
@@ -54,6 +58,27 @@ class Settings extends Component {
         foodLogTime: this.state.foodLogTime.push(value)
       });
     console.log('foodlogtime', this.state.foodLogTime)
+  };
+
+  toggleBlacklist = (event, index, value) => {
+    if (index === 0) this.props.dispatch(setBlacklist());
+    else if (index === 1) this.props.dispatch(setWhitelist());
+  }
+
+
+  renderBlacklistSelect = (id, label) => {
+    var val;
+    if (this.props.blacklist === true) val = 0;
+    else val = 1;
+    return (<SelectField
+              id={id}
+              floatingLabelText={label}
+              value={val}
+              onChange={this.toggleBlacklist}
+              maxHeight={200}>
+              <MenuItem value={0} primaryText="Blacklist" />
+              <MenuItem value={1} primaryText="Whitelist" />
+            </SelectField>)
   };
 
   renderModes = (name, label) => {
@@ -101,13 +126,14 @@ class Settings extends Component {
 
     return (
       <div>
-        <div  className="setting_div" onSubmit={this.props.handleWebsiteSubmit}>
+        <Col lg={6} md={6} sm={12} xs={12} className="setting_div" onSubmit={this.props.handleWebsiteSubmit}>
           <form>
             <fieldset>
               <legend>
-                {this.renderModes('blacklist', `Websites I want to ${this.state.blacklist ? 'block: ' : 'allow: '}`)}
+                <label>Website Blocking: </label>
               </legend>
               <div>
+                {this.renderBlacklistSelect('blacklist', 'Block Mode')}
                 <label>Enter the websites you want to block/allow separated by a comma. Enter <b>only</b> the domain name and extension. For example, enter facebook.com, snapchat.com, instagram.com <b>not</b> https://www.facebook.com/, https://www.snapchat.com/, https://www.instagram.com/.
                 </label>
                 <div>
@@ -128,13 +154,11 @@ class Settings extends Component {
               </div>
             </fieldset>
           </form>
-        </div>
-        <div className="setting_div" onSubmit={this.props.handleModesSubmit}>
+        </Col>
+        <Col lg={6} md={6} sm={12} xs={12} className="setting_div" onSubmit={this.props.handleModesSubmit}>
           <form>
             <fieldset>
               <legend><label>Modes: </label></legend>
-                <Row>
-                  <Col xs={12} sm={12} md={6} lg={6}>
                     <div>
                       {this.renderModes('disable', ' Disable')}
                       {this.state.disable ? (
@@ -159,8 +183,6 @@ class Settings extends Component {
                               {this.renderTimeSelect('dailyGoalTime', 'By')}
                               </div>) : null}
                     </div>
-                  </Col>
-                  <Col xs={12} sm={12} md={6} lg={6}>
                     <div>
                       {this.renderModes('foodLog', ' Food Log')}
                               {this.state.foodLog ? (
@@ -175,12 +197,11 @@ class Settings extends Component {
                               {this.renderTimeSelect('waterLogTime', 'Select Time')}
                               </div>) : null}
                     </div>
-                  </Col>
-                </Row>
+
                 <button type="submit">Save</button>
             </fieldset>
           </form>
-        </div>
+        </Col>
       </div>
 
     );
@@ -196,7 +217,8 @@ const mapStateToProps = (state) => {
   console.log('state: ', state)
   return{
     websites: state.settings && state.settings.websites,
-    stepGoal: state.settings && state.settings.stepGoal
+    stepGoal: state.settings && state.settings.stepGoal,
+    blacklist: state.settings && state.settings.blacklist
   };
 };
 
