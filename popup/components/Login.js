@@ -9,6 +9,7 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.onClick = this.onClick.bind(this);
+    this.signout = this.signout.bind(this);
   }
 
   onClick() {
@@ -18,11 +19,15 @@ class Login extends Component {
     })
   }
 
+  signout() {
+    this.props.dispatch(logoutUser())
+  }
+
   render() {
     return (
       <div className="sign-in-div">
         {this.props.accessToken ?
-        <Button id="sign-in">
+        <Button id="sign-in" onClick={this.signout}>
           Sign out
         </Button> :
         <Button id="sign-in" onClick={this.onClick}>

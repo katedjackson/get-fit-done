@@ -64,8 +64,8 @@ export default handleActions({
   GET_HOURLY_STEPS: (state, { payload }) => {
     return {...state, hourlySteps: payload };
   },
-  RESET_LAST_STEPS: (state { payload }) => {
-    return {...state, lastSteps: state.steps};
+  RESET_LAST_STEPS: (state, { payload }) => {
+    return {...state, lastSteps: state.steps };
   }
 }, initialState);
 
