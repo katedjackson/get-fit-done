@@ -34,6 +34,7 @@
     "react-chrome-redux": "^1.2.0",
     "react-simpletabs": "^0.7.0",
     "redux-logger": "^2.7.4",
+    "semantic-ui-react": "^0.64.7",
     "webpack": "^1.13.3"
   },
   "devDependencies": {

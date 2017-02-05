@@ -11,8 +11,13 @@ const store = new Store({
 
 window.store = store;
 
-render(
-  <Provider store={store}>
-    <App/>
-  </Provider>
-  , document.getElementById('app'));
+
+const unsubscribe = store.subscribe(() => {
+  unsubscribe();
+  render(
+    <Provider store={store}>
+      <App/>
+    </Provider>
+    , document.getElementById('app'));
+
+})

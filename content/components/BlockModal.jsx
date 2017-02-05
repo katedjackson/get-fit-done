@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import ProgressBar from './ProgressBar';
 import GiveUpPopUp from './GiveUpPopUp';
-import {connect} from 'react-redux'
+import {connect} from 'react-redux';
+import { unblock } from '../../background/reducers/block'
+import { resetTime } from '../../background/reducers/time'
+import { resetLastSteps } from '../../background/reducers/user'
 
 class BlockModal extends Component {
   constructor(props) {
@@ -11,6 +14,7 @@ class BlockModal extends Component {
     }
     this.giveUpToggle = this.giveUpToggle.bind(this);
     this.getSteps = this.getSteps.bind(this);
+    this.unblock = this.unblock.bind(this);
   }
 
   componentDidMount() {
@@ -19,6 +23,12 @@ class BlockModal extends Component {
 
   getSteps() {
     this.props.dispatch({ type: 'getSteps' });
+  }
+
+  unblock() {
+    this.props.dispatch(unblock());
+    this.props.dispatch(resetTime());
+    this.props.dispatch(resetLastSteps());
   }
 
   giveUpToggle(){
@@ -36,7 +46,7 @@ class BlockModal extends Component {
           </div>
           <div id="block-giveup-button" className="block-cursor block-select block-giveup-button block-buttons" onClick={this.giveUpToggle}>Give Up</div>
           <div id="block-popup-mask" className="block-cursor block-select block-popup-mask block-disappear"></div>
-          <GiveUpPopUp {...this.props} showPopup={this.state.showPopup} giveUpToggle={this.giveUpToggle}/>
+          <GiveUpPopUp {...this.props} showPopup={this.state.showPopup} giveUpToggle={this.giveUpToggle} unblock={this.unblock}/>
         </div>
       </div>
     </div>

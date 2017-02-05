@@ -9,10 +9,13 @@ const store = new Store({
   portName: 'GET_FIT_DONE' // communication port name
 });
 
-window.store = store;
 
-render(
-  <Provider store={store}>
-    <App/>
-  </Provider>
-  , document.getElementById('app'));
+const unsubscribe = store.subscribe(() => {
+  unsubscribe();
+  render(
+    <Provider store={store}>
+      <App/>
+    </Provider>
+    , document.getElementById('app'));
+
+})

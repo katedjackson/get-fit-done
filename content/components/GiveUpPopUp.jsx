@@ -13,7 +13,7 @@ const GiveUpPopUp = (props) => {
       <br/>
       <div id="block-popup-message" className="block-cursor block-select block-popup-message">This will break your 3 day streak.
       </div>
-      <div id="block-popup-confirm-button" className="block-cursor block-select block-popup-confirm-button block-buttons">Yes
+      <div id="block-popup-confirm-button" className="block-cursor block-select block-popup-confirm-button block-buttons" onClick={props.unblock}>Yes
       </div>
       <div id="block-popup-cancel-button" className="block-cursor block-select block-popup-cancel-button block-buttons" onClick={props.giveUpToggle}>
         No
