@@ -64,46 +64,38 @@ var pollInterval = 1000 * 60; // 1 minute, in milliseconds
 
 function startRequest() {
   store.dispatch({type: 'getSteps'})
-    .then((response) => {
-      store.dispatch(decrementTime());
-    })
-    .then((response) => {
-      var state = store.getState();
-      var steps = state.user.steps;
-      var lastSteps = state.user.lastSteps;
-      var hrSteps = steps-lastSteps
-      var blockState = state.block.showBlock;
-      var stepGoal = state.settings.stepGoal;
-      var timeLeft = state.time.timeLeft;
+  .then((response) => {
+    store.dispatch(decrementTime());
+  })
+  .then((response) => {
+    var state = store.getState();
+    var steps = state.user.steps;
+    var lastSteps = state.user.lastSteps;
+    var hrSteps = steps-lastSteps
+    var blockState = state.block.showBlock;
+    var stepGoal = state.settings.stepGoal;
+    var timeLeft = state.time.timeLeft;
 
-      if(blockState && hrSteps > stepGoal){
-        store.dispatch(unblock());
-        store.dispatch(resetTime());
+    if(blockState && hrSteps > stepGoal){
+      store.dispatch(unblock());
+      store.dispatch(resetTime());
+      store.dispatch(resetLastSteps());
+    }
+    else if (!blockState){
+      if(hrSteps < stepGoal && timeLeft === 0) {
+        store.dispatch(setBlock());
+      }
+      else if(hrSteps >= stepGoal && timeLeft === 0) {
+        store.dispatch(resetTime())
         store.dispatch(resetLastSteps());
       }
-      else if (!blockState){
-        if(hrSteps < stepGoal && timeLeft === 0) {
-          store.dispatch(setBlock());
-        }
-        else if(hrSteps >= stepGoal && timeLeft === 0) {
-          store.dispatch(resetTime())
-          store.dispatch(resetLastSteps());
-        }
-      }
+    }
 
-    })
-
-  //updateBadge();
-  // console.log("TEST!")
-  // console.log("state, ", store.getState())
+  })
 
   window.setTimeout(startRequest, pollInterval);
 }
 
-
-// function stopRequest() {
-//   window.clearTimeout(timerId);
-// }
 
 startRequest();
 

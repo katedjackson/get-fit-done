@@ -43,7 +43,8 @@ class App extends Component {
   render() {
     return (
       <div>
-      {this.props.block && this.state.blockedUrl ?
+      {(this.props.blacklist && this.props.block && this.state.blockedUrl) ||
+       (!this.props.blacklist && this.props.block && !this.state.blockedUrl) ?
       (<BlockModal />) : (
       <div></div>
       )}
@@ -59,7 +60,8 @@ const mapStateToProps = (state) => {
     steps: state.user && state.user.steps,
     stepGoal: state.settings && state.settings.stepGoal,
     websites: state.settings && state.settings.websites,
-    block: state.block && state.block.showBlock
+    block: state.block && state.block.showBlock,
+    blacklist: state.settings && state.settings.blacklist
   };
 };
 
