@@ -1,9 +1,6 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Toggle, TextField, TimePicker,
-         SelectField, MenuItem, RaisedButton } from 'material-ui';
-import { Field, reduxForm } from 'redux-form';
-import { Col, Row } from 'react-bootstrap';
+import { TextField } from 'material-ui';
 
 import { toggleHourlyMode, setStepGoal } from '../../background/reducers/settings'
 
@@ -19,7 +16,7 @@ class HourlyMode extends Component {
   toggleHourlyMode = () => {
     console.log("TOGGLING")
     this.props.dispatch(toggleHourlyMode())
-  }
+  };
 
   stepGoalChange = (evt, value) => {
     this.props.dispatch(setStepGoal(value))
