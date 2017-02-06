@@ -65,6 +65,12 @@ var pollInterval = 1000 * 60; // 1 minute, in milliseconds
 function startRequest() {
   store.dispatch({type: 'getSteps'})
   .then((response) => {
+    var state = store.getState();
+    if (state.user.steps < state.user.lastSteps) {
+      store.dispatch(resetLastSteps());
+    }
+  })
+  .then((response) => {
     store.dispatch(decrementTime());
   })
   .then((response) => {
