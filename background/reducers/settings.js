@@ -4,6 +4,9 @@ import { PropTypes } from 'react';
 const initialState = {
   websites: '',
   blacklist: true, //if false, then whitelist
+  disabledTimesMode: true,
+  startDisableTime: '',
+  stopDisableTime: '',
   hourlyStepsMode: true,
   timeStepsMode: false,
   stepGoal: 250,

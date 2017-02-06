@@ -13,7 +13,7 @@ import { setBlock, unblock } from './reducers/block';
 import { getTimeLeft, resetTime, decrementTime } from './reducers/time'
 import { resetLastSteps } from './reducers/user'
 
-const keysToPersistInChrome = ['settings', 'user', 'time', 'block'];
+const keysToPersistInChrome = ['settings', 'user'];
 
 // load values for keys to persist from storage into redux store
 // perform any initial server requests that are independent
