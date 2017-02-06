@@ -11,7 +11,7 @@ import { getDailyThunk, getWeeklyThunk, getHourlyThunk } from './reducers/user';
 
 import { setBlock, unblock } from './reducers/block';
 import { getTimeLeft, resetTime, decrementTime } from './reducers/time'
-import { resetLastSteps } from './reducers/user'
+import { resetLastSteps, incrementStreak, incrementTotalSteps } from './reducers/user'
 
 const keysToPersistInChrome = ['settings', 'user', 'time', 'block'];
 
@@ -75,6 +75,14 @@ function startRequest() {
     var blockState = state.block.showBlock;
     var stepGoal = state.settings.stepGoal;
     var timeLeft = state.time.timeLeft;
+    var t = new Date();
+    var time = t.toString().slice(16, 21);
+
+    if (time === '11:59') {
+      store.dispatch(incrementTotalSteps());
+      store.dispatch({type: 'getChartSteps'});
+    }
+    if (time === '00:00') store.dispatch(incrementStreak());
 
     if(blockState && hrSteps > stepGoal){
       store.dispatch(unblock());
@@ -96,11 +104,4 @@ function startRequest() {
   window.setTimeout(startRequest, pollInterval);
 }
 
-
 startRequest();
-
-
-
-
-
-

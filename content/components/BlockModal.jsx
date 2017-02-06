@@ -4,7 +4,7 @@ import GiveUpPopUp from './GiveUpPopUp';
 import {connect} from 'react-redux';
 import { unblock } from '../../background/reducers/block';
 import { resetTime } from '../../background/reducers/time';
-import { resetLastSteps, addFailure } from '../../background/reducers/user';
+import { resetLastSteps, resetStreak } from '../../background/reducers/user';
 
 class BlockModal extends Component {
   constructor(props) {
@@ -18,12 +18,10 @@ class BlockModal extends Component {
   }
 
   unblock() {
-    let date = 'setting failure';
     this.props.dispatch(unblock());
     this.props.dispatch(resetTime());
     this.props.dispatch(resetLastSteps());
-    this.props.dispatch(addFailure(date));
-    console.log(this.props.failures);
+    this.props.dispatch(resetStreak());
   }
 
   giveUpToggle(){
@@ -56,7 +54,7 @@ const mapStateToProps = (state) => {
     steps: state.user && state.user.steps,
     lastSteps: state.user && state.user.lastSteps,
     stepGoal: state.settings && state.settings.stepGoal,
-    failures: state.user && state.user.failures
+    streak: state.user && state.user.streak
   };
 };
 

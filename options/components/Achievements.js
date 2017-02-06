@@ -7,7 +7,6 @@ class Achievements extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [3750, 2469, 8762, 9883, 11786, 3982, 1984],
       badges: [
         { id: 1, url: "/options/badges/steps1.png" },
         { id: 2, url: "/options/badges/steps2.png" },
@@ -48,7 +47,7 @@ class Achievements extends Component {
             pointHoverBorderWidth: 2,
             pointRadius: 1,
             pointHitRadius: 10,
-            data: this.state.data
+            data: this.props.weeklySteps
           }
         ]
       }
@@ -77,10 +76,12 @@ class Achievements extends Component {
             />
           </Col>
           <Col md={6} lg={6}>
-            <h2>My Log</h2>
-            <div>
-              A LIST OF ALL THE TIMES YOU GAVE UP.
-            </div>
+            <h1>{this.props.streak}</h1>
+            days without giving up!
+          </Col>
+          <Col>
+            <h1>{this.props.totalSteps}</h1>
+            Steps!
           </Col>
         </Row>
       </Grid>
@@ -92,8 +93,9 @@ const mapStateToProps = (state) => {
   console.log('state: ', state)
   return{
     badges: state.user && state.user.badges,
-    failures: state.user && state.user.failures,
-    weeklySteps: state.user && state.user.weeklySteps
+    streak: state.user && state.user.streak,
+    weeklySteps: state.user && state.user.weeklySteps,
+    totalSteps: state.user && state.user.totalSteps
   };
 };
 
