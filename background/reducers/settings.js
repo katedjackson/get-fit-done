@@ -23,14 +23,18 @@ export const SET_WEBSITES = 'SET_WEBSITES';
 
 export const SET_STEP_GOAL= 'SET_STEP_GOAL';
 
-export const TOGGLE_BLACKLIST = 'TOGGLE_BLACKLIST';
+export const SET_BLACKLIST = 'SET_BLACKLIST';
+
+export const SET_WHITELIST = 'SET_WHITELIST';
 
 /*-------------------------ACTION CREATORS----------------------------*/
 export const setWebsites = createAction(SET_WEBSITES);
 
 export const setStepGoal = createAction(SET_STEP_GOAL);
 
-export const toggleBlacklist = createAction(TOGGLE_BLACKLIST);
+export const setBlacklist = createAction(SET_BLACKLIST);
+
+export const setWhitelist = createAction(SET_WHITELIST);
 
 /*-------------------------REDUCERS----------------------------*/
 export default handleActions({
@@ -40,7 +44,10 @@ export default handleActions({
   SET_STEP_GOAL: (state, { payload }) => {
     return {...state, stepGoal: payload};
   },
-  TOGGLE_BLACKLIST: (state, { payload }) => {
-    return {...state, blacklist: !state.blacklist}
+  SET_BLACKLIST: (state, { payload }) => {
+    return {...state, blacklist: true}
+  },
+  SET_WHITELIST: (state, { payload }) => {
+    return {...state, blacklist: false}
   }
 }, initialState);

@@ -13,17 +13,17 @@ class BlockModal extends Component {
       showPopup: false
     }
     this.giveUpToggle = this.giveUpToggle.bind(this);
-    this.getSteps = this.getSteps.bind(this);
+    // this.getSteps = this.getSteps.bind(this);
     this.unblock = this.unblock.bind(this);
   }
 
-  componentDidMount() {
-    this.getSteps();
-  }
+  // componentDidMount() {
+  //   this.getSteps();
+  // }
 
-  getSteps() {
-    this.props.dispatch({ type: 'getSteps' });
-  }
+  // getSteps() {
+  //   this.props.dispatch({ type: 'getSteps' });
+  // }
 
   unblock() {
     this.props.dispatch(unblock());
@@ -57,10 +57,10 @@ class BlockModal extends Component {
 const mapStateToProps = (state) => {
   console.log('state: ', state);
   return {
-    accessToken: state.user.accessToken,
-    steps: state.user.steps,
-    lastSteps: state.user.lastSteps,
-    stepGoal: state.settings.stepGoal
+    accessToken: state.user && state.user.accessToken,
+    steps: state.user && state.user.steps,
+    lastSteps: state.user && state.user.lastSteps,
+    stepGoal: state.settings && state.settings.stepGoal
   };
 };
 
