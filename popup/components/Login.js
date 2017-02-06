@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { Button } from 'semantic-ui-react';
 import {fitbitAuth} from '../../background/auth';
-import { loginUser } from '../../background/reducers/user';
+import { loginUser, logoutUser } from '../../background/reducers/user';
 
 
 class Login extends Component {
