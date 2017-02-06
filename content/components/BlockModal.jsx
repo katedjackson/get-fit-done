@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import ProgressBar from './ProgressBar';
 import GiveUpPopUp from './GiveUpPopUp';
 import {connect} from 'react-redux';
-import { unblock } from '../../background/reducers/block'
-import { resetTime } from '../../background/reducers/time'
-import { resetLastSteps } from '../../background/reducers/user'
+import { unblock } from '../../background/reducers/block';
+import { resetTime } from '../../background/reducers/time';
+import { resetLastSteps, addFailure } from '../../background/reducers/user';
 
 class BlockModal extends Component {
   constructor(props) {
@@ -17,18 +17,13 @@ class BlockModal extends Component {
     this.unblock = this.unblock.bind(this);
   }
 
-  // componentDidMount() {
-  //   this.getSteps();
-  // }
-
-  // getSteps() {
-  //   this.props.dispatch({ type: 'getSteps' });
-  // }
-
   unblock() {
+    let date = 'setting failure';
     this.props.dispatch(unblock());
     this.props.dispatch(resetTime());
     this.props.dispatch(resetLastSteps());
+    this.props.dispatch(addFailure(date));
+    console.log(this.props.failures);
   }
 
   giveUpToggle(){
@@ -60,7 +55,8 @@ const mapStateToProps = (state) => {
     accessToken: state.user && state.user.accessToken,
     steps: state.user && state.user.steps,
     lastSteps: state.user && state.user.lastSteps,
-    stepGoal: state.settings && state.settings.stepGoal
+    stepGoal: state.settings && state.settings.stepGoal,
+    failures: state.user && state.user.failures
   };
 };
 

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Grid, Col, Row} from 'react-bootstrap';
 import {Line} from 'react-chartjs-2';
+import {connect} from 'react-redux';
 
 class Achievements extends Component {
   constructor(props) {
@@ -87,4 +88,14 @@ class Achievements extends Component {
   }
 }
 
-export default Achievements;
+const mapStateToProps = (state) => {
+  console.log('state: ', state)
+  return{
+    badges: state.user && state.user.badges,
+    failures: state.user && state.user.failures,
+    weeklySteps: state.user && state.user.weeklySteps
+  };
+};
+
+
+export default connect(mapStateToProps)(Achievements);
