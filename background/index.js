@@ -13,7 +13,7 @@ import { setBlock, unblock } from './reducers/block';
 import { getTimeLeft, resetTime, decrementTime } from './reducers/time'
 import { resetLastSteps } from './reducers/user'
 
-const keysToPersistInChrome = ['settings', 'user', 'time', 'block'];
+const keysToPersistInChrome = ['settings', 'user'];
 
 // load values for keys to persist from storage into redux store
 // perform any initial server requests that are independent
@@ -64,6 +64,12 @@ var pollInterval = 1000 * 60; // 1 minute, in milliseconds
 
 function startRequest() {
   store.dispatch({type: 'getSteps'})
+  .then((response) => {
+    var state = store.getState();
+    if (state.user.steps < state.user.lastSteps) {
+      store.dispatch(resetLastSteps());
+    }
+  })
   .then((response) => {
     store.dispatch(decrementTime());
   })
