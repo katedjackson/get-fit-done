@@ -8,10 +8,19 @@
 
 .sign-in-div{
   text-align:center;
-  display: inline-block;
+  margin-top: 20%;
 }
+
+.logo{
+	width: 100%;
+}
+
 
 body{
   min-width: 200px;
   min-height: 270px;
+  padding-top: 15px;
+  padding-right: 55px;
+  padding-left: 55px;
+  padding-bottom: 15px;
 }
