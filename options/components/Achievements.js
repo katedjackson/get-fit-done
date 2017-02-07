@@ -16,6 +16,7 @@ class Achievements extends Component {
     };
     this.getDate = this.getDate.bind(this);
     this.getChartData = this.getChartData.bind(this);
+    this.getLabels = this.getLabels.bind(this);
   }
 
   getDate() {
@@ -23,10 +24,18 @@ class Achievements extends Component {
     return today.substr(0, today.length-24);
   }
 
+  getLabels() {
+    const days = ['Su', 'M', 'Tu', 'W', 'Th', 'F', 'Sa'];
+    const d = new Date();
+    const dayIndex = d.getDay();
+    const labels = [...days.slice(dayIndex + 1, days.length), ...days.slice(0, dayIndex + 1)];
+    return labels;
+}
+
   getChartData() {
     return (
       {
-        labels: ['M', 'Tu', 'W', 'Th', 'F', 'Sa', 'Su'],
+        labels: this.getLabels(),
         datasets: [
           {
             label: `Steps for the Week of ${this.getDate()}`,
@@ -80,7 +89,7 @@ class Achievements extends Component {
             days without giving up!
           </Col>
           <Col>
-            <h1>{this.props.totalSteps}</h1>
+            <h1>{this.props.totalSteps === 0 ? this.props.steps : this.props.totalSteps}</h1>
             Steps!
           </Col>
         </Row>
@@ -95,7 +104,8 @@ const mapStateToProps = (state) => {
     badges: state.user && state.user.badges,
     streak: state.user && state.user.streak,
     weeklySteps: state.user && state.user.weeklySteps,
-    totalSteps: state.user && state.user.totalSteps
+    totalSteps: state.user && state.user.totalSteps,
+    steps: state.user && state.user.steps
   };
 };
 

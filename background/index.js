@@ -57,8 +57,6 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
     }
 });
 
-
-
 //keeping track of time
 var pollInterval = 1000 * 60; // 1 minute, in milliseconds
 
