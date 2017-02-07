@@ -10,12 +10,7 @@ class App extends Component {
       showPopup: false,
       blockedUrl: false
     }
-    this.giveUpToggle = this.giveUpToggle.bind(this);
     this.checkWebsites = this.checkWebsites.bind(this);
-  }
-
-  giveUpToggle(){
-    this.setState({showPopup: this.state.showPopup ? false : true})
   }
 
   checkWebsites(){

@@ -6,11 +6,13 @@ import axios from 'axios';
 const LOGIN_USER = 'LOGIN_USER';
 const LOGOUT_USER = 'LOGOUT_USER';
 const ADD_ACHIEVEMENT = 'ADD_ACHIEVEMENT';
-const ADD_FAILURE = 'ADD_FAILURE';
+const RESET_STREAK = 'RESET_STREAK';
+const INCREMENT_STREAK = 'INCREMENT_STREAK';
 const GET_DAILY_STEPS = 'GET_DAILY_STEPS';
 const GET_WEEKLY_STEPS = 'GET_WEEKLY_STEPS';
 const GET_HOURLY_STEPS = 'GET_HOURLY_STEPS';
 const RESET_LAST_STEPS = 'RESET_LAST_STEPS';
+const TOTAL_STEPS = 'TOTAL_STEPS';
 
 /* --------------    ACTION CREATORS    ----------------- */
 
@@ -20,7 +22,9 @@ export const logoutUser = createAction(LOGOUT_USER);
 
 export const addNewAchievement = createAction(ADD_ACHIEVEMENT);
 
-export const addFailure = createAction(ADD_FAILURE);
+export const resetStreak = createAction(RESET_STREAK);
+
+export const incrementStreak = createAction(INCREMENT_STREAK);
 
 export const resetLastSteps = createAction(RESET_LAST_STEPS);
 
@@ -30,29 +34,35 @@ const getWeeklySteps = createAction(GET_WEEKLY_STEPS);
 
 const getHourlySteps = createAction(GET_HOURLY_STEPS);
 
+export const incrementTotalSteps = createAction(TOTAL_STEPS);
+
 /* ------------------    REDUCER    --------------------- */
 
 const initialState = {
   accessToken: '',
   badges: [],
-  failures: [],
+  streak: 0,
   steps: '',
   lastSteps: '',
-  weeklySteps: []
+  weeklySteps: [],
+  totalSteps: 0
 };
 
 export default handleActions({
   LOGIN_USER: (state, { payload }) => {
     return {...state, accessToken: payload };
   },
-  LOGOUT_USER: (state, action) => {
+  LOGOUT_USER: (state) => {
     return {...state, accessToken: '' };
   },
   ADD_ACHIEVEMENT: (state, { payload }) => {
     return {...state, badges: [...state.badges, payload]};
   },
-  ADD_FAILURE: (state, { payload }) => {
-    return {...state, failures: [...state.failures, payload]};
+  RESET_STREAK: (state) => {
+    return {...state, streak: 0 };
+  },
+  INCREMENT_STREAK: (state) => {
+    return {...state, streak: ++state.streak }
   },
   GET_DAILY_STEPS: (state, { payload }) => {
     if (state.lastSteps) return {...state, steps: payload };
@@ -64,8 +74,11 @@ export default handleActions({
   GET_HOURLY_STEPS: (state, { payload }) => {
     return {...state, hourlySteps: payload };
   },
-  RESET_LAST_STEPS: (state, { payload }) => {
+  RESET_LAST_STEPS: (state) => {
     return {...state, lastSteps: state.steps };
+  },
+  TOTAL_STEPS: (state) => {
+    return {...state, totalSteps: state.totalSteps + state.steps }
   }
 }, initialState);
 
@@ -86,10 +99,15 @@ export const getDailyThunk = () =>
 export const getWeeklyThunk = () =>
   (dispatch, getState) => {
     let { accessToken } = getState().user;
-    return axios.get(`https://api.fitbit.com/1/user/-/activities/date/today/1w.json`,
+    return axios.get(`https://api.fitbit.com/1/user/-/activities/steps/date/today/1w.json`,
       { headers: {'Authorization': 'Bearer ' + accessToken}})
     .then(response => {
-      dispatch(getWeeklySteps(response.data[`activities-log-steps`]));
+      console.log(response.data);
+      let steps = response.data[`activities-steps`].map(activity => {
+        return activity.value;
+      });
+      console.log(steps);
+      dispatch(getWeeklySteps(steps));
     })
   };
 
