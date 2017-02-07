@@ -18,16 +18,17 @@ class App extends Component {
     chrome.runtime.sendMessage('get-tabId', (response) => {
         tabUrl = response;
         var websites = this.props.websites;
-
+        var matchingSite = false
         if(websites && websites.length){
         var urlsArray = websites.split(",").map(function(url){return url.trim() + "/*"});
         urlsArray.forEach( (url) => {
              let regexp = new RegExp(url);
              if(regexp.test(tabUrl)){
-               this.setState({ blockedUrl : true });
+               matchingSite = true;
              }
            })
         }
+        this.setState({blockedUrl: matchingSite})
     });
   }
 
