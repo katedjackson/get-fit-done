@@ -33,11 +33,13 @@ class TimeStepsMode extends Component {
          {this.props.renderModes('timeSteps', ' Step vs. Time Blocking', this.toggleTimeStepsMode, this.props.timeStepsMode)}
          {this.props.timeStepsMode ? (
          <div>
-           <TextField id="timeStepsNum"
+          <TextField id="timeStepsNum"
+                      className="timeStepsField"
+                      floatingLabelText="Steps"
                       defaultValue={this.props.totalStepGoal}
                       onChange={this.stepGoalChange}
            />
-           {this.props.renderTimeSelect('dailyGoalTime', 'By', this.handleTimeChange, this.props.totalStepsTime)}
+          {this.props.renderTimeSelect('dailyGoalTime', 'By', this.handleTimeChange, this.props.totalStepsTime)}
          </div>) : null}
        </div>
     )
