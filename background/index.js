@@ -79,7 +79,7 @@ function startRequest() {
   .then((response) => {
     var state = store.getState();
     if (state.settings.hourlyMode) checkHourlyBlock(state);
-    // if (state.settings.timeStepsMode) checkTimeSteps(state);
+    if (state.settings.timeStepsMode) checkTimeSteps(state,time);
     // if (state.settings.sleepMode) checkSleepTime(state);
   })
   .then((response) => {
@@ -105,7 +105,7 @@ function checkBlockState(state){
 function checkHourlyBlock(state){
   var hrSteps = state.user.steps-state.user.lastSteps;
   var stepGoal = state.settings.stepGoal;
-  var blockState = state.block.showBlock;
+  var blockState = state.block.hourlyBlock;
   var timeLeft = state.time.timeLeft;
 
   if(blockState && hrSteps > stepGoal){
@@ -126,20 +126,25 @@ function checkHourlyBlock(state){
 
 function checkTimeSteps(state, time){
   let totalSteps = state.user.steps;
-  let stepGoal = state.settings.stepGoal;
+  let stepGoal = state.settings.totalStepGoal;
   let blockTime = state.settings.totalStepsTime;
-  let blockState = state.block.blockReason.timeStepsBlock;
+  let blockState = state.block.timeStepsBlock;
   let currTimeVal = Number(time.slice(0,2) + time.slice(3));
   let blockTimeVal = Number(blockTime.slice(0,2) + blockTime.slice(3));
+  console.log("TIME STEPS BLOCK STATE: ", blockState)
+  console.log("CURRENT TIME: ", currTimeVal)
+  console.log("BLOCK TIME: ", blockTimeVal)
+  console.log("TOTAL STEPS: ", totalSteps)
+  console.log("STEP GOAL: ", stepGoal)
 
   if (!blockState && currTimeVal >= blockTimeVal && totalSteps < stepGoal){
-    store.dispatch(setBlock())
+    store.dispatch(toggleTimeStepsBlock())
   }
   else if (blockState && currTimeVal >= blockTimeVal && totalSteps >= stepGoal){
-    store.dispatch(unblock());
+    store.dispatch(toggleTimeStepsBlock());
   }
   else if (blockState && currTimeVal <= blockTimeVal) {
-    store.dispatch(unblock());
+    store.dispatch(toggleTimeStepsBlock());
   }
 
 }
