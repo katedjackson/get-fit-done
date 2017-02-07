@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Icon } from 'semantic-ui-react';
 import { Circle } from 'react-progressbar.js'
-import Login from './Login';
 
 const Blocked = (props) => {
 
@@ -32,7 +31,7 @@ const Blocked = (props) => {
           containerStyle={containerStyle}
           containerClassName={'.progressbar'} />
 
-      <Login />
+
     </div>
   );
 }
