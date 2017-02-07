@@ -8,6 +8,11 @@
     "default_title": "Get Fit Done",
     "default_popup" : "popup/index.html"
   },
+  "icons": { 
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png" 
+  },
   "content_scripts": [
     {
       "matches": ["*://*/*"],
