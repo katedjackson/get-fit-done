@@ -34,8 +34,7 @@ class App extends Component {
     console.log(this.props);
     return (
       <div>
-      {this.props.accessToken.length > 1 ? this.signedInView() : this.loginView()}
-        
+        {this.props.accessToken.length > 1 ? this.signedInView() : this.loginView()}
       </div>
       
     );
