@@ -80,7 +80,7 @@ function startRequest() {
     var state = store.getState();
     if (state.settings.hourlyMode) checkHourlyBlock(state);
     if (state.settings.timeStepsMode) checkTimeSteps(state,time);
-    // if (state.settings.sleepMode) checkSleepTime(state);
+    if (state.settings.sleepMode) checkSleepTime(state, time);
   })
   .then((response) => {
     checkBlockState(store.getState())
@@ -131,11 +131,6 @@ function checkTimeSteps(state, time){
   let blockState = state.block.timeStepsBlock;
   let currTimeVal = Number(time.slice(0,2) + time.slice(3));
   let blockTimeVal = Number(blockTime.slice(0,2) + blockTime.slice(3));
-  console.log("TIME STEPS BLOCK STATE: ", blockState)
-  console.log("CURRENT TIME: ", currTimeVal)
-  console.log("BLOCK TIME: ", blockTimeVal)
-  console.log("TOTAL STEPS: ", totalSteps)
-  console.log("STEP GOAL: ", stepGoal)
 
   if (!blockState && currTimeVal >= blockTimeVal && totalSteps < stepGoal){
     store.dispatch(toggleTimeStepsBlock())
@@ -150,6 +145,45 @@ function checkTimeSteps(state, time){
 }
 
 function checkSleepTime(state, time){
-  if (time === state.settings.sleepTime[0]) store.dispatch(setBlock());
-  if (time === state.settings.sleepTime[1]) store.dispatch(unblock());
+  console.log("CHECKING SLEEP TIME")
+  let blockState = state.block.sleepBlock;
+  let startSleep = state.settings.sleepTime[0];
+  let stopSleep = state.settings.sleepTime[1];
+  let currTimeVal = Number(time.slice(0,2) + time.slice(3));
+  let startSleepVal = Number(startSleep.slice(0,2) + startSleep.slice(3));
+  let stopSleepVal = Number(stopSleep.slice(0,2) + stopSleep.slice(3));
+
+  console.log("blockState: ", blockState)
+  console.log("currTimeVal: ", currTimeVal)
+  console.log("startSleepVal: ", startSleepVal)
+  console.log("stopSleepVal: ", stopSleepVal)
+
+
+  if (blockState) {
+    if (startSleepVal < stopSleepVal){
+      if (currTimeVal >= stopSleepVal || currTimeVal < startSleepVal){
+        store.dispatch(toggleSleepBlock());
+      }
+    }
+    else if (startSleepVal > stopSleepVal) {
+      if (currTimeVal >= stopSleepVal && currTimeVal < startSleepVal){
+        store.dispatch(toggleSleepBlock());
+      }
+    }
+  }
+  else if (!blockState) {
+    if (startSleepVal < stopSleepVal) {
+      if (currTimeVal >= startSleepVal && currTimeVal < stopSleepVal){
+        store.dispatch(toggleSleepBlock());
+      }
+    }
+    else if (startSleepVal > stopSleepVal){
+      if (currTimeVal >= startSleepVal || currTimeVal < stopSleepVal)
+        store.dispatch(toggleSleepBlock());
+    }
+  }
+
+
 }
+
+
