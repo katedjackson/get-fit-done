@@ -19,7 +19,7 @@ const initialState = {
   // waterMode: false,
   // waterTime: [],
   sleepMode: true,
-  sleepTime: ['16:00', '17:00']
+  sleepTime: ['22:00', '6:00']
 }
 /*-------------------------ACTIONS----------------------------*/
 export const SET_WEBSITES = 'SET_WEBSITES';
