@@ -42,8 +42,8 @@ const initialState = {
   accessToken: '',
   badges: [],
   streak: 0,
-  steps: '',
-  lastSteps: '',
+  steps: 0,
+  lastSteps: 0,
   weeklySteps: [],
   totalSteps: 0
 };
