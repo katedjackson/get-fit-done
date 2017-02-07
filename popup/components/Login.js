@@ -4,7 +4,6 @@ import { Button } from 'semantic-ui-react';
 import {fitbitAuth} from '../../background/auth';
 import { loginUser, logoutUser } from '../../background/reducers/user';
 
-
 class Login extends Component {
   constructor(props) {
     super(props);

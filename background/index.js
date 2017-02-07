@@ -1,19 +1,24 @@
 'use strict';
 
-import {wrapStore, alias } from 'react-chrome-redux';
+import { wrapStore, alias } from 'react-chrome-redux';
 import rootReducer from './reducers';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import createLogger from 'redux-logger'
+import createLogger from 'redux-logger';
 import chromeStorage, { loadFromStorage } from './redux/chromeStorage';
 import { middleware } from 'redux-async-initial-state';
 import { getDailyThunk, getWeeklyThunk, getHourlyThunk } from './reducers/user';
-
 import { setBlock, unblock } from './reducers/block';
-import { getTimeLeft, resetTime, decrementTime } from './reducers/time'
-import { resetLastSteps, incrementStreak, incrementTotalSteps } from './reducers/user'
+import { getTimeLeft, resetTime, decrementTime } from './reducers/time';
+import { resetLastSteps } from './reducers/user';
+ import checkAchievements from './achievements';
 
-const keysToPersistInChrome = ['settings', 'user', 'time', 'block'];
+const keysToPersistInChrome = [
+  'settings',
+  'user',
+  'time',
+  'block'
+];
 
 // load values for keys to persist from storage into redux store
 // perform any initial server requests that are independent
@@ -25,7 +30,7 @@ const loadStore = (currentState) => {
     chromeStoragePromise,
   ])
     .then(([
-      loadedChromeStorage,
+      loadedChromeStorage
     ]) => ({
       ...currentState,
       ...loadedChromeStorage,
@@ -58,47 +63,41 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
 });
 
 //keeping track of time
-var pollInterval = 1000 * 60; // 1 minute, in milliseconds
+var pollInterval = 1000; // 1 second
 
 function startRequest() {
-  store.dispatch({type: 'getSteps'})
-  .then((response) => {
-    store.dispatch(decrementTime());
-  })
-  .then((response) => {
-    var state = store.getState();
-    var steps = state.user.steps;
-    var lastSteps = state.user.lastSteps;
-    var hrSteps = steps-lastSteps
-    var blockState = state.block.showBlock;
-    var stepGoal = state.settings.stepGoal;
-    var timeLeft = state.time.timeLeft;
-    var t = new Date();
-    var time = t.toString().slice(16, 21);
+  var state = store.getState();
+  if (state.user.accessToken) {
+    pollInterval = 1000 * 60;
+    store.dispatch({type: 'getSteps'})
+      .then((response) => {
+        store.dispatch(decrementTime());
+      })
+      .then((response) => {
+        var steps = state.user.steps;
+        var lastSteps = state.user.lastSteps;
+        var hrSteps = steps-lastSteps;
+        var blockState = state.block.showBlock;
+        var stepGoal = state.settings.stepGoal;
+        var timeLeft = state.time.timeLeft;
 
-    if (time === '11:59') {
-      store.dispatch(incrementTotalSteps());
-      store.dispatch({type: 'getChartSteps'});
-    }
-    if (time === '00:00') store.dispatch(incrementStreak());
-
-    if(blockState && hrSteps > stepGoal){
-      store.dispatch(unblock());
-      store.dispatch(resetTime());
-      store.dispatch(resetLastSteps());
-    }
-    else if (!blockState){
-      if(hrSteps < stepGoal && timeLeft === 0) {
-        store.dispatch(setBlock());
-      }
-      else if(hrSteps >= stepGoal && timeLeft === 0) {
-        store.dispatch(resetTime())
-        store.dispatch(resetLastSteps());
-      }
-    }
-
-  })
-
+        if(blockState && hrSteps > stepGoal){
+          store.dispatch(unblock());
+          store.dispatch(resetTime());
+          store.dispatch(resetLastSteps());
+        }
+        else if (!blockState){
+          if(hrSteps < stepGoal && timeLeft === 0) {
+            store.dispatch(setBlock());
+          }
+          else if(hrSteps >= stepGoal && timeLeft === 0) {
+            store.dispatch(resetTime())
+            store.dispatch(resetLastSteps());
+          }
+        }
+        checkAchievements();
+      })
+  }
   window.setTimeout(startRequest, pollInterval);
 }
 

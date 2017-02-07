@@ -7,16 +7,25 @@ class Achievements extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      badges: [
-        { id: 1, url: "/options/badges/steps1.png" },
-        { id: 2, url: "/options/badges/steps2.png" },
-        { id: 3, url: "/options/badges/streak1.png" },
-        { id: 4, url: "/options/badges/streak2.png" }
+      achievementBadges: [
+        { id: 0, type: "50,000 Steps", url: "/options/badges/steps1.png" },
+        { id: 1, type: "100,000 Steps", url: "/options/badges/steps2.png" },
+        { id: 2, type: " 7 Day Streak", url: "/options/badges/streak1.png" },
+        { id: 3, type: "14 Day Streak", url: "/options/badges/streak2.png" }
       ]
     };
     this.getDate = this.getDate.bind(this);
     this.getChartData = this.getChartData.bind(this);
     this.getLabels = this.getLabels.bind(this);
+  }
+
+  getBadges() {
+    let earnedBadges = [];
+    this.props.badges.map(badgeId => {
+      earnedBadges.push(this.state.achievementBadges[badgeId]);
+    });
+    console.log(earnedBadges);
+    return earnedBadges;
   }
 
   getDate() {
@@ -30,7 +39,7 @@ class Achievements extends Component {
     const dayIndex = d.getDay();
     const labels = [...days.slice(dayIndex + 1, days.length), ...days.slice(0, dayIndex + 1)];
     return labels;
-}
+  }
 
   getChartData() {
     return (
@@ -64,12 +73,13 @@ class Achievements extends Component {
   }
 
   render () {
+    let badges = this.getBadges();
     return (
       <Grid>
         <Row className="show-grid badges">
             <h2>My Badges</h2>
             {
-              this.state.badges && this.state.badges.map((badge) => {
+              badges && badges.map((badge) => {
                 return (
                   <Col md={3} lg={3} className="badge-col" key={badge.id}>
                     <img src={badge.url}></img>
