@@ -6,7 +6,9 @@ const auth_url = 'https://www.fitbit.com/oauth2/authorize/?' +
     'client_id=' + client_id + '&' +
     'redirect_uri=' + encodeURIComponent(redirect_uri) +
     '&scope=activity%20heartrate%20location%20nutrition%20profile%20settings%20sleep%20social%20weight' +
-    '&expires_in=31536000';
+    '&expires_in=31536000' +
+    '&prompt=login';
+    //'&prompt=consent';
 
 export const fitbitAuth = () => {
   return new Promise(function (resolve, reject) {
