@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import Blocked from './Blocked';
-import Unblocked from './Unblocked';
+import ProgressBar from './ProgressBar';
+import Login from './Login';
 
 
 class App extends Component {
@@ -9,12 +9,34 @@ class App extends Component {
     super(props);
   }
 
+  loginView(){
+    return (
+      <div>
+        <img className='logo' src='../logo.png' />
+        <Login />
+      </div>
+    )
+  }
+
+  signedInView(){
+    return (
+      <div>
+        <img className='logo' src='../logo.png' />
+          {!this.props.blocked ? <h3>{this.props.timeLeft} minutes to get your steps!</h3> : 
+          <h3>You need { this.props.stepGoal - (this.props.steps - this.props.lastSteps)} more steps to unlock</h3>}
+          <ProgressBar /> 
+          <Login /> 
+      </div>
+    )
+  }
+
   render() {
     console.log(this.props);
     return (
       <div>
-        {this.props.blocked ? <Blocked /> : <Unblocked />}
+        {this.props.accessToken.length > 1 ? this.signedInView() : this.loginView()}
       </div>
+      
     );
   }
 }
@@ -23,7 +45,12 @@ const mapStateToProps = (state) => {
   console.log('state: ', state);
   return {
     accessToken: state.user && state.user.accessToken,
-    blocked: state.block && state.block.showBlock
+    blocked: state.block && state.block.showBlock,
+    timeLeft : state.user && state.time.timeLeft,
+    steps: state.user && state.user.steps,
+    lastSteps: state.user && state.user.lastSteps,
+    stepGoal: state.settings && state.settings.stepGoal
+
   };
 };
 
