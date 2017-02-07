@@ -9,7 +9,7 @@ import chromeStorage, { loadFromStorage } from './redux/chromeStorage';
 import { middleware } from 'redux-async-initial-state';
 import { getDailyThunk, getWeeklyThunk, getHourlyThunk } from './reducers/user';
 
-import { setBlock, unblock } from './reducers/block';
+import { setBlock, unblock, toggleHourlyBlock, toggleTimeStepsBlock, toggleSleepBlock } from './reducers/block';
 import { getTimeLeft, resetTime, decrementTime } from './reducers/time'
 import { resetLastSteps, incrementStreak, incrementTotalSteps } from './reducers/user'
 
@@ -63,6 +63,9 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
 var pollInterval = 1000 * 60; // 1 minute, in milliseconds
 
 function startRequest() {
+  let t = new Date()
+  let time = t.toString().slice(16,21);
+
   store.dispatch({type: 'getSteps'})
   .then((response) => {
     var state = store.getState();
@@ -75,39 +78,73 @@ function startRequest() {
   })
   .then((response) => {
     var state = store.getState();
-    var steps = state.user.steps;
-    var lastSteps = state.user.lastSteps;
-    var hrSteps = steps-lastSteps
-    var blockState = state.block.showBlock;
-    var stepGoal = state.settings.stepGoal;
-    var timeLeft = state.time.timeLeft;
-    var t = new Date();
-    var time = t.toString().slice(16, 21);
-
-    if (time === '11:59') {
-      store.dispatch(incrementTotalSteps());
-      store.dispatch({type: 'getChartSteps'});
-    }
-    if (time === '00:00') store.dispatch(incrementStreak());
-
-    if(blockState && hrSteps > stepGoal){
-      store.dispatch(unblock());
-      store.dispatch(resetTime());
-      store.dispatch(resetLastSteps());
-    }
-    else if (!blockState){
-      if(hrSteps < stepGoal && timeLeft === 0) {
-        store.dispatch(setBlock());
-      }
-      else if(hrSteps >= stepGoal && timeLeft === 0) {
-        store.dispatch(resetTime())
-        store.dispatch(resetLastSteps());
-      }
-    }
-
+    if (state.settings.hourlyMode) checkHourlyBlock(state);
+    // if (state.settings.timeStepsMode) checkTimeSteps(state);
+    // if (state.settings.sleepMode) checkSleepTime(state);
+  })
+  .then((response) => {
+    checkBlockState(store.getState())
   })
 
   window.setTimeout(startRequest, pollInterval);
 }
 
 startRequest();
+
+function checkBlockState(state){
+  if (state.block.showBlock){
+    if (!state.block.hourlyBlock && !state.block.timeStepsBlock && !state.block.sleepBlock){
+      store.dispatch(unblock());
+    }
+  }
+  else if (state.block.hourlyBlock || state.block.timeStepsBlock || state.block.sleepBlock){
+    store.dispatch(setBlock());
+  }
+}
+
+function checkHourlyBlock(state){
+  var hrSteps = state.user.steps-state.user.lastSteps;
+  var stepGoal = state.settings.stepGoal;
+  var blockState = state.block.showBlock;
+  var timeLeft = state.time.timeLeft;
+
+  if(blockState && hrSteps > stepGoal){
+    store.dispatch(resetTime());
+    store.dispatch(resetLastSteps());
+    store.dispatch(toggleHourlyBlock());
+  }
+  else if (!blockState){
+    if(hrSteps < stepGoal && timeLeft === 0) {
+      store.dispatch(toggleHourlyBlock());
+    }
+    else if(hrSteps >= stepGoal && timeLeft === 0) {
+      store.dispatch(resetTime());
+      store.dispatch(resetLastSteps());
+    }
+  }
+}
+
+function checkTimeSteps(state, time){
+  let totalSteps = state.user.steps;
+  let stepGoal = state.settings.stepGoal;
+  let blockTime = state.settings.totalStepsTime;
+  let blockState = state.block.blockReason.timeStepsBlock;
+  let currTimeVal = Number(time.slice(0,2) + time.slice(3));
+  let blockTimeVal = Number(blockTime.slice(0,2) + blockTime.slice(3));
+
+  if (!blockState && currTimeVal >= blockTimeVal && totalSteps < stepGoal){
+    store.dispatch(setBlock())
+  }
+  else if (blockState && currTimeVal >= blockTimeVal && totalSteps >= stepGoal){
+    store.dispatch(unblock());
+  }
+  else if (blockState && currTimeVal <= blockTimeVal) {
+    store.dispatch(unblock());
+  }
+
+}
+
+function checkSleepTime(state, time){
+  if (time === state.settings.sleepTime[0]) store.dispatch(setBlock());
+  if (time === state.settings.sleepTime[1]) store.dispatch(unblock());
+}
