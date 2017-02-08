@@ -100,3 +100,11 @@ h2 {
 .logout {
   text-align: right;
 }
+
+.splash-screen {
+  text-align: center;
+}
+
+img .splash-img {
+  margin-top: 30vh;
+}
