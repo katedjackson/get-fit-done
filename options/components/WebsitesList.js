@@ -43,7 +43,7 @@ class WebsitesList extends Component {
          </legend>
          <div>
            {this.renderBlacklistSelect('blacklist', 'Block Mode')}
-           <label>Enter websites you want to block/allow separated by a comma. Enter <b>only</b> the domain name and extension. For example, enter facebook.com, snapchat.com, instagram.com.
+           <label>{"Enter websites you want to " + (this.props.blacklist ? 'BLOCK' : 'ALLOW') + " separated by a comma."}<br />Enter <b>only</b> the domain name and extension.<br />For example, enter facebook.com, snapchat.com, instagram.com.
            </label>
            <div>
              {typeof this.props.websites === 'string' && <TextField
