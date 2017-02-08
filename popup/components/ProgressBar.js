@@ -30,8 +30,6 @@ const Blocked = (props) => {
           initialAnimate={true}
           containerStyle={containerStyle}
           containerClassName={'.progressbar'} />
-
-
     </div>
   );
 }
