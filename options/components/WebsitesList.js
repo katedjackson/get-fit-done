@@ -26,7 +26,7 @@ class WebsitesList extends Component {
       <SelectField
         id={id}
         floatingLabelText={label}
-        value={this.props.blacklist}
+        value={val}
         onChange={this.toggleBlacklist}
         maxHeight={200}>
         <MenuItem value={0} primaryText="Blacklist" />
