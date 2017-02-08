@@ -20,6 +20,10 @@
     margin-top: -4%;
 }
 
+.progressbar-text{
+	font-size: 18px;
+	top: 55% !important;
+}
 
 body{
 	text-align: center;	
