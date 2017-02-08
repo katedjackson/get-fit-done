@@ -108,3 +108,23 @@ h2 {
 img .splash-img {
   margin-top: 30vh;
 }
+
+.ticker {
+  border-color: #55AAFF;
+  border-width: 1px;
+  border-radius: 15%;
+}
+
+.ticker p {
+  font-size: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.tickers {
+  margin-top: 10vh;
+}
+
+.badge-col img {
+  text-align: center;
+}
