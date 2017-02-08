@@ -53,7 +53,7 @@ export default handleActions({
     return {...state, accessToken: payload };
   },
   LOGOUT_USER: (state) => {
-    return {...state, accessToken: '' };
+    return initialState;
   },
   ADD_ACHIEVEMENT: (state, { payload }) => {
     return {...state, badges: [...state.badges, payload]};

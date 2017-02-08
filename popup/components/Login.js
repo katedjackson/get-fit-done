@@ -3,6 +3,9 @@ import {connect} from 'react-redux';
 import { Button } from 'semantic-ui-react';
 import {fitbitAuth} from '../../background/auth';
 import { loginUser, logoutUser } from '../../background/reducers/user';
+import { resetBlock } from '../../background/reducers/block';
+import { resetSettings } from '../../background/reducers/settings';
+import { resetTime } from '../../background/reducers/time';
 
 class Login extends Component {
   constructor(props) {
@@ -21,7 +24,10 @@ class Login extends Component {
   }
 
   signout() {
-    this.props.dispatch(logoutUser())
+    this.props.dispatch(resetTime());
+    this.props.dispatch(resetSettings());
+    this.props.dispatch(resetBlock());
+    this.props.dispatch(logoutUser());
   }
 
   render() {
