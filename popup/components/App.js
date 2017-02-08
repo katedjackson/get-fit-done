@@ -19,30 +19,34 @@ class App extends Component {
   }
 
   signedInView(){
+    let timeLeft;
+    if (this.props.timeLeft > 0) timeLeft = this.props.timeLeft;
+    else timeLeft = 0;
+
     return (
       <div>
+        <a title='Settings' target='_blank' href='chrome-extension://fecjgkehmgognabbnohaoombfboddooo/options/index.html'><img className='settings' src='../settingsIcon.png' /></a>
         <img className='logo' src='../logo.png' />
-          {!this.props.blocked ? <h3>{this.props.timeLeft} minutes to get your steps!</h3> : 
+          { (this.props.steps - this.props.lastSteps)  >= this.props.stepGoal ? <h3 className='animated infinite tada'>Congrats you've reached your goal!</h3> :  <h3></h3>}
+          {!this.props.blocked ? <h3>{timeLeft} minutes remaining</h3> :
           <h3>You need { this.props.stepGoal - (this.props.steps - this.props.lastSteps)} more steps to unlock</h3>}
-          <ProgressBar /> 
-          <Login /> 
+          <ProgressBar />
+          <Login />
       </div>
     )
   }
 
   render() {
-    console.log(this.props);
     return (
       <div>
         {this.props.accessToken.length > 1 ? this.signedInView() : this.loginView()}
       </div>
-      
+
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  console.log('state: ', state);
   return {
     accessToken: state.user && state.user.accessToken,
     blocked: state.block && state.block.showBlock,

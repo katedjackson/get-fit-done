@@ -6,7 +6,7 @@ const initialState = {
   blacklist: true, //if false, then whitelist
   disabledTimeMode: false,
   disabledTime: ['09:00', '17:00'],
-  hourlyMode: false,
+  hourlyMode: true,
   timeStepsMode: false,
   stepGoal: "250",
   totalStepGoal: "10000",
@@ -18,7 +18,7 @@ const initialState = {
   // foodTime: [],
   // waterMode: false,
   // waterTime: [],
-  sleepMode: true,
+  sleepMode: false,
   sleepTime: ['22:00', '06:00']
 }
 /*-------------------------ACTIONS----------------------------*/

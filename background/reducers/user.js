@@ -112,19 +112,3 @@ export const getWeeklyThunk = () =>
       dispatch(getWeeklySteps(steps));
     })
   };
-
-
-/**
-** intraday actiity data. need permission from fitbit..
-export const getHourlyThunk = () =>
-  (dispatch, getState) => {
-    let { accessToken } = getState().user;
-    console.log('gethourly thunk access token', accessToken)
-    return axios.get(`https://api.fitbit.com/1/user/-/activities/tracker/steps/date/today/1d/15min/time/10:30/10:45.json`,
-      { headers: {'Authorization': 'Bearer ' + accessToken}})
-    .then(response => {
-      console.log(response.data);
-      dispatch(getHourlySteps(response.data));
-    })
-  };
-*/

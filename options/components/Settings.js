@@ -88,9 +88,6 @@ class Settings extends Component {
   }
 
   render() {
-    console.log("settings Component: ",this.props.websites);
-    console.log(typeof this.props.websites);
-
     return (
       <div>
         <Col lg={6} md={6} sm={12} xs={12} className="setting_div">
