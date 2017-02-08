@@ -28,7 +28,7 @@ class App extends Component {
         <a title='Settings' target='_blank' href='chrome-extension://fecjgkehmgognabbnohaoombfboddooo/options/index.html'><img className='settings' src='../settingsIcon.png' /></a>
         <img className='logo' src='../logo.png' />
           { (this.props.steps - this.props.lastSteps)  >= this.props.stepGoal ? <h3 className='animated infinite tada'>Congrats you've reached your goal!</h3> :  <h3></h3>}
-          {!this.props.blocked ? <h3>{this.props.timeLeft} minutes remaining</h3> : 
+          {!this.props.blocked ? <h3>{timeLeft} minutes remaining</h3> :
           <h3>You need { this.props.stepGoal - (this.props.steps - this.props.lastSteps)} more steps to unlock</h3>}
           <ProgressBar />
           <Login />
