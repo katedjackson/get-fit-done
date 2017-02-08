@@ -24,6 +24,9 @@ export const toggleTimeStepsBlock = createAction(TOGGLE_TIME_STEPS_BLOCK);
 export const TOGGLE_SLEEP_BLOCK = 'TOGGLE_SLEEP_BLOCK';
 export const toggleSleepBlock = createAction(TOGGLE_SLEEP_BLOCK);
 
+export const RESET_BLOCK = 'RESET_BLOCK';
+export const resetBlock = createAction(RESET_BLOCK);
+
 export default handleActions({
   SET_BLOCK: (state, { payload }) => {
     return {...state, showBlock: true};
@@ -32,13 +35,16 @@ export default handleActions({
     return initialState;
   },
   TOGGLE_HOURLY_BLOCK: (state, { payload }) => {
-    return {...state, hourlyBlock: !state.hourlyBlock}
+    return {...state, hourlyBlock: !state.hourlyBlock};
   },
   TOGGLE_TIME_STEPS_BLOCK: (state, { payload }) => {
-    return {...state, timeStepsBlock: !state.timeStepsBlock}
+    return {...state, timeStepsBlock: !state.timeStepsBlock};
   },
   TOGGLE_SLEEP_BLOCK: (state, { payload }) => {
-    return {...state, sleepBlock: !state.sleepBlock}
+    return {...state, sleepBlock: !state.sleepBlock};
+  },
+  RESET_BLOCK: (state, { payload }) => {
+    return initialState;
   }
 
 }, initialState);

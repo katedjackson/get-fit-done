@@ -96,3 +96,7 @@ h2 {
 .hourlyStepsField {
   width: 75px !important;
 }
+
+.logout {
+  text-align: right;
+}
