@@ -14,7 +14,6 @@ class HourlyMode extends Component {
 
 
   toggleHourlyMode = () => {
-    console.log("TOGGLING")
     this.props.dispatch(toggleHourlyMode())
   };
 

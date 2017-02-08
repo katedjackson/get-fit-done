@@ -18,7 +18,7 @@ export const decrementTime = createAction(DECREMENT_TIME);
 /* ------------------    REDUCER    --------------------- */
 
 const initialState = {
-  timeLeft: 1
+  timeLeft: 5
 };
 
 export default handleActions({
@@ -29,7 +29,6 @@ export default handleActions({
     return initialState;
   },
   DECREMENT_TIME: (state, action) => {
-    console.log('state.timeLeft: ', state.timeLeft)
     return {...state, timeLeft: --state.timeLeft}
   }
 }, initialState);

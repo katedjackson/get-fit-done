@@ -33,7 +33,7 @@ class App extends Component {
         <MuiThemeProvider>
           { !this.props.accessToken ? <SplashScreen /> :
             (<div>
-              <h1>Get [F]it Done</h1>
+              <p><img className='logo' src='../logo.png' /></p>
               <Tabs selected={0} className="tabs">
                 <Tab label="Settings" className="tab">
                   <Settings handleWebsiteSubmit={this.handleWebsiteSubmit} handleModesSubmit= {this.handleModesSubmit} websites={this.props.websites}/>
@@ -50,18 +50,10 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log('state: ', state)
   return{
     websites: state.settings && state.settings.websites,
     accessToken: state.user && state.user.accessToken
   };
 };
 
-
 export default connect(mapStateToProps)(App);
-
-
-
-
-
-

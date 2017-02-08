@@ -9,8 +9,6 @@ const store = new Store({
   portName: 'GET_FIT_DONE' // communication port name
 });
 
-console.log('from content script store: ', store.getState())
-
 if (!document.getElementById('rcr-anchor')) {
   const anchor = document.createElement('div');
   anchor.id = 'rcr-anchor';
