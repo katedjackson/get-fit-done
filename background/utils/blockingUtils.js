@@ -1,5 +1,6 @@
 import { setBlock, unblock, toggleHourlyBlock, toggleTimeStepsBlock, toggleSleepBlock } from '../reducers/block';
 import { getTimeLeft, resetTime, decrementTime } from '../reducers/time'
+import { getDailyThunk, getWeeklyThunk, getHourlyThunk, resetLastSteps, incrementStreak, incrementTotalSteps } from './reducers/user';
 
 
 export function checkBlockState(state){
