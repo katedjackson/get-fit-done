@@ -14,10 +14,19 @@ export const fitbitAuth = () => {
   return new Promise(function (resolve, reject) {
     chrome.identity.launchWebAuthFlow({ 'url': auth_url, 'interactive': true},
       function(redirect_url) {
-        console.log('redirectURL:',redirect_url);
          // extract the token from this url and use it for future requests
          let accessToken = redirect_url.substring(redirect_url.indexOf('=') + 1, redirect_url.indexOf('&user_id'));
          resolve(accessToken);
+      });
+  });
+};
+
+export const fitbitLogout = () => {
+  return new Promise(function (resolve, reject) {
+    chrome.identity.launchWebAuthFlow({ 'url': 'https://www.fitbit.com/logout','interactive':false},
+      function(response) {
+         // extract the token from this url and use it for future requests
+         resolve(response);
       });
   });
 };

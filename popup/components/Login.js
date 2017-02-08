@@ -1,17 +1,14 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { Button } from 'semantic-ui-react';
-import { fitbitAuth } from '../../background/auth';
-import { loginUser, logoutUser } from '../../background/reducers/user';
-import { resetBlock } from '../../background/reducers/block';
-import { resetSettings } from '../../background/reducers/settings';
-import { resetTime } from '../../background/reducers/time';
+import { fitbitAuth} from '../../background/auth';
+import { loginUser } from '../../background/reducers/user';
+
 
 class Login extends Component {
   constructor(props) {
     super(props);
     this.onClick = this.onClick.bind(this);
-    this.signout = this.signout.bind(this);
   }
 
   onClick() {
@@ -21,12 +18,6 @@ class Login extends Component {
     })
   }
 
-  signout() {
-    this.props.dispatch(resetTime());
-    this.props.dispatch(resetSettings());
-    this.props.dispatch(resetBlock());
-    this.props.dispatch(logoutUser());
-  }
 
   render() {
     return (

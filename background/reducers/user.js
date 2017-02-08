@@ -1,6 +1,8 @@
 import { createAction, handleActions } from 'redux-actions';
 import axios from 'axios';
 
+import { fitbitAuth } from '../auth'
+
 /* ------------------    ACTIONS    --------------------- */
 
 const LOGIN_USER = 'LOGIN_USER';
@@ -31,8 +33,6 @@ export const resetLastSteps = createAction(RESET_LAST_STEPS);
 const getDailySteps = createAction(GET_DAILY_STEPS);
 
 const getWeeklySteps = createAction(GET_WEEKLY_STEPS);
-
-const getHourlySteps = createAction(GET_HOURLY_STEPS);
 
 export const incrementTotalSteps = createAction(TOTAL_STEPS);
 
@@ -71,9 +71,6 @@ export default handleActions({
   GET_WEEKLY_STEPS: (state, { payload }) => {
     return {...state, weeklySteps: payload };
   },
-  GET_HOURLY_STEPS: (state, { payload }) => {
-    return {...state, hourlySteps: payload };
-  },
   RESET_LAST_STEPS: (state) => {
     return {...state, lastSteps: state.steps };
   },
@@ -95,6 +92,14 @@ export const getDailyThunk = () =>
     .then(response => {
       dispatch(getDailySteps(response.data.summary.steps));
     })
+    .catch((err) => {
+     if (err.response.data.errors[0].errorType === 'invalid_token' ||
+         err.response.data.errors[0].errorType === 'expired_token'){
+          fitbitAuth().then( accessToken => {
+            dispatch(loginUser(accessToken));
+          })
+      }
+    });
   };
 
 export const getWeeklyThunk = () =>

@@ -11,6 +11,7 @@ import { logoutUser } from '../../background/reducers/user';
 import { resetBlock } from '../../background/reducers/block';
 import { resetSettings } from '../../background/reducers/settings';
 import { resetTime } from '../../background/reducers/time';
+import { fitbitLogout } from '../../background/auth'
 
 import WebsitesList from './WebsitesList'
 import DisabledTime from './DisabledTime'
@@ -92,7 +93,9 @@ class Settings extends Component {
             );
   }
 
+
 signout() {
+  fitbitLogout();
   this.props.dispatch(resetTime());
   this.props.dispatch(resetSettings());
   this.props.dispatch(resetBlock());
