@@ -74,13 +74,13 @@ class Achievements extends Component {
   render () {
     let badges = this.getBadges();
     return (
-      <Grid>
+      <Grid className="container-fluid">
         <Row className="show-grid badges">
             <h2>My Badges</h2>
             {
               badges && badges.map((badge) => {
                 return (
-                  <Col md={3} lg={3} className="badge-col" key={badge.id}>
+                  <Col xs={6} sm={6} md={3} lg={3} className="badge-col" key={badge.id}>
                     <img src={badge.url}></img>
                   </Col>
                 );
@@ -88,18 +88,21 @@ class Achievements extends Component {
             }
         </Row>
         <Row className="show-grid graph-failures">
-          <Col md={6} lg={6}>
+          <Col xs={12} sm={12} md={6} lg={6}>
             <Line
               data={this.getChartData()}
             />
           </Col>
-          <Col md={6} lg={6}>
-            <h1>{this.props.streak}</h1>
-            days without giving up!
-          </Col>
-          <Col>
-            <h1>{this.props.totalSteps === 0 ? this.props.steps : this.props.totalSteps}</h1>
-            Steps!
+          <Col className="tickers" xs={12} sm={12} md={6} lg={6}>
+            <Col className="streak ticker" xs={6} sm={6} md={6} lg={6}>
+              <h1>{this.props.streak}</h1>
+              <p className="break">days without</p>
+              <p className="break">giving up!</p>
+            </Col>
+            <Col className="steps ticker" xs={6} sm={6} md={6} lg={6}>
+              <h1>{this.props.totalSteps === 0 ? this.props.steps : this.props.totalSteps}</h1>
+              <p>Steps!</p>
+            </Col>
           </Col>
         </Row>
       </Grid>
