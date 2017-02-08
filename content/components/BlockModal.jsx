@@ -34,7 +34,7 @@ class BlockModal extends Component {
       <div id="block-overlay" className="block-cursor block-select block-overlay">
         <div id="block-info-container" className="block-cursor block-select block-info-container">
           <span id="block-overlay-top-text" className="block-cursor block-select block-overlay-top-text">{`You need ${this.props.stepGoal-(this.props.steps - this.props.lastSteps)} more steps to unlock this page...`}</span>
-          <div id="block-tree-ball" className="block-tree-ball">
+          <div id="block-progress" className="block-progress">
             <ProgressBar {...this.props}/>
           </div>
           <div id="block-giveup-button" className="block-cursor block-select block-giveup-button block-buttons" onClick={this.giveUpToggle}>Give Up</div>
