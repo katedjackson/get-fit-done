@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { Button } from 'semantic-ui-react';
-import {fitbitAuth} from '../../background/auth';
+import { fitbitAuth } from '../../background/auth';
 import { loginUser, logoutUser } from '../../background/reducers/user';
 
 class Login extends Component {
@@ -15,8 +15,6 @@ class Login extends Component {
     const dispatch = this.props.dispatch;
     fitbitAuth().then( accessToken => {
       dispatch(loginUser(accessToken));
-      dispatch({type: 'getChartSteps'});
-      dispatch({type: 'getSteps'});
     })
   }
 
