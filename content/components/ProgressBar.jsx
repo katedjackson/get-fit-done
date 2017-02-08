@@ -42,7 +42,6 @@ class ProgressBar extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log('state: ', state);
   return {
     accessToken: state.user.accessToken,
     steps: state.user.steps,

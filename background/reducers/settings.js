@@ -6,7 +6,7 @@ const initialState = {
   blacklist: true, //if false, then whitelist
   disabledTimeMode: false,
   disabledTime: ['09:00', '17:00'],
-  hourlyMode: false,
+  hourlyMode: true,
   timeStepsMode: false,
   stepGoal: "250",
   totalStepGoal: "10000",
@@ -18,7 +18,7 @@ const initialState = {
   // foodTime: [],
   // waterMode: false,
   // waterTime: [],
-  sleepMode: true,
+  sleepMode: false,
   sleepTime: ['22:00', '06:00']
 }
 /*-------------------------ACTIONS----------------------------*/
@@ -55,6 +55,8 @@ export const TOGGLE_SLEEP_MODE = 'TOGGLE_SLEEP_MODE';
 export const SET_START_DISABLE = 'SET_START_DISABLE';
 
 export const SET_STOP_DISABLE = 'SET_STOP_DISABLE';
+
+export const RESET_SETTINGS = 'RESET_SETTINGS'
 
 
 
@@ -93,6 +95,8 @@ export const toggleSleepMode = createAction(TOGGLE_SLEEP_MODE);
 export const setStartDisable = createAction(SET_START_DISABLE)
 
 export const setStopDisable = createAction(SET_STOP_DISABLE)
+
+export const resetSettings = createAction(RESET_SETTINGS)
 
 /*-------------------------REDUCERS----------------------------*/
 export default handleActions({
@@ -146,6 +150,9 @@ export default handleActions({
   },
   SET_STOP_DISABLE: (state, { payload }) => {
     return {...state, stopDisableTime: payload}
+  },
+  RESET_SETTINGS: (state, { payload }) => {
+    return initialState;
   }
 
 }, initialState);
