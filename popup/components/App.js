@@ -19,13 +19,17 @@ class App extends Component {
   }
 
   signedInView(){
+    let timeLeft;
+    if (this.props.timeLeft > 0) timeLeft = this.props.timeLeft;
+    else timeLeft = 0;
+
     return (
       <div>
         <img className='logo' src='../logo.png' />
-          {!this.props.blocked ? <h3>{this.props.timeLeft} minutes to get your steps!</h3> : 
+          {!this.props.blocked ? <h3>{timeLeft} minutes to get your steps!</h3> :
           <h3>You need { this.props.stepGoal - (this.props.steps - this.props.lastSteps)} more steps to unlock</h3>}
-          <ProgressBar /> 
-          <Login /> 
+          <ProgressBar />
+          <Login />
       </div>
     )
   }
@@ -36,7 +40,7 @@ class App extends Component {
       <div>
         {this.props.accessToken.length > 1 ? this.signedInView() : this.loginView()}
       </div>
-      
+
     );
   }
 }
