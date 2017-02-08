@@ -46,7 +46,6 @@ class WebsitesList extends Component {
            <label>Enter websites you want to block/allow separated by a comma. Enter <b>only</b> the domain name and extension. For example, enter facebook.com, snapchat.com, instagram.com.
            </label>
            <div>
-             {console.log('didRender with websites:', this.props.websites)}
              {typeof this.props.websites === 'string' && <TextField
                  name="websites"
                  id="websites"

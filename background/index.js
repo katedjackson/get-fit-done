@@ -26,7 +26,6 @@ const keysToPersistInChrome = [
 // from login state
 const loadStore = (currentState) => {
   const chromeStoragePromise = loadFromStorage(keysToPersistInChrome);
-  //console.log('current state: ', currentState)
   return Promise.all([
     chromeStoragePromise,
   ])

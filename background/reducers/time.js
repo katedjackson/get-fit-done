@@ -29,7 +29,6 @@ export default handleActions({
     return initialState;
   },
   DECREMENT_TIME: (state, action) => {
-    console.log('state.timeLeft: ', state.timeLeft)
     return {...state, timeLeft: --state.timeLeft}
   }
 }, initialState);
