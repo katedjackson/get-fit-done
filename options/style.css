@@ -88,3 +88,12 @@ h2 {
 .hourlyStepsField {
   width: 75px !important;
 }
+
+.splash-screen {
+  text-align: center;
+}
+
+img {
+  margin-top: 30vh;
+}
+
