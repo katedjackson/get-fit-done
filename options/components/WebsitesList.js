@@ -1,10 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Toggle, TextField, TimePicker,
-         SelectField, MenuItem, RaisedButton } from 'material-ui';
+import { Toggle, TextField, TimePicker, SelectField, MenuItem, RaisedButton } from 'material-ui';
 import { Field, reduxForm } from 'redux-form';
 import { Col, Row } from 'react-bootstrap';
-
 import { setBlacklist, setWhitelist, toggleDisableTimeMode } from '../../background/reducers/settings'
 
 
@@ -15,27 +13,28 @@ class WebsitesList extends Component {
     this.toggleBlacklist = this.toggleBlacklist.bind(this)
   }
 
-  toggleBlacklist = (event, index, value) => {
+  toggleBlacklist (event, index, value) {
     if (index === 0) this.props.dispatch(setBlacklist());
     else if (index === 1) this.props.dispatch(setWhitelist());
   }
 
-  renderBlacklistSelect = (id, label) => {
+  renderBlacklistSelect (id, label) {
     var val;
     if (this.props.blacklist === true) val = 0;
     else val = 1;
-    return (<SelectField
-              id={id}
-              floatingLabelText={label}
-              value={val}
-              onChange={this.toggleBlacklist}
-              maxHeight={200}>
-              <MenuItem value={0} primaryText="Blacklist" />
-              <MenuItem value={1} primaryText="Whitelist" />
-            </SelectField>)
-  };
+    return (
+      <SelectField
+        id={id}
+        floatingLabelText={label}
+        value={val}
+        onChange={this.toggleBlacklist}
+        maxHeight={200}>
+        <MenuItem value={0} primaryText="Blacklist" />
+        <MenuItem value={1} primaryText="Whitelist" />
+      </SelectField>);
+  }
 
-  render(){
+  render() {
     return(
      <form onSubmit={this.props.handleWebsiteSubmit}>
        <fieldset>
@@ -58,13 +57,12 @@ class WebsitesList extends Component {
                  rowsMax={4}
                />}
              <button type="submit">Save</button>
-
              {/*<RaisedButton label="Save" type="submit" primary={true} style ={{margin: 12}}/>*/}
            </div>
          </div>
        </fieldset>
      </form>
-    )
+    );
   }
 }
 

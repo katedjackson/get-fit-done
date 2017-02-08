@@ -29,6 +29,8 @@ class HourlyMode extends Component {
          {this.props.hourlyMode ? (
          <div>
            <TextField id="hourlyStepsNum"
+                      className="hourlyStepsField"
+                      floatingLabelText="Steps"
                       defaultValue={this.props.stepGoal}
                       onChange={this.stepGoalChange}
            />

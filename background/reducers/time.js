@@ -26,7 +26,7 @@ export default handleActions({
     return {...state, timeLeft: payload };
   },
   RESET_TIME: (state, action) => {
-    return {...state, timeLeft: 60 };
+    return initialState;
   },
   DECREMENT_TIME: (state, action) => {
     console.log('state.timeLeft: ', state.timeLeft)

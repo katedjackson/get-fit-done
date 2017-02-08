@@ -42,8 +42,8 @@ const initialState = {
   accessToken: '',
   badges: [],
   streak: 0,
-  steps: '',
-  lastSteps: '',
+  steps: 0,
+  lastSteps: 0,
   weeklySteps: [],
   totalSteps: 0
 };
@@ -88,7 +88,8 @@ export const getDailyThunk = () =>
   (dispatch, getState) => {
     let { accessToken } = getState().user;
     let d = new Date();
-    let date = d.toISOString().slice(0, 10);
+    let dateArr = d.toLocaleDateString().split('/');
+    let date = `${dateArr[2]}-${`0${dateArr[0]}`.slice(-2)}-${`0${dateArr[1]}`.slice(-2)}`;
     return axios.get(`https://api.fitbit.com/1/user/-/activities/date/${date}.json`,
       { headers: {'Authorization': 'Bearer ' + accessToken}})
     .then(response => {
@@ -99,14 +100,15 @@ export const getDailyThunk = () =>
 export const getWeeklyThunk = () =>
   (dispatch, getState) => {
     let { accessToken } = getState().user;
-    return axios.get(`https://api.fitbit.com/1/user/-/activities/steps/date/today/1w.json`,
+    let d = new Date();
+    let dateArr = d.toLocaleDateString().split('/');
+    let date = `${dateArr[2]}-${`0${dateArr[0]}`.slice(-2)}-${`0${dateArr[1]}`.slice(-2)}`;
+    return axios.get(`https://api.fitbit.com/1/user/-/activities/steps/date/${date}/1w.json`,
       { headers: {'Authorization': 'Bearer ' + accessToken}})
     .then(response => {
-      console.log(response.data);
       let steps = response.data[`activities-steps`].map(activity => {
         return activity.value;
       });
-      console.log(steps);
       dispatch(getWeeklySteps(steps));
     })
   };
