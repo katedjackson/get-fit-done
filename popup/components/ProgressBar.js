@@ -35,7 +35,6 @@ const Blocked = (props) => {
 }
 
 const mapStateToProps = (state) => {
-  console.log('state: ', state);
   return {
     accessToken: state.user && state.user.accessToken,
     steps: state.user && state.user.steps,

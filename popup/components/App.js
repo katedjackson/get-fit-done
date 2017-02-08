@@ -35,7 +35,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <div>
         {this.props.accessToken.length > 1 ? this.signedInView() : this.loginView()}
@@ -46,7 +45,6 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log('state: ', state);
   return {
     accessToken: state.user && state.user.accessToken,
     blocked: state.block && state.block.showBlock,

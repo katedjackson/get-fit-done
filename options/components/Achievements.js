@@ -24,7 +24,6 @@ class Achievements extends Component {
     this.props.badges.map(badgeId => {
       earnedBadges.push(this.state.achievementBadges[badgeId]);
     });
-    console.log(earnedBadges);
     return earnedBadges;
   }
 
@@ -109,7 +108,7 @@ class Achievements extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log('state: ', state)
+
   return{
     badges: state.user && state.user.badges,
     streak: state.user && state.user.streak,
