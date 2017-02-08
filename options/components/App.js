@@ -4,7 +4,7 @@ import Achievements from './Achievements';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import {connect} from 'react-redux';
-
+import SplashScreen from './SplashScreen';
 import { setWebsites, setStepGoal } from '../../background/reducers/settings';
 
 class App extends Component {
@@ -30,35 +30,30 @@ class App extends Component {
 
   render() {
     return (
-      <MuiThemeProvider>
-        <div>
-          <p><img className='logo' src='../logo.png' /></p>
-          <Tabs selected={0} className="tabs">
-            <Tab label="Settings" className="tab">
-              <Settings handleWebsiteSubmit={this.handleWebsiteSubmit} handleModesSubmit= {this.handleModesSubmit} websites={this.props.websites}/>
-            </Tab>
-            <Tab label="Achievements" className="tab">
-              <Achievements />
-            </Tab>
-          </Tabs>
-        </div>
-      </MuiThemeProvider>
+        <MuiThemeProvider>
+          { !this.props.accessToken ? <SplashScreen /> :
+            (<div>
+              <p><img className='logo' src='../logo.png' /></p>
+              <Tabs selected={0} className="tabs">
+                <Tab label="Settings" className="tab">
+                  <Settings handleWebsiteSubmit={this.handleWebsiteSubmit} handleModesSubmit= {this.handleModesSubmit} websites={this.props.websites}/>
+                </Tab>
+                <Tab label="Achievements" className="tab">
+                  <Achievements />
+                </Tab>
+              </Tabs>
+            </div>)
+          }
+        </MuiThemeProvider>
     );
   }
 }
 
 const mapStateToProps = (state) => {
   return{
-    websites: state.settings && state.settings.websites
-    //hourlySteps: state.hourlySteps
+    websites: state.settings && state.settings.websites,
+    accessToken: state.user && state.user.accessToken
   };
 };
 
-
 export default connect(mapStateToProps)(App);
-
-
-
-
-
-
