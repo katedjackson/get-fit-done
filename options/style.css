@@ -97,6 +97,14 @@ h2 {
   width: 75px !important;
 }
 
+.splash-screen {
+  text-align: center;
+}
+
+img {
+  margin-top: 30vh;
+}
+
 .logout {
   text-align: right;
 }
