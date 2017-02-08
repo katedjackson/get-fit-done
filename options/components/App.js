@@ -32,7 +32,7 @@ class App extends Component {
     return (
       <MuiThemeProvider>
         <div>
-          <h1>Get [F]it Done</h1>
+          <p><img className='logo' src='../logo.png' /></p>
           <Tabs selected={0} className="tabs">
             <Tab label="Settings" className="tab">
               <Settings handleWebsiteSubmit={this.handleWebsiteSubmit} handleModesSubmit= {this.handleModesSubmit} websites={this.props.websites}/>

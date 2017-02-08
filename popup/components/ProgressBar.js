@@ -21,10 +21,11 @@ const Blocked = (props) => {
       height: '200px'
   };
 
+
   return (
     <div>
       <Circle
-          progress = {(props.steps - props.lastSteps) / props.stepGoal}
+          progress = { ((props.steps - props.lastSteps)  >= props.stepGoal ) ? 1 : (props.steps - props.lastSteps) / props.stepGoal  }
           text={`${(props.steps - props.lastSteps)}/${props.stepGoal}`}
           options={options}
           initialAnimate={true}
