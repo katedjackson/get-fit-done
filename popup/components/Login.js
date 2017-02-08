@@ -34,9 +34,7 @@ class Login extends Component {
     return (
       <div className="sign-in-div">
         {this.props.accessToken ?
-        <Button id="sign-in" onClick={this.signout}>
-          Sign out
-        </Button> :
+        null :
         <Button id="sign-in" onClick={this.onClick}>
           Sign in
         </Button>}

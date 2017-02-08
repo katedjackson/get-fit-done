@@ -7,6 +7,10 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import { Col, Row } from 'react-bootstrap';
 
 import { setBlacklist, setWhitelist, toggleDisableTimeMode } from '../../background/reducers/settings'
+import { logoutUser } from '../../background/reducers/user';
+import { resetBlock } from '../../background/reducers/block';
+import { resetSettings } from '../../background/reducers/settings';
+import { resetTime } from '../../background/reducers/time';
 
 import WebsitesList from './WebsitesList'
 import DisabledTime from './DisabledTime'
@@ -37,6 +41,7 @@ class Settings extends Component {
     //this.onLoad = this.onLoad.bind(this);
     this.renderModes = this.renderModes.bind(this);
     this.renderTimeSelect = this.renderTimeSelect.bind(this);
+    this.signout = this.signout.bind(this);
 
 
   }
@@ -87,6 +92,13 @@ class Settings extends Component {
             );
   }
 
+signout() {
+  this.props.dispatch(resetTime());
+  this.props.dispatch(resetSettings());
+  this.props.dispatch(resetBlock());
+  this.props.dispatch(logoutUser());
+}
+
   render() {
     return (
       <div>
@@ -101,6 +113,7 @@ class Settings extends Component {
                       renderTimeSelect={this.renderTimeSelect}/>
                     <SleepMode renderModes={this.renderModes}
                       renderTimeSelect={this.renderTimeSelect}/>
+                    <div className="logout" ><a onClick={this.signout}>Logout and Clear Data</a></div>
                     {/*<div>
                       {this.renderModes('foodLog', ' Food Log')}
                               {this.state.foodLog ? (
