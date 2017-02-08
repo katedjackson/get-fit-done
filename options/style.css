@@ -75,6 +75,14 @@ h3 {
   padding: 20px;
 }
 
+p {
+  text-align: center;
+}
+
+img {
+  margin-top: 2%;
+}
+
 h2 {
   text-align: center;
 }

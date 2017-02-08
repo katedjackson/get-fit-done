@@ -21,10 +21,11 @@ const Blocked = (props) => {
       height: '200px'
   };
 
+
   return (
     <div>
       <Circle
-          progress = {(props.steps - props.lastSteps) / props.stepGoal}
+          progress = { ((props.steps - props.lastSteps)  >= props.stepGoal ) ? 1 : (props.steps - props.lastSteps) / props.stepGoal  }
           text={`${(props.steps - props.lastSteps)}/${props.stepGoal}`}
           options={options}
           initialAnimate={true}
@@ -36,6 +37,7 @@ const Blocked = (props) => {
 
 const mapStateToProps = (state) => {
   console.log('state: ', state);
+  console.log('TEST: ', (state.user.steps - state.user.lastSteps) / state.settings.stepGoal)
   return {
     accessToken: state.user && state.user.accessToken,
     steps: state.user && state.user.steps,
