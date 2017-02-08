@@ -22,13 +22,13 @@ const initialState = {
 };
 
 export default handleActions({
+  DECREMENT_TIME: (state, action) => {
+    return {...state, timeLeft: state.timeLeft-1}
+  },
   GET_TIME_LEFT: (state, { payload }) => {
     return {...state, timeLeft: payload };
   },
   RESET_TIME: (state, action) => {
-    return initialState;
-  },
-  DECREMENT_TIME: (state, action) => {
-    return {...state, timeLeft: --state.timeLeft}
+    return {...state, timeLeft: 5};
   }
 }, initialState);
