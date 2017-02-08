@@ -26,10 +26,10 @@ export function checkHourlyBlock(state){
     store.dispatch(toggleHourlyBlock());
   }
   else if (!blockState){
-    if(hrSteps < stepGoal && timeLeft <= 0) {
+    if(hrSteps < stepGoal && timeLeft <= 1) {
       store.dispatch(toggleHourlyBlock());
     }
-    else if(hrSteps >= stepGoal && timeLeft <= 0) {
+    else if(hrSteps >= stepGoal && timeLeft <= 1) {
       store.dispatch(resetTime());
       store.dispatch(resetLastSteps());
     }
