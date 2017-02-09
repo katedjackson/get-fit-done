@@ -15,6 +15,8 @@ const GET_WEEKLY_STEPS = 'GET_WEEKLY_STEPS';
 const GET_HOURLY_STEPS = 'GET_HOURLY_STEPS';
 const RESET_LAST_STEPS = 'RESET_LAST_STEPS';
 const TOTAL_STEPS = 'TOTAL_STEPS';
+const INCREMENT_REFRESH = 'INCREMENT_REFRESH';
+const RESET_REFRESH = 'RESET_REFRESH';
 
 /* --------------    ACTION CREATORS    ----------------- */
 
@@ -36,6 +38,10 @@ const getWeeklySteps = createAction(GET_WEEKLY_STEPS);
 
 export const incrementTotalSteps = createAction(TOTAL_STEPS);
 
+export const incrementRefresh = createAction(INCREMENT_REFRESH);
+
+export const resetRefresh = createAction(resetRefresh);
+
 /* ------------------    REDUCER    --------------------- */
 
 const initialState = {
@@ -45,7 +51,8 @@ const initialState = {
   steps: 0,
   lastSteps: 0,
   weeklySteps: [],
-  totalSteps: 0
+  totalSteps: 0,
+  timesRefreshed: 0
 };
 
 export default handleActions({
@@ -76,6 +83,12 @@ export default handleActions({
   },
   TOTAL_STEPS: (state) => {
     return {...state, totalSteps: state.totalSteps + state.steps }
+  },
+  INCREMENT_REFRESH: (state) => {
+    return {...state, timesRefreshed: state.timesRefreshed+1}
+  },
+  RESET_REFRESH: (state) => {
+    return {...state, timesRefreshed: 0}
   }
 }, initialState);
 

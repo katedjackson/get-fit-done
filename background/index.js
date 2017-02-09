@@ -7,7 +7,7 @@ import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 import chromeStorage, { loadFromStorage } from './redux/chromeStorage';
 import { middleware } from 'redux-async-initial-state';
-import { getDailyThunk, getWeeklyThunk, getHourlyThunk, resetLastSteps, incrementStreak, incrementTotalSteps } from './reducers/user';
+import { getDailyThunk, getWeeklyThunk, getHourlyThunk, resetLastSteps, incrementStreak, incrementTotalSteps, resetRefresh } from './reducers/user';
 import { setBlock, unblock, toggleHourlyBlock, toggleTimeStepsBlock, toggleSleepBlock } from './reducers/block';
 import { getTimeLeft, resetTime, decrementTime } from './reducers/time'
 import checkAchievements from './achievements';
@@ -65,12 +65,21 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
 //keeping track of time
 var pollInterval = 1000; // 1 second
 
+export function refreshSteps(){
+  store.dispatch({type: 'getSteps'})
+}
+
 function startRequest() {
   var state = store.getState();
   if (state.user.accessToken) {
     pollInterval = 1000 * 60;
     let t = new Date()
     let time = t.toString().slice(16,21);
+
+    let currTimeVal = Number(time.slice(0,2) + time.slice(3));
+    if (currTimeVal % 100 === 0){
+      store.disaptch(resetRefresh());
+    }
 
     store.dispatch({type: 'getSteps'})
       .then((response) => {
