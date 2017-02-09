@@ -86,9 +86,6 @@ function startRequest() {
           store.dispatch(resetLastSteps());
         }
       })
-      .then(() => {
-        store.dispatch({type: 'getChartSteps'});
-      })
       .then((response) => {
         store.dispatch(decrementTime());
       })
