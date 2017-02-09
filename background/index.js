@@ -65,9 +65,7 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
 //keeping track of time
 var pollInterval = 1000; // 1 second
 
-export function refreshSteps(){
-  store.dispatch({type: 'getSteps'})
-}
+
 
 function startRequest() {
   var state = store.getState();
@@ -78,7 +76,7 @@ function startRequest() {
 
     let currTimeVal = Number(time.slice(0,2) + time.slice(3));
     if (currTimeVal % 100 === 0){
-      store.disaptch(resetRefresh());
+      store.dispatch(resetRefresh());
     }
 
     store.dispatch({type: 'getSteps'})
