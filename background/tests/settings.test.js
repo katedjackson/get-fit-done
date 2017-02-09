@@ -6,7 +6,7 @@ import { setWebsites, setStepGoal, setTotalStepsTime, setBlacklist, setWhitelist
 
 
 
-describe('action creators', () => {
+describe('action creators for settings', () => {
 
     describe('setWebsites', () => {
 

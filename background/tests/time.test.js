@@ -6,7 +6,7 @@ import { getTimeLeft, resetTime, decrementTime } from '../reducers/time'
 
 
 
-describe('action creators', () => {
+describe('action creators for time', () => {
 
     describe('decrementTime', () => {
 
