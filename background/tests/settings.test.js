@@ -1,7 +1,7 @@
 
 import chai, {expect} from 'chai'                                                   
 
-import { setWebsites, setStepGoal, setTotalStepsTime } from '../reducers/settings'
+import { setWebsites, setStepGoal, setTotalStepsTime, setBlacklist, setWhitelist, setDisabledTime, setSleepTime } from '../reducers/settings'
 
 
 
@@ -55,4 +55,37 @@ describe('action creators', () => {
 
         });
     });
+
+    describe('setBlacklist', () => {
+
+        it('returns expected action description for setting blacklist', () => {
+
+            const blacklist = true;
+
+            const actionDescriptor = setBlacklist(blacklist);
+
+            expect(actionDescriptor).to.be.deep.equal({
+                type: 'SET_BLACKLIST',
+                payload: blacklist
+            });
+
+        });
+    });
+
+    describe('setWhitelist', () => {
+
+        it('returns expected action description for setting whitelist', () => {
+
+            const whitelist = false;
+
+            const actionDescriptor = setWhitelist(whitelist);
+
+            expect(actionDescriptor).to.be.deep.equal({
+                type: 'SET_WHITELIST',
+                payload: whitelist
+            });
+
+        });
+    });
 });
+
