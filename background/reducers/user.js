@@ -40,7 +40,7 @@ export const incrementTotalSteps = createAction(TOTAL_STEPS);
 
 export const incrementRefresh = createAction(INCREMENT_REFRESH);
 
-export const resetRefresh = createAction(resetRefresh);
+export const resetRefresh = createAction(RESET_REFRESH);
 
 /* ------------------    REDUCER    --------------------- */
 

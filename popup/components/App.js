@@ -4,8 +4,7 @@ import ProgressBar from './ProgressBar';
 import Login from './Login';
 import { Col, Row } from 'react-bootstrap';
 import { incrementRefresh, getDailyThunk} from '../../background/reducers/user';
-
-
+import { checkHourlyBlock, checkTimeSteps, checkSleepTime } from '../../background/utils/blockingUtils'
 
 class App extends Component {
   constructor(props) {
@@ -18,6 +17,12 @@ class App extends Component {
     if (this.props.timesRefreshed < 10){
       this.props.dispatch(incrementRefresh());
       this.props.dispatch({type: 'getSteps'})
+      .then(() => {
+        var state = store.getState();
+        if (state.settings.hourlyMode) checkHourlyBlock(state);
+        if (state.settings.timeStepsMode) checkTimeSteps(state,time);
+        if (state.settings.sleepMode) checkSleepTime(state, time);
+      })
     }
   }
 
