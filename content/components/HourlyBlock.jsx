@@ -6,11 +6,7 @@ import { unblock } from '../../background/reducers/block';
 import { resetTime } from '../../background/reducers/time';
 import { resetLastSteps, resetStreak } from '../../background/reducers/user';
 
-import HourlyBlock from './HourlyBlock';
-import TimeStepsBlock from './TimeStepsBlock';
-import SleepBlock from './SleepBlock';
-
-class BlockModal extends Component {
+class HourlyBlock extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -32,15 +28,17 @@ class BlockModal extends Component {
     this.setState({showPopup: this.state.showPopup ? false : true})
   }
 
-  render(){
-    return (
-    <div id="block-overlay-container" className="block-cursor block-select block-overlay-container">
-      <div id="block-overlay" className="block-cursor block-select block-overlay">
-        <div id="block-info-container" className="block-cursor block-select block-info-container">
-          <SleepBlock {...this.props} showPopup={this.state.showPopup} giveUpToggle={this.giveUpToggle} unblock={this.props.unblock}/>
+  render() {
+    return(
+      <div>
+        <span id="block-overlay-top-text" className="block-cursor block-select block-overlay-top-text">{`You need ${this.props.stepGoal-(this.props.steps - this.props.lastSteps)} more steps to unlock this page...`}</span>
+        <div id="block-progress" className="block-progress">
+          <ProgressBar {...this.props}/>
         </div>
+        <div id="block-giveup-button" className="block-cursor block-select block-giveup-button block-buttons" onClick={this.giveUpToggle}>Give Up</div>
+        <div id="block-popup-mask" className="block-cursor block-select block-popup-mask block-disappear"></div>
+        <GiveUpPopUp {...this.props} showPopup={this.state.showPopup} giveUpToggle={this.giveUpToggle} unblock={this.unblock}/>
       </div>
-    </div>
     )
   }
 }
@@ -55,5 +53,5 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(BlockModal);
+export default connect(mapStateToProps)(HourlyBlock);
 

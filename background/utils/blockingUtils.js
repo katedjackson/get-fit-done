@@ -1,4 +1,4 @@
-import { setBlock, unblock, toggleHourlyBlock, toggleTimeStepsBlock, toggleSleepBlock } from '../reducers/block';
+import { setBlock, unblock, toggleHourlyBlock, toggleTimeStepsBlock, toggleSleepBlock, toggleTimeStepsGiveup, toggleSleepExt, setSleepExtTime, decrementSleepExt} from '../reducers/block';
 import { getTimeLeft, resetTime, decrementTime } from '../reducers/time'
 import { getDailyThunk, getWeeklyThunk, getHourlyThunk, resetLastSteps, incrementStreak, incrementTotalSteps } from '../reducers/user';
 
@@ -39,10 +39,12 @@ export function checkHourlyBlock(state){
 export function checkTimeSteps(state, time){
   let totalSteps = state.user.steps;
   let stepGoal = state.settings.totalStepGoal;
+  let timeStepsGaveUp = state.block.timeStepsGaveUp;
   let blockTime = state.settings.totalStepsTime;
   let blockState = state.block.timeStepsBlock;
   let currTimeVal = Number(time.slice(0,2) + time.slice(3));
   let blockTimeVal = Number(blockTime.slice(0,2) + blockTime.slice(3));
+
 
   if (!blockState && currTimeVal >= blockTimeVal && totalSteps < stepGoal){
     store.dispatch(toggleTimeStepsBlock())
@@ -59,6 +61,8 @@ export function checkTimeSteps(state, time){
 
 export function checkSleepTime(state, time){
   let blockState = state.block.sleepBlock;
+  let sleepExtension = state.block.sleepExtension;
+  let sleepExtMin = state.block.sleepExtensionMin;
   let startSleep = state.settings.sleepTime[0];
   let stopSleep = state.settings.sleepTime[1];
   let currTimeVal = Number(time.slice(0,2) + time.slice(3));
