@@ -7,7 +7,7 @@ function checkAchievements () {
   var t = new Date();
   var time = t.toString().slice(16, 21);
 
-  if (time === '11:59') {
+  if (time === '00:01') {
     store.dispatch(incrementTotalSteps());
     store.dispatch({type: 'getChartSteps'});
   }

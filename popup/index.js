@@ -9,7 +9,6 @@ const store = new Store({
   portName: 'GET_FIT_DONE' // communication port name
 });
 
-
 const unsubscribe = store.subscribe(() => {
   unsubscribe();
   render(
