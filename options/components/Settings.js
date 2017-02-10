@@ -7,11 +7,6 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import { Col, Row } from 'react-bootstrap';
 
 import { setBlacklist, setWhitelist, toggleDisableTimeMode } from '../../background/reducers/settings'
-import { logoutUser } from '../../background/reducers/user';
-import { resetBlock } from '../../background/reducers/block';
-import { resetSettings } from '../../background/reducers/settings';
-import { resetTime } from '../../background/reducers/time';
-import { fitbitLogout } from '../../background/auth'
 
 import WebsitesList from './WebsitesList'
 import DisabledTime from './DisabledTime'
@@ -42,9 +37,6 @@ class Settings extends Component {
     //this.onLoad = this.onLoad.bind(this);
     this.renderModes = this.renderModes.bind(this);
     this.renderTimeSelect = this.renderTimeSelect.bind(this);
-    this.signout = this.signout.bind(this);
-
-
   }
 
   // onLoad =() => {
@@ -52,14 +44,14 @@ class Settings extends Component {
   // };
 
 
-  renderModes = (name, label, toggleFunc, defaultToggle) => {
+  renderModes (name, label, toggleFunc, defaultToggle) {
     return (<Toggle name={name} label={label}
                    labelPosition="right"
                    onToggle={toggleFunc}
-                   defaultToggled={defaultToggle} />)
-  };
+                   defaultToggled={defaultToggle} />);
+  }
 
-  renderTimeSelect = (id, label, handleTimeChange, val) => {
+  renderTimeSelect (id, label, handleTimeChange, val) {
     return (<SelectField id={id}
                          floatingLabelText={label}
                          value={val}
@@ -93,45 +85,37 @@ class Settings extends Component {
             );
   }
 
-
-signout() {
-  fitbitLogout();
-  this.props.dispatch(resetTime());
-  this.props.dispatch(resetSettings());
-  this.props.dispatch(resetBlock());
-  this.props.dispatch(logoutUser());
-}
-
   render() {
     return (
       <div>
-        <Col lg={6} md={6} sm={12} xs={12} className="setting_div">
-          <WebsitesList handleWebsiteSubmit={this.props.handleWebsiteSubmit}/>
-        </Col>
-        <Col lg={6} md={6} sm={12} xs={12} className="setting_div">
+        <Row>
+          <Col lg={6} md={6} sm={12} xs={12} className="setting_div">
+            <WebsitesList handleWebsiteSubmit={this.props.handleWebsiteSubmit}/>
+          </Col>
+          <Col lg={6} md={6} sm={12} xs={12} className="setting_div">
               <legend><label>Modes: </label></legend>
-                    <DisabledTime renderModes={this.renderModes} renderTimeSelect={this.renderTimeSelect}/>
-                    <HourlyMode renderModes={this.renderModes}/>
-                    <TimeStepsMode renderModes={this.renderModes}
-                      renderTimeSelect={this.renderTimeSelect}/>
-                    <SleepMode renderModes={this.renderModes}
-                      renderTimeSelect={this.renderTimeSelect}/>
-                    <div className="logout" ><a onClick={this.signout}>Logout and Clear Data</a></div>
-                    {/*<div>
-                      {this.renderModes('foodLog', ' Food Log')}
-                              {this.state.foodLog ? (
-                              <div>
-                              {this.renderTimeSelect('foodLogTime', 'Select Time')}
-                              </div>) : null}
-                    </div>
-                    <div>
-                      {this.renderModes('waterLog', ' Water Log')}
-                              {this.state.waterLog ? (
-                              <div>
-                              {this.renderTimeSelect('waterLogTime', 'Select Time')}
-                              </div>) : null}
-                    </div>*/}
-        </Col>
+                <DisabledTime renderModes={this.renderModes} renderTimeSelect={this.renderTimeSelect}/>
+                <HourlyMode renderModes={this.renderModes}/>
+                <TimeStepsMode renderModes={this.renderModes}
+                  renderTimeSelect={this.renderTimeSelect}/>
+                <SleepMode renderModes={this.renderModes}
+                  renderTimeSelect={this.renderTimeSelect}/>
+                {/*<div>
+                  {this.renderModes('foodLog', ' Food Log')}
+                          {this.state.foodLog ? (
+                          <div>
+                          {this.renderTimeSelect('foodLogTime', 'Select Time')}
+                          </div>) : null}
+                </div>
+                <div>
+                  {this.renderModes('waterLog', ' Water Log')}
+                          {this.state.waterLog ? (
+                          <div>
+                          {this.renderTimeSelect('waterLogTime', 'Select Time')}
+                          </div>) : null}
+                </div>*/}
+          </Col>
+        </Row>
       </div>
 
     );

@@ -8,10 +8,10 @@ class Achievements extends Component {
     super(props);
     this.state = {
       achievementBadges: [
-        { id: 0, type: "50,000 Steps", url: "/options/badges/50kSteps.png" },
-        { id: 1, type: "100,000 Steps", url: "/options/badges/100kSteps.png" },
-        { id: 2, type: " 7 Day Streak", url: "/options/badges/7DayStreak.png" },
-        { id: 3, type: "14 Day Streak", url: "/options/badges/14DayStreak.png" }
+        { id: 0, type: "50,000 Steps", url: "/images/badges/50kSteps.png" },
+        { id: 1, type: "100,000 Steps", url: "/images/badges/100kSteps.png" },
+        { id: 2, type: " 7 Day Streak", url: "/images/badges/7DayStreak.png" },
+        { id: 3, type: "14 Day Streak", url: "/images/badges/14DayStreak.png" }
       ]
     };
     this.getDate = this.getDate.bind(this);
@@ -100,6 +100,7 @@ class Achievements extends Component {
           </Col>
         </Row>
         <Row className="show-grid badges">
+          <Col xs={12} sm={12} md={12} lg={12}>
             <h3>My Badges</h3>
             {
               badges && badges.map((badge) => {
@@ -110,6 +111,7 @@ class Achievements extends Component {
                 );
               })
             }
+          </Col>
         </Row>
       </Grid>
     );

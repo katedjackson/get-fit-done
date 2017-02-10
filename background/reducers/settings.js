@@ -2,7 +2,7 @@ import { createAction, handleActions } from 'redux-actions';
 import { PropTypes } from 'react';
 
 const initialState = {
-  websites: '',
+  websites: 'ex: reddit.com',
   blacklist: true, //if false, then whitelist
   disabledTimeMode: false,
   disabledTime: ['09:00', '17:00'],

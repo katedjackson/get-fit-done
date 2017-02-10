@@ -120,10 +120,40 @@ h3 {
 
 .logout {
   text-align: right;
+  margin: 10px;
+}
+
+.logout a {
+  border: solid 1px #DFE4E6;
+  border-radius: 4px;
+  padding: 6px;
+  background-image: linear-gradient(rgb(237, 237, 237), rgb(237, 237, 237) 38%, rgb(222, 222, 222));
+  border-color: rgba(0, 0, 0, 0.247059);
+  color: rgb(68, 68, 68);
 }
 
 .setting_div {
   padding: 15px;
+}
+
+button {
+  box-shadow: none !important;
+}
+
+#websites {
+  border: solid 1px #DFE4E6 !important;
+  border-bottom: 0 !important;
+  border-radius: 4px;
+  padding: 6px !important;
+}
+
+#website-submit {
+  border-radius: 4px;
+  margin: 6px;
+}
+
+.logout a:hover {
+  text-decoration: none;
 }
 
 /*---------- Splash Screen -----------*/
@@ -175,11 +205,39 @@ div.col-lg-6.col-md-6.col-sm-6.col-xs-6 {
   width: 50%;
 }
 
-/*---------- Achievements -----------*/
+#app > div > div:nth-child(1) > div > div > div > div > div > div.show-grid.badges.row {
+  width: 100%;
+}
+
+/*---------- Feedback -----------*/
 .feedback {
   width: 100%;
 }
 
 .feedback-form {
   width: 100%;
+}
+
+/*---------- Footer -----------*/
+.footer {
+  text-align: center;
+  margin: 15px;
+  padding: 0 15px;
+}
+.footer a {
+  text-decoration: none;
+  color: black;
+}
+
+#app > div > div:nth-child(2) > div > div > a:nth-child(3) > img {
+  padding-left: 14px;
+}
+
+a.login > img {
+  padding-left: 12px;
+  cursor: auto;
+}
+
+hr {
+  display: block;
 }
