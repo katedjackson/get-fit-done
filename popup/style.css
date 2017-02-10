@@ -15,9 +15,13 @@
 /*    margin-top: -4%;*/
 }
 
-.progressbar-text{
-	font-size: 18px;
-	top: 65% !important;
+#app > div > div > div.popup-container.row > div:nth-child(2) > div > div:nth-child(3) > div{
+	position: relative !important;
+}
+.progressbar-text {
+    position: absolute !important;
+    top: 50% !important;
+    font-size: 20px !important;
 }
 
 body{

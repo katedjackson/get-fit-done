@@ -29,7 +29,6 @@ class HourlyBlock extends Component {
   }
 
   render() {
-    console.log("RENDER HOURLY BLOCK")
     return(
       <div>
         <Row className="block-cursor block-select block-overlay-top-text">{`You need ${this.props.stepGoal-(this.props.steps - this.props.lastSteps)} more steps to unlock this page...`}</Row>

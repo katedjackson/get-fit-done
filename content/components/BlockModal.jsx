@@ -33,7 +33,6 @@ class BlockModal extends Component {
     if (this.props.sleepBlock) blockMode = 'sleepBlock';
     else if (this.props.timeStepsBlock) blockMode = 'timeStepsBlock';
     else if (this.props.hourlyBlock) blockMode = 'hourlyBlock';
-    console.log("BlockMode: ", blockMode)
     return (
     <div id="block-overlay-container" className="block-cursor block-select block-overlay-container">
       <div id="block-overlay" className="block-cursor block-select block-overlay">

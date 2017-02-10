@@ -34,7 +34,6 @@ SleepTime.propTypes = {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state)
   return {
     disabledEnd: state.settings && state.settings.disabledTime && state.settings.disabledTime[1]
   };
