@@ -8,7 +8,7 @@ import createLogger from 'redux-logger';
 import chromeStorage, { loadFromStorage } from './redux/chromeStorage';
 import { middleware } from 'redux-async-initial-state';
 import { getDailyThunk, getWeeklyThunk, getHourlyThunk, resetLastSteps, incrementStreak, incrementTotalSteps } from './reducers/user';
-import { setBlock, unblock, toggleHourlyBlock, toggleTimeStepsBlock, toggleSleepBlock, toggleGiveUp } from './reducers/block';
+import { setBlock, unblock, toggleHourlyBlock, toggleTimeStepsBlock, toggleSleepBlock, toggleGaveUp, toggleStayUp } from './reducers/block';
 import { getTimeLeft, resetTime, decrementTime } from './reducers/time'
 import checkAchievements from './achievements';
 import { checkBlockState, checkHourlyBlock, checkTimeSteps, checkSleepTime } from './utils/blockingUtils'
@@ -72,6 +72,7 @@ function startRequest() {
     let t = new Date()
     let time = t.toString().slice(16,21);
 
+
     store.dispatch({type: 'getSteps'})
       .then((response) => {
         var state = store.getState();
@@ -87,14 +88,26 @@ function startRequest() {
       })
       .then((response) => {
         var state = store.getState();
+        if (state.settings.hourlyMode) checkHourlyBlock(state);
         if (!state.block.gaveUp){
-          if (state.settings.hourlyMode) checkHourlyBlock(state);
           if (state.settings.timeStepsMode) checkTimeSteps(state,time);
+        }
+        else {
+          let totalStepsTime = state.settings.totalStepsTime
+          if (time.slice(0,2) < totalStepsTime.slice(0,2)){
+            store.dispatch(toggleGaveUp());
+          }
+        }
+        if (!state.block.stayUp){
           if (state.settings.sleepMode) checkSleepTime(state, time);
         }
         else{
-          if (time === '00:01') store.dispatch(toggleGiveUp());
+          let startSleep = state.settings.sleepTime[0];
+          if (time.slice(0,2) < startSleep.slice(0,2)){
+            store.dispatch(toggleStayUp());
+          }
         }
+
       })
       // .then((response) => {
       //   checkBlockState(store.getState())

@@ -9,11 +9,13 @@ const initialState = {
   sleepBlock: false,
   sleepExtension: false,
   sleepExtensionMin: 5
-
 }
 
 export const SET_BLOCK = 'SET_BLOCK';
 export const setBlock = createAction(SET_BLOCK);
+
+export const GIVE_UP = 'GIVE_UP';
+export const giveup = createAction(GIVE_UP);
 
 export const UNBLOCK = 'UNBLOCK';
 export const unblock = createAction(UNBLOCK);
@@ -42,9 +44,24 @@ export const decrementSleepExt = createAction(DECREMENT_SLEEP_EXT);
 export const TOGGLE_GAVE_UP = 'TOGGLE_GAVE_UP';
 export const toggleGaveUp = createAction(TOGGLE_GAVE_UP);
 
+export const TOGGLE_STAY_UP = 'TOGGLE_STAY_UP';
+export const toggleStayUp = createAction(TOGGLE_STAY_UP);
+
 export default handleActions({
   SET_BLOCK: (state, { payload }) => {
     return {...state, showBlock: true};
+  },
+  GIVE_UP: (state, { payload }) => {
+    return {
+      showBlock: false,
+      hourlyBlock: false,
+      timeStepsBlock: false,
+      gaveUp: true,
+      sleepBlock: false,
+      stayUp: false,
+      sleepExtension: false,
+      sleepExtensionMin: 5
+    }
   },
   UNBLOCK: (state, { payload }) => {
     return initialState;
@@ -60,6 +77,9 @@ export default handleActions({
   },
   TOGGLE_GAVE_UP: (state, { payload }) => {
     return {...state, gaveUp: !state.gaveUp};
+  },
+  TOGGLE_STAY_UP: (state, { payload }) => {
+    return {...state, stayUp: !state.stayUp};
   },
   RESET_BLOCK: (state, { payload }) => {
     return initialState;

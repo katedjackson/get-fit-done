@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import TotalProgress from './TotalProgress';
 import GiveUpPopUp from './GiveUpPopUp';
 import {connect} from 'react-redux';
-import { unblock, toggleGaveUp } from '../../background/reducers/block';
+import { giveup, toggleGaveUp, toggleTimeStepsBlock } from '../../background/reducers/block';
 import { resetTime } from '../../background/reducers/time';
 import { resetLastSteps, resetStreak } from '../../background/reducers/user';
 
@@ -19,7 +19,7 @@ class HourlyBlock extends Component {
 
   unblock() {
     this.props.dispatch(toggleGaveUp());
-    this.props.dispatch(unblock());
+    this.props.dispatch(toggleTimeStepsBlock());
     this.props.dispatch(resetTime());
     this.props.dispatch(resetLastSteps());
     this.props.dispatch(resetStreak());
