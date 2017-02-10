@@ -1,15 +1,3 @@
-#sign-in{
-	background-color:#00B0B9;
-	color: white;
-	font-size: 16px ;
-	border-radius: 5px ;
-	padding: 5px ;
-}
-
-.sign-in-div{
-	/*margin-top: 20%;*/
-}
-
 .logo{
 	width: 100%;
 }
@@ -35,7 +23,7 @@
 body{
 	text-align: center;
 	min-width: 310px;
-	min-height: 317px;
+	min-height: 160px;
 }
 
 .popup-container {
@@ -43,4 +31,13 @@ body{
 	padding-right: 55px;
 	padding-left: 55px;
 	padding-bottom: 15px;
+}
+
+div .popup-login {
+	text-align: center;
+	padding-top: 25vh;
+}
+
+#app > div > div > div:nth-child(2) > a > img {
+	padding-top: 20px;
 }

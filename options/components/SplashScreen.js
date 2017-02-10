@@ -7,7 +7,7 @@ class  SplashScreen extends Component {
   }
 
   componentDidMount () {
-    setTimeout(this.props.login, 1000);
+    this.props.login();
   }
 
   render () {

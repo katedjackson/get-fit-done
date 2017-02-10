@@ -27,9 +27,13 @@ class App extends Component {
 
   loginView(){
     return (
-      <div>
-        <img className='logo' src='/images/logo.png' />
-        <Login />
+      <div className="popup-login">
+        <Row>
+          <img className='logo' src='/images/logo.png' />
+        </Row>
+        <Row>
+          <a title='Login' target='_blank' href='chrome-extension://fecjgkehmgognabbnohaoombfboddooo/options/index.html'><img className='popup-login' src='/images/login.png' /></a>
+        </Row>
       </div>
     )
   }
@@ -41,37 +45,35 @@ class App extends Component {
 
     return (
       <div>
-        <a title='Settings' target='_blank' href='chrome-extension://fecjgkehmgognabbnohaoombfboddooo/options/index.html'><img className='settings' src='/images/settingsIcon.png' /></a>
-        <img className='logo' src='/images/logo.png' />
-      <Row>
-        <a title={(10-this.props.timesRefreshed) + ' refreshes left this hour'} target='_blank' onClick={this.refresh}><img className='refresh' src='../refresh.png' /></a>
-        <a title='Settings' target='_blank' href='chrome-extension://fecjgkehmgognabbnohaoombfboddooo/options/index.html'><img className='settings' src='../settingsIcon.png' /></a>
-      </Row>
-      <Row className="popup-container">
         <Row>
-          <img className='logo' src='../logo.png' />
+          <a title={(10-this.props.timesRefreshed) + ' refreshes left this hour'} target='_blank' onClick={this.refresh}><img className='refresh' src='/images/refresh.png' /></a>
+          <a title='Settings' target='_blank' href='chrome-extension://fecjgkehmgognabbnohaoombfboddooo/options/index.html'><img className='settings' src='/images/settingsIcon.png' /></a>
         </Row>
-        <Row>
-          { (this.props.steps - this.props.lastSteps)  >= this.props.stepGoal ?
-            <h3 className='animated infinite tada'>Congrats you've reached your goal!</h3>
-            :
-            <h3></h3>
-          }
+        <Row className="popup-container">
+          <Row>
+            <img className='logo' src='/images/logo.png' />
+          </Row>
+          <Row>
+            { (this.props.steps - this.props.lastSteps)  >= this.props.stepGoal ?
+              <h3 className='animated infinite tada'>Congrats you've reached your goal!</h3>
+              :
+              <h3></h3>
+            }
+          </Row>
+          <Row>
+            {!this.props.blocked ?
+              <h3>{timeLeft} minutes remaining</h3>
+              :
+              <h3>You need { this.props.stepGoal - (this.props.steps - this.props.lastSteps)} more steps to unlock</h3>
+            }
+          </Row>
+          <Row>
+            <ProgressBar />
+          </Row>
+          <Row>
+            <Login />
+          </Row>
         </Row>
-        <Row>
-          {!this.props.blocked ?
-            <h3>{timeLeft} minutes remaining</h3>
-            :
-            <h3>You need { this.props.stepGoal - (this.props.steps - this.props.lastSteps)} more steps to unlock</h3>
-          }
-        </Row>
-        <Row>
-          <ProgressBar />
-        </Row>
-        <Row>
-          <Login />
-        </Row>
-      </Row>
       </div>
     )
   }
