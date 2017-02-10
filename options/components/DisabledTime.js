@@ -6,6 +6,7 @@ import { Field, reduxForm } from 'redux-form';
 import { Col, Row } from 'react-bootstrap';
 
 import { setDisabledTime, toggleDisableTimeMode } from '../../background/reducers/settings'
+import { toggleDisable } from '../../background/reducers/block';
 
 
 class DisabledTime extends Component {
@@ -19,6 +20,7 @@ class DisabledTime extends Component {
 
   toggleDisabledTime = () => {
     this.props.dispatch(toggleDisableTimeMode())
+    if (this.props.disabled) this.props.dispatch(toggleDisable());
   };
 
   handleStartDisabledTime = (event, index, value) => {
@@ -47,7 +49,8 @@ const mapStateToProps = (state) => {
     websites: state.settings && state.settings.websites,
     blacklist: state.settings && state.settings.blacklist,
     disabledTimeMode: state.settings && state.settings.disabledTimeMode,
-    disabledTime: state.settings && state.settings.disabledTime
+    disabledTime: state.settings && state.settings.disabledTime,
+    disabled: state.block && state.block.disable
   };
 };
 

@@ -7,7 +7,7 @@
 }
 
 .sign-in-div{
-	margin-top: 20%;
+	/*margin-top: 20%;*/
 }
 
 .logo{
@@ -15,20 +15,30 @@
 }
 
 .settings {
-	width: 10%;
-    margin-left: 116%;
-    margin-top: -4%;
+	width: 7%;
+	float: right;
+/*    margin-left: 116%;
+    margin-top: -4%;*/
+}
+
+.refresh {
+	width: 6%;
+	float: left;
+/*    margin-top: -4%;*/
 }
 
 .progressbar-text{
 	font-size: 18px;
-	top: 55% !important;
+	top: 65% !important;
 }
 
 body{
-	text-align: center;	
-	min-width: 200px;
-	min-height: 270px;
+	text-align: center;
+	min-width: 310px;
+	min-height: 317px;
+}
+
+.popup-container {
 	padding-top: 15px;
 	padding-right: 55px;
 	padding-left: 55px;
