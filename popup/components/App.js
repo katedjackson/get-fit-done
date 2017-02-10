@@ -89,7 +89,7 @@ class App extends Component {
 const mapStateToProps = (state) => {
   return {
     accessToken: state.user && state.user.accessToken,
-    blocked: state.block && state.block.showBlock,
+    blocked: state.block && state.block.hourlyBlock,
     timeLeft : state.user && state.time.timeLeft,
     steps: state.user && state.user.steps,
     lastSteps: state.user && state.user.lastSteps,

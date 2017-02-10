@@ -37,10 +37,13 @@ class App extends Component {
   }
 
   render() {
+    let showBlock = false;
+    if (this.props.sleepBlock || this.props.timeStepsBlock || this.props.hourlyBlock) showBlock = true;
+    console.log("SHOW BLOCK: ", showBlock)
     return (
       <div>
-      {(this.props.blacklist && this.props.block && this.state.blockedUrl) ||
-       (!this.props.blacklist && this.props.block && !this.state.blockedUrl) ?
+      {(this.props.blacklist && showBlock && this.state.blockedUrl) ||
+       (!this.props.blacklist && showBlock && !this.state.blockedUrl) ?
       (<BlockModal />) : (
       <div></div>
       )}
@@ -55,7 +58,9 @@ const mapStateToProps = (state) => {
     steps: state.user && state.user.steps,
     stepGoal: state.settings && state.settings.stepGoal,
     websites: state.settings && state.settings.websites,
-    block: state.block && state.block.showBlock,
+    hourlyBlock: state.block && state.block.hourlyBlock,
+    timeStepsBlock: state.block && state.block.timeStepsBlock,
+    sleepBlock: state.block && state.block.sleepBlock,
     blacklist: state.settings && state.settings.blacklist
   };
 };
