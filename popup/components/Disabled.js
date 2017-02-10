@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import {  Row } from 'react-bootstrap';
 
-const SleepTime = (props) => {
+const Disabled = (props) => {
     const convertTime = (str) => {
       const timeArr = str.split(':');
       var hours = Number(timeArr[0]);
@@ -29,7 +29,7 @@ const SleepTime = (props) => {
    );
 }
 
-SleepTime.propTypes = {
+Disabled.propTypes = {
   disabledEnd: PropTypes.string
 }
 
@@ -40,4 +40,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(SleepTime);
+export default connect(mapStateToProps)(Disabled);
