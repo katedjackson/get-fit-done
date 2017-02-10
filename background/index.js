@@ -8,7 +8,7 @@ import createLogger from 'redux-logger';
 import chromeStorage, { loadFromStorage } from './redux/chromeStorage';
 import { middleware } from 'redux-async-initial-state';
 import { getDailyThunk, getWeeklyThunk, getHourlyThunk, resetLastSteps, incrementStreak, incrementTotalSteps } from './reducers/user';
-import { setBlock, unblock, toggleHourlyBlock, toggleTimeStepsBlock, toggleSleepBlock } from './reducers/block';
+import { setBlock, unblock, toggleHourlyBlock, toggleTimeStepsBlock, toggleSleepBlock, toggleGiveUp } from './reducers/block';
 import { getTimeLeft, resetTime, decrementTime } from './reducers/time'
 import checkAchievements from './achievements';
 import { checkBlockState, checkHourlyBlock, checkTimeSteps, checkSleepTime } from './utils/blockingUtils'
@@ -87,9 +87,14 @@ function startRequest() {
       })
       .then((response) => {
         var state = store.getState();
-        if (state.settings.hourlyMode) checkHourlyBlock(state);
-        if (state.settings.timeStepsMode) checkTimeSteps(state,time);
-        if (state.settings.sleepMode) checkSleepTime(state, time);
+        if (!state.block.gaveUp){
+          if (state.settings.hourlyMode) checkHourlyBlock(state);
+          if (state.settings.timeStepsMode) checkTimeSteps(state,time);
+          if (state.settings.sleepMode) checkSleepTime(state, time);
+        }
+        else{
+          if (time === '00:01') store.dispatch(toggleGiveUp());
+        }
       })
       // .then((response) => {
       //   checkBlockState(store.getState())

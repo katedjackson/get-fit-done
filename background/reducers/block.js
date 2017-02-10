@@ -3,9 +3,9 @@ import { PropTypes } from 'react';
 
 const initialState = {
   showBlock: false,
+  gaveUp: false,
   hourlyBlock: false,
   timeStepsBlock: false,
-  timeStepsGaveUp: false,
   sleepBlock: false,
   sleepExtension: false,
   sleepExtensionMin: 5
@@ -27,9 +27,6 @@ export const toggleTimeStepsBlock = createAction(TOGGLE_TIME_STEPS_BLOCK);
 export const TOGGLE_SLEEP_BLOCK = 'TOGGLE_SLEEP_BLOCK';
 export const toggleSleepBlock = createAction(TOGGLE_SLEEP_BLOCK);
 
-export const TOGGLE_TIMESTEPS_GIVEUP = 'TOGGLE_TIMESTEPS_GIVEUP';
-export const toggleTimeStepsGiveup = createAction(TOGGLE_TIMESTEPS_GIVEUP);
-
 export const RESET_BLOCK = 'RESET_BLOCK';
 export const resetBlock = createAction(RESET_BLOCK);
 
@@ -41,6 +38,9 @@ export const setSleepExtTime= createAction(SET_SLEEP_EXT_TIME);
 
 export const DECREMENT_SLEEP_EXT = 'DECREMENT_SLEEP_EXT';
 export const decrementSleepExt = createAction(DECREMENT_SLEEP_EXT);
+
+export const TOGGLE_GAVE_UP = 'TOGGLE_GAVE_UP';
+export const toggleGaveUp = createAction(TOGGLE_GAVE_UP);
 
 export default handleActions({
   SET_BLOCK: (state, { payload }) => {
@@ -58,8 +58,8 @@ export default handleActions({
   TOGGLE_SLEEP_BLOCK: (state, { payload }) => {
     return {...state, sleepBlock: !state.sleepBlock};
   },
-  TOGGLE_TIMESTEPS_GIEUP: (state, { payload }) => {
-    return {...state, timeStepsGaveUp: !state.timeStepsGaveUp}
+  TOGGLE_GAVE_UP: (state, { payload }) => {
+    return {...state, gaveUp: !state.gaveUp};
   },
   RESET_BLOCK: (state, { payload }) => {
     return initialState;

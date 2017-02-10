@@ -87,6 +87,7 @@ export function checkSleepTime(state, time){
         store.dispatch(decrementSleepExt());
       }
       else {
+        store.dispatch(setSleepExtTime());
         store.dispatch(toggleSleepExt());
         store.dispatch(toggleSleepBlock());
       }
