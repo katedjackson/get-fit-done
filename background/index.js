@@ -13,7 +13,7 @@ import { setBlock, unblock, toggleHourlyBlock, toggleTimeStepsBlock, toggleSleep
 
 import { getTimeLeft, resetTime, decrementTime } from './reducers/time'
 import checkAchievements from './achievements';
-import { checkBlockState, checkHourlyBlock, checkTimeSteps, checkSleepTime } from './utils/blockingUtils'
+import { checkBlockState, checkHourlyBlock, checkTimeSteps, checkSleepTime, checkDisable} from './utils/blockingUtils'
 
 
 const keysToPersistInChrome = [
@@ -93,6 +93,7 @@ function startRequest() {
       })
       .then((response) => {
         var state = store.getState();
+        if (state.settings.disabledTimeMode) checkDisable(state,time);
         if (state.settings.hourlyMode) checkHourlyBlock(state);
         if (!state.block.gaveUp){
           if (state.settings.timeStepsMode) checkTimeSteps(state,time);

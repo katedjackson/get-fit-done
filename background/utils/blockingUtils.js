@@ -1,4 +1,4 @@
-import { setBlock, unblock, toggleHourlyBlock, toggleTimeStepsBlock, toggleSleepBlock, toggleTimeStepsGiveup, toggleSleepExt, setSleepExtTime, decrementSleepExt} from '../reducers/block';
+import { setBlock, unblock, toggleHourlyBlock, toggleTimeStepsBlock, toggleSleepBlock, toggleTimeStepsGiveup, toggleSleepExt, setSleepExtTime, decrementSleepExt, toggleDisable} from '../reducers/block';
 import { getTimeLeft, resetTime, decrementTime } from '../reducers/time'
 import { getDailyThunk, getWeeklyThunk, getHourlyThunk, resetLastSteps, incrementStreak, incrementTotalSteps } from '../reducers/user';
 
@@ -14,11 +14,44 @@ import { getDailyThunk, getWeeklyThunk, getHourlyThunk, resetLastSteps, incremen
 //   }
 // }
 
-export function checkHourlyBlock(state){
-  var hrSteps = state.user.steps-state.user.lastSteps;
-  var stepGoal = state.settings.stepGoal;
-  var blockState = state.block.hourlyBlock;
-  var timeLeft = state.time.timeLeft;
+export function checkDisable(state, time) {
+  let startDisableTime = state.settings.disabledTime[0];
+  let stopDisableTime = state.settings.disabledTime[1];
+  let currTimeVal = Number(time.slice(0,2) + time.slice(3));
+  let startDisableVal = Number(startDisableTime.slice(0,2) + startDisableTime.slice(3));
+  let stopDisableVal = Number(stopDisableTime.slice(0,2) + stopDisableTime.slice(3));
+
+  if (state.block.disable){
+    if (startDisableVal < stopDisableVal){
+      if (currTimeVal >= stopDisableVal || currTimeVal < startDisableVal){
+        store.dispatch(toggleDisable());
+      }
+    }
+    else if (startDisableVal > stopDisableVal) {
+      if (currTimeVal >= stopDisableVal && currTimeVal < startDisableVal){
+         store.dispatch(toggleDisable());
+      }
+    }
+  }
+  else { //disable is false
+    if (startDisableVal < stopDisableVal) {
+      if (currTimeVal >= startDisableVal && currTimeVal < stopDisableVal){
+        store.dispatch(toggleDisable());
+      }
+    }
+    else if (startDisableVal > stopDisableVal){
+      if (currTimeVal >= startDisableVal || currTimeVal < stopDisableVal){
+        store.dispatch(toggleDisable());
+      }
+    }
+  }
+}
+
+export function checkHourlyBlock(state) {
+  let hrSteps = state.user.steps-state.user.lastSteps;
+  let stepGoal = state.settings.stepGoal;
+  let blockState = state.block.hourlyBlock;
+  let timeLeft = state.time.timeLeft;
 
   if(blockState && hrSteps > stepGoal){
     store.dispatch(resetTime());
