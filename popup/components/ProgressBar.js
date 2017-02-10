@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Circle } from 'react-progressbar.js';
 import { Row } from 'react-bootstrap';
 
-const Blocked = (props) => {
+const ProgressBar = (props) => {
 
     const options = {
       strokeWidth: 20,
@@ -60,7 +60,7 @@ Blocked.propTypes = {
   lastSteps: PropTypes.number,
   hourlySteps: PropTypes.number,
   timeLeft: PropTypes.number,
-  stepGoal: PropTypes.number,
+  stepGoal: PropTypes.string,
   blocked: PropTypes.bool
 }
 const mapStateToProps = (state) => {
@@ -75,5 +75,5 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Blocked);
+export default connect(mapStateToProps)(ProgressBar);
 
