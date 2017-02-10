@@ -38,7 +38,7 @@ class App extends Component {
 
   render() {
     let showBlock = false;
-    if (this.props.sleepBlock || this.props.timeStepsBlock || this.props.hourlyBlock) showBlock = true;
+    if (!this.props.disable && (this.props.sleepBlock || this.props.timeStepsBlock || this.props.hourlyBlock)) showBlock = true;
     console.log("SHOW BLOCK: ", showBlock)
     return (
       <div>
@@ -61,7 +61,8 @@ const mapStateToProps = (state) => {
     hourlyBlock: state.block && state.block.hourlyBlock,
     timeStepsBlock: state.block && state.block.timeStepsBlock,
     sleepBlock: state.block && state.block.sleepBlock,
-    blacklist: state.settings && state.settings.blacklist
+    blacklist: state.settings && state.settings.blacklist,
+    disable: state.block && state.block.disable
   };
 };
 
