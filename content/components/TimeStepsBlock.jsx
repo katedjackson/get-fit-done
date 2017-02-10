@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import { giveup, toggleGaveUp, toggleTimeStepsBlock } from '../../background/reducers/block';
 import { resetTime } from '../../background/reducers/time';
 import { resetLastSteps, resetStreak } from '../../background/reducers/user';
+import { Col, Row } from 'react-bootstrap';
 
 class HourlyBlock extends Component {
   constructor(props) {

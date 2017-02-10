@@ -32,7 +32,7 @@
 }
 
 .block-overlay-top-text {
-    margin-top: 10% !important;
+    margin-top: 15% !important;
     font-size: 32px !important;
     cursor: default !important;
     user-select: none !important;
@@ -40,7 +40,7 @@
 }
 
 .block-progress {
-    margin: 20px auto 20px auto !important;
+    margin: 40px auto 40px auto !important;
     width: 200px !important;
     height: 200px !important;
     background-size: contain !important;
