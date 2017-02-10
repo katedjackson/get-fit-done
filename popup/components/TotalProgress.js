@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import {  Row } from 'react-bootstrap';
 import { Circle } from 'react-progressbar.js'
@@ -25,7 +25,7 @@ const TotalProgress = (props) => {
       <div>
         <Row>
           { (props.steps - props.lastSteps)  >= props.stepGoal ?
-            <h3 className='animated infinite tada'>Congrats you've reached your goal!</h3>
+            <h3 className="animated infinite tada">Congrats you've reached your goal!</h3>
             :
             <h3></h3>
           }
@@ -35,7 +35,7 @@ const TotalProgress = (props) => {
         </Row>
         <Row>
           <Circle
-            progress={props.steps/props.stepGoal}
+            progress={props.steps / props.stepGoal}
             text={`${props.steps}/${props.stepGoal}`}
             options={options}
             initialAnimate={true}
@@ -44,6 +44,12 @@ const TotalProgress = (props) => {
         </Row>
       </div>
     );
+}
+
+TotalProgress.propTypes = {
+  steps: PropTypes.number,
+  lastSteps: PropTypes.number,
+  stepGoal: PropTypes.number
 }
 
 const mapStateToProps = (state) => {

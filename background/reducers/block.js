@@ -9,7 +9,7 @@ const initialState = {
   sleepBlock: false,
   sleepExtension: false,
   sleepExtensionMin: 5,
-  disabled: false
+  disable: false
 }
 
 export const SET_BLOCK = 'SET_BLOCK';

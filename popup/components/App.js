@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import ProgressBar from './ProgressBar';
 import TotalProgress from './TotalProgress';
 import SleepTime from './SleepTime';
+import Disabled from './Disabled';
 import Login from './Login';
 import { Row } from 'react-bootstrap';
 import { incrementRefresh, getDailyThunk} from '../../background/reducers/user';
@@ -40,10 +41,12 @@ class App extends Component {
 
   signedInView(){
     let blockMode = null;
-    if (this.props.sleepBlock) blockMode = 'sleepBlock';
+    if (this.props.disableBlock) blockMode = 'disableBlock';
+    else if (this.props.sleepBlock) blockMode = 'sleepBlock';
     else if (this.props.timeStepsBlock) blockMode = 'timeStepsBlock';
     else if (this.props.hourlyBlock) blockMode = 'hourlyBlock';
-
+    console.log("props,", this.props);
+    console.log(blockMode);
     return (
       <div>
       <Row>
@@ -55,6 +58,7 @@ class App extends Component {
           <img className="logo" src="../logo.png" />
         </Row>
         <Row>
+          { blockMode === 'disableBlock' && <Disabled />}
           { blockMode === 'sleepBlock' && <SleepTime /> }
           { blockMode === 'timeStepsBlock' && <TotalProgress /> }
           { blockMode === 'hourlyBlock' && <ProgressBar />}
@@ -87,7 +91,8 @@ const mapStateToProps = (state) => {
     timesRefreshed: state.user && state.user.timesRefreshed,
     sleepBlock: state.block && state.block.sleepBlock,
     timeStepsBlock: state.block && state.block.timeStepsBlock,
-    hourlyBlock: state.block && state.block.hourlyBlock
+    hourlyBlock: state.block && state.block.hourlyBlock,
+    disableBlock: state.block && state.block.disable
   };
 };
 
