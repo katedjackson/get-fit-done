@@ -5,7 +5,6 @@ import TotalProgress from './TotalProgress';
 import SleepTime from './SleepTime';
 import Disabled from './Disabled';
 import NoMode from './NoMode';
-import Login from './Login';
 import { Row } from 'react-bootstrap';
 import { incrementRefresh } from '../../background/reducers/user';
 import { checkHourlyBlock, checkTimeSteps, checkSleepTime } from '../../background/utils/blockingUtils'
@@ -56,23 +55,21 @@ class App extends Component {
     else blockMode = 'noMode'
     return (
       <div>
-      <Row>
-        <a title={(10 - this.props.timesRefreshed) + ' refreshes left this hour'} target="_blank" onClick={this.refresh}><img className="refresh" src="../refresh.png" /></a>
-        <a title="Settings" target="_blank" href="chrome-extension://fecjgkehmgognabbnohaoombfboddooo/options/index.html"><img className="settings" src="../settingsIcon.png" /></a>
-      </Row>
-      <Row className="popup-container">
         <Row>
-          <img className="logo" src="../logo.png" />
+          <a title={(10 - this.props.timesRefreshed) + ' refreshes left this hour'} target="_blank" onClick={this.refresh}><img className="refresh" src="/images/refresh.png" /></a>
+          <a title="Settings" target="_blank" href="chrome-extension://fecjgkehmgognabbnohaoombfboddooo/options/index.html"><img className="settings" src="/images/settingsIcon.png" /></a>
         </Row>
-        <Row>
-          { blockMode === 'disableBlock' && <Disabled />}
-          { blockMode === 'sleepBlock' && <SleepTime /> }
-          { blockMode === 'timeStepsBlock' && <TotalProgress /> }
-          { blockMode === 'hourlyMode' && <ProgressBar />}
-          { blockMode === 'noMode' && <NoMode />}
-        </Row>
-        <Row>
-          <Login />
+        <Row className="popup-container">
+          <Row>
+            <img className="logo" src="/images/logo.png" />
+          </Row>
+          <Row>
+            { blockMode === 'disableBlock' && <Disabled />}
+            { blockMode === 'sleepBlock' && <SleepTime /> }
+            { blockMode === 'timeStepsBlock' && <TotalProgress /> }
+            { blockMode === 'hourlyMode' && <ProgressBar />}
+            { blockMode === 'noMode' && <NoMode />}
+          </Row>
         </Row>
       </div>
     )
