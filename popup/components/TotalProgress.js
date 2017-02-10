@@ -24,14 +24,14 @@ const TotalProgress = (props) => {
     return (
       <div>
         <Row>
-          { (props.steps - props.lastSteps)  >= props.stepGoal ?
+          { props.steps   >= props.stepGoal ?
             <h3 className="animated infinite tada">Congrats you've reached your goal!</h3>
             :
             <h3></h3>
           }
         </Row>
         <Row>
-          <h3>You need { props.stepGoal - (props.steps - props.lastSteps)} more steps to unlock</h3>
+          <h3>You need { props.stepGoal - props.steps} more steps to unlock</h3>
         </Row>
         <Row>
           <Circle
@@ -48,14 +48,12 @@ const TotalProgress = (props) => {
 
 TotalProgress.propTypes = {
   steps: PropTypes.number,
-  lastSteps: PropTypes.number,
   stepGoal: PropTypes.number
 }
 
 const mapStateToProps = (state) => {
   return {
     steps: state.user && state.user.steps,
-    lastSteps: state.user && state.user.lastSteps,
     stepGoal: state.settings && state.settings.totalStepGoal
   };
 };
