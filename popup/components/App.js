@@ -12,7 +12,6 @@ class App extends Component {
     this.refresh = this.refresh.bind(this);
   }
 
-
   refresh(){
     if (this.props.timesRefreshed < 10){
       this.props.dispatch(incrementRefresh());
@@ -29,12 +28,11 @@ class App extends Component {
   loginView(){
     return (
       <div>
-        <img className='logo' src='../logo.png' />
+        <img className='logo' src='/images/logo.png' />
         <Login />
       </div>
     )
   }
-
 
   signedInView(){
     let timeLeft;
@@ -43,6 +41,8 @@ class App extends Component {
 
     return (
       <div>
+        <a title='Settings' target='_blank' href='chrome-extension://fecjgkehmgognabbnohaoombfboddooo/options/index.html'><img className='settings' src='/images/settingsIcon.png' /></a>
+        <img className='logo' src='/images/logo.png' />
       <Row>
         <a title={(10-this.props.timesRefreshed) + ' refreshes left this hour'} target='_blank' onClick={this.refresh}><img className='refresh' src='../refresh.png' /></a>
         <a title='Settings' target='_blank' href='chrome-extension://fecjgkehmgognabbnohaoombfboddooo/options/index.html'><img className='settings' src='../settingsIcon.png' /></a>

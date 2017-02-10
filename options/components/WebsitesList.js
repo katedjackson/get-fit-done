@@ -42,20 +42,19 @@ class WebsitesList extends Component {
            <label>Website Blocking: </label>
          </legend>
          <div>
-           {this.renderBlacklistSelect('blacklist', 'Block Mode')}
-           <label>{"Enter websites you want to " + (this.props.blacklist ? 'BLOCK' : 'ALLOW') + " separated by a comma."}<br />Enter <b>only</b> the domain name and extension.<br />For example, enter facebook.com, snapchat.com, instagram.com.
+           <label>{"Enter websites you want to " + (this.props.blacklist ? 'BLOCK' : 'ALLOW') + " separated by a comma."}<br />Enter <b>only</b> the domain name and extension.<br />For example, enter 'facebook.com', 'snapchat.com', 'instagram.com.'
            </label>
+           {this.renderBlacklistSelect('blacklist', 'Block Mode')}
            <div>
              {typeof this.props.websites === 'string' && <TextField
                  name="websites"
                  id="websites"
-                 hintText="Put your websites"
                  defaultValue={this.props.websites}
                  multiLine={true}
-                 rows={2}
-                 rowsMax={4}
+                 rows={3}
+                 rowsMax={8}
                />}
-             <button type="submit">Save</button>
+             <button id="website-submit" type="submit">Save</button>
            </div>
          </div>
        </fieldset>
