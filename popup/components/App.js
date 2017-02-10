@@ -50,7 +50,7 @@ class App extends Component {
     if (this.props.disableBlock) blockMode = 'disableBlock';
     else if (this.props.sleepBlock) blockMode = 'sleepBlock';
     else if (this.props.timeStepsBlock) blockMode = 'timeStepsBlock';
-    else if (this.props.hourlyBlock) blockMode = 'hourlyBlock';
+    else if (this.props.hourlyMode) blockMode = 'hourlyMode';
     else blockMode = 'noMode'
     return (
       <div>
@@ -66,7 +66,7 @@ class App extends Component {
           { blockMode === 'disableBlock' && <Disabled />}
           { blockMode === 'sleepBlock' && <SleepTime /> }
           { blockMode === 'timeStepsBlock' && <TotalProgress /> }
-          { blockMode === 'hourlyBlock' && <ProgressBar />}
+          { blockMode === 'hourlyMode' && <ProgressBar />}
           { blockMode === 'noMode' && <NoMode />}
         </Row>
         <Row>
@@ -92,11 +92,11 @@ App.propTypes = {
   blocked: PropTypes.bool,
   steps: PropTypes.number,
   lastSteps: PropTypes.number,
-  stepGoal: PropTypes.number,
+  stepGoal: PropTypes.string,
   timesRefreshed: PropTypes.number,
   sleepBlock: PropTypes.bool,
   timeStepsBlock: PropTypes.bool,
-  hourlyBlock: PropTypes.bool,
+  hourlyMode: PropTypes.bool,
   disableBlock: PropTypes.bool
 }
 
@@ -110,7 +110,7 @@ const mapStateToProps = (state) => {
     timesRefreshed: state.user && state.user.timesRefreshed,
     sleepBlock: state.block && state.block.sleepBlock,
     timeStepsBlock: state.block && state.block.timeStepsBlock,
-    hourlyBlock: state.block && state.block.hourlyBlock,
+    hourlyMode: state.settings && state.settings.hourlyMode,
     disableBlock: state.block && state.block.disable
   };
 };

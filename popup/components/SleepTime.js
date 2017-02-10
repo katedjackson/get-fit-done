@@ -11,7 +11,7 @@ const SleepTime = (props) => {
         </Row>
         <Row>
           <div id="block-progress" className="block-progress">
-            <img className="sleep" height="200px" width="200px" src="https://i.imgur.com/KXY2b8V.png" />
+            <img className="sleep" height="180px" width="180px" src="https://i.imgur.com/KXY2b8V.png" />
           </div>
         </Row>
       </div>
