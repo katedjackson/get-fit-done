@@ -1,10 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Toggle, TextField, TimePicker,
-         SelectField, MenuItem, RaisedButton } from 'material-ui';
-import { Field, reduxForm } from 'redux-form';
-import { Col, Row } from 'react-bootstrap';
-
 import { setDisabledTime, toggleDisableTimeMode } from '../../background/reducers/settings'
 import { toggleDisable } from '../../background/reducers/block';
 
@@ -31,7 +26,7 @@ class DisabledTime extends Component {
     this.props.dispatch(setDisabledTime([this.props.disabledTime[0], value]));
   };
   render(){
-    return(
+    return (
        <div>
          {this.props.renderModes('disable', ' Disable', this.toggleDisabledTime, this.props.disabledTimeMode)}
          {this.props.disabledTimeMode ? (
@@ -42,6 +37,16 @@ class DisabledTime extends Component {
        </div>
     )
   }
+}
+
+DisabledTime.propTypes = {
+  websites: PropTypes.string,
+  blacklist: PropTypes.bool,
+  disabledTimeMode: PropTypes.bool,
+  disabledTime: PropTypes.array,
+  disabled: PropTypes.bool,
+  renderModes: PropTypes.func,
+  renderTimeSelect: PropTypes.func
 }
 
 const mapStateToProps = (state) => {

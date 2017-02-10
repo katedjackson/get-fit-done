@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { setSleepTime, toggleSleepMode } from '../../background/reducers/settings'
 
@@ -36,6 +36,15 @@ class SleepMode extends Component {
        </div>
     )
   }
+}
+
+SleepMode.propTypes = {
+  websites: PropTypes.string,
+  blacklist: PropTypes.bool,
+  sleepMode: PropTypes.bool,
+  sleepTime: PropTypes.array,
+  renderModes: PropTypes.func,
+  renderTimeSelect: PropTypes.func
 }
 
 const mapStateToProps = (state) => {

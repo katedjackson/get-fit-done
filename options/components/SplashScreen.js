@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import {connect} from 'react-redux';
 
 class  SplashScreen extends Component {
@@ -19,9 +19,11 @@ class  SplashScreen extends Component {
     );
   }
 }
-
+SplashScreen.propTypes = {
+  login: PropTypes.func
+}
 const mapStateToProps = (state) => {
-  return{
+  return {
     accessToken: state.user && state.user.accessToken
   };
 };

@@ -1,9 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Toggle, TextField, TimePicker, SelectField, MenuItem, RaisedButton } from 'material-ui';
-import { Field, reduxForm } from 'redux-form';
-import { Col, Row } from 'react-bootstrap';
-import { setBlacklist, setWhitelist, toggleDisableTimeMode } from '../../background/reducers/settings'
+import { TextField, SelectField, MenuItem } from 'material-ui';
+import { setBlacklist, setWhitelist } from '../../background/reducers/settings'
 
 
 class WebsitesList extends Component {
@@ -13,7 +11,7 @@ class WebsitesList extends Component {
     this.toggleBlacklist = this.toggleBlacklist.bind(this)
   }
 
-  toggleBlacklist (event, index, value) {
+  toggleBlacklist (event, index) {
     if (index === 0) this.props.dispatch(setBlacklist());
     else if (index === 1) this.props.dispatch(setWhitelist());
   }
@@ -35,14 +33,14 @@ class WebsitesList extends Component {
   }
 
   render() {
-    return(
+    return (
      <form onSubmit={this.props.handleWebsiteSubmit}>
        <fieldset>
          <legend>
            <label>Website Blocking: </label>
          </legend>
          <div>
-           <label>{"Enter websites you want to " + (this.props.blacklist ? 'BLOCK' : 'ALLOW') + " separated by a comma."}<br />Enter <b>only</b> the domain name and extension.<br />For example, enter 'facebook.com', 'snapchat.com', 'instagram.com.'
+           <label>{`Enter websites you want to ${this.props.blacklist ? 'BLOCK' : 'ALLOW'} separated by a comma.`}<br />Enter <b>only</b> the domain name and extension.<br />For example, enter 'facebook.com', 'snapchat.com', 'instagram.com.'
            </label>
            {this.renderBlacklistSelect('blacklist', 'Block Mode')}
            <div>

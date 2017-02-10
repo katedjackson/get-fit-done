@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component, PropTypes} from 'react';
 import {Grid, Col, Row} from 'react-bootstrap';
 import {Line} from 'react-chartjs-2';
 import {connect} from 'react-redux';
@@ -8,10 +8,10 @@ class Achievements extends Component {
     super(props);
     this.state = {
       achievementBadges: [
-        { id: 0, type: "50,000 Steps", url: "/images/badges/50kSteps.png" },
-        { id: 1, type: "100,000 Steps", url: "/images/badges/100kSteps.png" },
-        { id: 2, type: " 7 Day Streak", url: "/images/badges/7DayStreak.png" },
-        { id: 3, type: "14 Day Streak", url: "/images/badges/14DayStreak.png" }
+        { id: 0, type: '50,000 Steps', url: '/images/badges/50kSteps.png' },
+        { id: 1, type: '100,000 Steps', url: '/images/badges/100kSteps.png' },
+        { id: 2, type: ' 7 Day Streak', url: '/images/badges/7DayStreak.png' },
+        { id: 3, type: '14 Day Streak', url: '/images/badges/14DayStreak.png' }
       ]
     };
     this.getDate = this.getDate.bind(this);
@@ -29,7 +29,7 @@ class Achievements extends Component {
 
   getDate() {
     const today = new Date().toString();
-    return today.substr(0, today.length-24);
+    return today.substr(0, today.length - 24);
   }
 
   getLabels() {
@@ -118,9 +118,17 @@ class Achievements extends Component {
   }
 }
 
+Achievements.propTypes = {
+  badges: PropTypes.array,
+  streak: PropTypes.number,
+  weeklySteps: PropTypes.array,
+  totalSteps: PropTypes.number,
+  steps: PropTypes.number
+}
+
 const mapStateToProps = (state) => {
 
-  return{
+  return {
     badges: state.user && state.user.badges,
     streak: state.user && state.user.streak,
     weeklySteps: state.user && state.user.weeklySteps,

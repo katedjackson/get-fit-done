@@ -1,5 +1,4 @@
 import { createAction, handleActions } from 'redux-actions';
-import { PropTypes } from 'react';
 
 const initialState = {
   websites: 'ex: reddit.com',
@@ -8,16 +7,9 @@ const initialState = {
   disabledTime: ['09:00', '17:00'],
   hourlyMode: true,
   timeStepsMode: false,
-  stepGoal: "250",
-  totalStepGoal: "10000",
+  stepGoal: '250',
+  totalStepGoal: '10000',
   totalStepsTime: '18:00',
-  // timeExerciseMode: false,
-  // exerciseTime: '18:00',
-  // exerciseMinutes: 30,
-  // foodMode: false,
-  // foodTime: [],
-  // waterMode: false,
-  // waterTime: [],
   sleepMode: false,
   sleepTime: ['22:00', '06:00']
 }

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component, PropTypes } from 'react';
 import Settings from './Settings';
 import Achievements from './Achievements';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -8,10 +8,9 @@ import Tabs from './Tabs';
 import Pane from './Pane';
 import SplashScreen from './SplashScreen';
 import Footer from './Footer';
-import { setWebsites, setStepGoal } from '../../background/reducers/settings';
-import { logoutUser, loginUser, getWeeklySteps } from '../../background/reducers/user';
+import { setWebsites, setStepGoal, resetSettings } from '../../background/reducers/settings';
+import { logoutUser, loginUser } from '../../background/reducers/user';
 import { resetBlock } from '../../background/reducers/block';
-import { resetSettings } from '../../background/reducers/settings';
 import { resetTime } from '../../background/reducers/time';
 import { fitbitLogout, fitbitAuth } from '../../background/auth';
 
@@ -87,8 +86,13 @@ class App extends Component {
   }
 }
 
+App.propTypes = {
+  accessToken: PropTypes.string,
+  websites: PropTypes.string
+}
+
 const mapStateToProps = (state) => {
-  return{
+  return {
     websites: state.settings && state.settings.websites,
     accessToken: state.user && state.user.accessToken
   };

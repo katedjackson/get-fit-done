@@ -1,13 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Toggle, TextField, TimePicker,
-         SelectField, MenuItem, RaisedButton } from 'material-ui';
-import { Field, reduxForm } from 'redux-form';
+import { Toggle, SelectField, MenuItem } from 'material-ui';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import { Col, Row } from 'react-bootstrap';
-
-import { setBlacklist, setWhitelist, toggleDisableTimeMode } from '../../background/reducers/settings'
-
 import WebsitesList from './WebsitesList'
 import DisabledTime from './DisabledTime'
 import HourlyMode from './HourlyMode'
@@ -19,30 +14,10 @@ injectTapEventPlugin();
 class Settings extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      disable: false,
-      hourlySteps: false,
-      dailySteps: false,
-      foodLog: false,
-      waterLog: false,
 
-      hourlyStepsNum: '250',
-      dailyStepsNum: '0',
-
-      disabledTime: [], //[start, end]
-      dailyGoalTime: null,
-      foodLogTime: [],
-      waterLogTime: []
-    }
-    //this.onLoad = this.onLoad.bind(this);
     this.renderModes = this.renderModes.bind(this);
     this.renderTimeSelect = this.renderTimeSelect.bind(this);
   }
-
-  // onLoad =() => {
-  //   chrome.storage.sync.get({ websites: '' }, (items) => this.setState({ websites: items.websites }));
-  // };
-
 
   renderModes (name, label, toggleFunc, defaultToggle) {
     return (<Toggle name={name} label={label}
@@ -93,27 +68,13 @@ class Settings extends Component {
             <WebsitesList handleWebsiteSubmit={this.props.handleWebsiteSubmit}/>
           </Col>
           <Col lg={6} md={6} sm={12} xs={12} className="setting_div">
-              <legend><label>Modes: </label></legend>
-                <DisabledTime renderModes={this.renderModes} renderTimeSelect={this.renderTimeSelect}/>
-                <HourlyMode renderModes={this.renderModes}/>
-                <TimeStepsMode renderModes={this.renderModes}
-                  renderTimeSelect={this.renderTimeSelect}/>
-                <SleepMode renderModes={this.renderModes}
-                  renderTimeSelect={this.renderTimeSelect}/>
-                {/*<div>
-                  {this.renderModes('foodLog', ' Food Log')}
-                          {this.state.foodLog ? (
-                          <div>
-                          {this.renderTimeSelect('foodLogTime', 'Select Time')}
-                          </div>) : null}
-                </div>
-                <div>
-                  {this.renderModes('waterLog', ' Water Log')}
-                          {this.state.waterLog ? (
-                          <div>
-                          {this.renderTimeSelect('waterLogTime', 'Select Time')}
-                          </div>) : null}
-                </div>*/}
+            <legend><label>Modes: </label></legend>
+            <DisabledTime renderModes={this.renderModes} renderTimeSelect={this.renderTimeSelect}/>
+            <HourlyMode renderModes={this.renderModes}/>
+            <TimeStepsMode renderModes={this.renderModes}
+              renderTimeSelect={this.renderTimeSelect}/>
+            <SleepMode renderModes={this.renderModes}
+              renderTimeSelect={this.renderTimeSelect}/>
           </Col>
         </Row>
       </div>
@@ -128,14 +89,7 @@ Settings.propTypes = {
 
 
 const mapStateToProps = (state) => {
-  return{
-    websites: state.settings && state.settings.websites,
-    stepGoal: state.settings && state.settings.stepGoal,
-    blacklist: state.settings && state.settings.blacklist,
-    disabledTimeMode: state.settings && state.settings.disabledTimeMode,
-    startDisableTime: state.settings && state.settings.startDisableTime,
-    stopDisableTime: state.settings && state.settings.stopDisableTime
-  };
+  return {};
 };
 
 

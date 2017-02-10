@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { TextField } from 'material-ui';
 
@@ -22,7 +22,7 @@ class HourlyMode extends Component {
   }
 
   render(){
-    return(
+    return (
        <div>
          {this.props.renderModes('hourlySteps', ' Hourly Step Goal', this.toggleHourlyMode, this.props.hourlyMode)}
          {this.props.hourlyMode ? (
@@ -37,6 +37,14 @@ class HourlyMode extends Component {
        </div>
     )
   }
+}
+
+HourlyMode.propTypes = {
+  websites: PropTypes.string,
+  blacklist: PropTypes.bool,
+  hourlyMode: PropTypes.bool,
+  stepGoal: PropTypes.string,
+  renderModes: PropTypes.func
 }
 
 const mapStateToProps = (state) => {

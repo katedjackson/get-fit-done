@@ -1,5 +1,5 @@
 
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { TextField } from 'material-ui';
 
@@ -28,7 +28,7 @@ class TimeStepsMode extends Component {
   };
 
   render(){
-    return(
+    return (
        <div>
          {this.props.renderModes('timeSteps', ' Step vs. Time Blocking', this.toggleTimeStepsMode, this.props.timeStepsMode)}
          {this.props.timeStepsMode ? (
@@ -45,6 +45,16 @@ class TimeStepsMode extends Component {
     )
   }
 }
+TimeStepsMode.propTypes = {
+  websites: PropTypes.string,
+  blacklist: PropTypes.bool,
+  timeStepsMode: PropTypes.bool,
+  totalStepGoal: PropTypes.string,
+  totalStepsTime: PropTypes.string,
+  renderModes: PropTypes.func,
+  renderTimeSelect: PropTypes.func
+}
+
 
 const mapStateToProps = (state) => {
   return {

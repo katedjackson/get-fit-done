@@ -1,5 +1,4 @@
 import {createAction, handleActions } from 'redux-actions';
-import { PropTypes } from 'react';
 
 const initialState = {
   showBlock: false,

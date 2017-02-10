@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component, PropTypes } from 'react';
 
 class Tabs extends Component {
   constructor(props) {
@@ -56,6 +56,9 @@ class Tabs extends Component {
       </div>
     );
   }
+}
+Tabs.propTypes = {
+  selected: PropTypes.number
 }
 
 export default Tabs;
