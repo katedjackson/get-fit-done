@@ -2,8 +2,8 @@ import { createAction, handleActions } from 'redux-actions';
 import { PropTypes } from 'react';
 
 const initialState = {
-  websites: '',
-  blacklist: false, //if false, then whitelist
+  websites: 'ex: reddit.com',
+  blacklist: true, //if false, then whitelist
   disabledTimeMode: false,
   disabledTime: ['09:00', '17:00'],
   hourlyMode: true,
@@ -21,6 +21,7 @@ const initialState = {
   sleepMode: false,
   sleepTime: ['22:00', '06:00']
 }
+
 /*-------------------------ACTIONS----------------------------*/
 export const SET_WEBSITES = 'SET_WEBSITES';
 
@@ -57,9 +58,6 @@ export const SET_START_DISABLE = 'SET_START_DISABLE';
 export const SET_STOP_DISABLE = 'SET_STOP_DISABLE';
 
 export const RESET_SETTINGS = 'RESET_SETTINGS'
-
-
-
 
 /*-------------------------ACTION CREATORS----------------------------*/
 export const setWebsites = createAction(SET_WEBSITES);

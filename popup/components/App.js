@@ -18,7 +18,6 @@ class App extends Component {
     this.signedInView = this.signedInView.bind(this);
   }
 
-
   refresh(){
     let t = new Date();
     let time = t.toString().slice(16, 21);
@@ -37,13 +36,16 @@ class App extends Component {
 
   loginView(){
     return (
-      <div>
-        <img className="logo" src="../logo.png" />
-        <Login />
+      <div className="popup-login">
+        <Row>
+          <img className='logo' src='/images/logo.png' />
+        </Row>
+        <Row>
+          <a title='Login' target='_blank' href='chrome-extension://fecjgkehmgognabbnohaoombfboddooo/options/index.html'><img className='popup-login' src='/images/login.png' /></a>
+        </Row>
       </div>
     )
   }
-
 
   signedInView(){
     let blockMode = null;
@@ -72,7 +74,6 @@ class App extends Component {
         <Row>
           <Login />
         </Row>
-      </Row>
       </div>
     )
   }
