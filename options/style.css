@@ -1,3 +1,6 @@
+/*----- General Options Styling -------*/
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
 html {
   height: 100%;
 }
@@ -17,9 +20,10 @@ body {
 h1 {
   text-align: center;
   font-size: 3em;
-  font-family: Helvetica;
+  font-family: Roboto, sans-serif;
 }
 
+/*-------------- Tabs ---------------*/
 div .tabs {
   border-color: grey;
   margin: 15px;
@@ -27,53 +31,70 @@ div .tabs {
   height: 90%;
 }
 
-h3 {
-  border-bottom: 1px solid #dddddd;
-  margin: 0 0 1em;
-}
-
-
-.tab {
-  margin: 15px;
-}
-
 .tabs>div {
   border-top-left-radius: 2em;
   border-top-right-radius: 2em;
-
 }
 
-.setting_div {
-  padding: 15px;
+.tabs_labels {
+  width: 100%;
+  background-color: rgb(0, 188, 212);
+  white-space: nowrap;
+  display: flex;
+  padding: 0;
 }
 
-/* tabs.. we might not need them */
-.tabs_labels li {
-  border-bottom: 1px solid grey;
-  display: inline;
-  margin: 15px;
-  padding: 10px 15px 15px 15px;
-  font-size: 20px;
-}
-
-.tabs_labels li a {
-  color: black;
+.tab_button {
+  border: 10px;
+  box-sizing: border-box;
+  display: inline-block;
+  font-family: Roboto, sans-serif;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   text-decoration: none;
+  margin: 0px;
+  padding: 0px;
+  outline: none;
+  font-size: 20px;
+  font-weight: 500;
+  position: relative;
+  color: rgb(255, 255, 255);
+  width: 33.3333%;
+  text-transform: uppercase;
+  background: none;
 }
+
+.tab_button li{
+  display: flex;
+  flex-direction: column;
+  height: 48px;
+  text-align: center;
+}
+
+li > a {
+  height: 100%;
+  width: 100%;
+  text-decoration: none;
+  color: white;
+  padding-top: 10px;
+}
+
+li > a:hover {
+  text-decoration: none;
+  color: black;
+}
+
+li > a.active {
+  text-decoration: none;
+  color: inherit;
+  border-bottom: solid #FF1166;
+}
+
 
 .tabs_content {
   margin: 15px;
   padding-top: 20px;
 }
-
-.switch {
-  float: none;
-  margin-top: 1em;
-}
-
-.badges {
-  padding: 20px;
-}
+/*------------ Settings -------------*/
 
 p {
   text-align: center;
@@ -83,7 +104,7 @@ img {
   margin-top: 2%;
 }
 
-h2 {
+h3 {
   text-align: center;
 }
 
@@ -101,6 +122,12 @@ h2 {
   text-align: right;
 }
 
+.setting_div {
+  padding: 15px;
+}
+
+/*---------- Splash Screen -----------*/
+
 .splash-screen {
   text-align: center;
 }
@@ -109,22 +136,50 @@ h2 {
   margin-top: 30vh;
 }
 
-.ticker {
-  border-color: #55AAFF;
-  border-width: 1px;
-  border-radius: 15%;
+/*---------- Achievements -----------*/
+
+.badges {
+  padding: 20px;
 }
 
-.ticker p {
+div.tickers.col-lg-4.col-md-4.col-sm-12.col-xs-12 {
+  display: table;
+  height: 100%;
+  text-align: center;
+}
+div.ticker {
+  height: 100%;
+  width: 50%;
+  margin: 30px 25% 10px 25%;
+}
+
+div.ticker p {
   font-size: 20px;
   margin: 0;
   padding: 0;
 }
 
-.tickers {
-  margin-top: 10vh;
+div.col-lg-6.col-md-6.col-sm-6.col-xs-6 {
+  border-radius: 10%;
+  background-color: rgb(224, 247, 250);
+  height: 100%;
+  padding: 4px;
+}
+
+.badge-col {
+  margin-top: 2vh;
+  text-align: center;
 }
 
 .badge-col img {
-  text-align: center;
+  width: 50%;
+}
+
+/*---------- Achievements -----------*/
+.feedback {
+  width: 100%;
+}
+
+.feedback-form {
+  width: 100%;
 }

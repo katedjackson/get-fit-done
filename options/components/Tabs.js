@@ -22,13 +22,15 @@ class Tabs extends Component {
     function labels(child, index) {
       let activeClass = (this.state.selected === index ? 'active' : '');
       return (
-        <li key={index}>
-          <a href="#"
-            className={activeClass}
-            onClick={this.handleClick.bind(this, index)}>
-            {child.props.label}
-          </a>
-        </li>
+        <div key={index} className="tab_button">
+          <li>
+            <a href="#"
+              className={activeClass}
+              onClick={this.handleClick.bind(this, index)}>
+              {child.props.label}
+            </a>
+          </li>
+        </div>
       );
     }
     return (

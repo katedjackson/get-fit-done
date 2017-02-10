@@ -8,10 +8,10 @@ class Achievements extends Component {
     super(props);
     this.state = {
       achievementBadges: [
-        { id: 0, type: "50,000 Steps", url: "/options/badges/steps1.png" },
-        { id: 1, type: "100,000 Steps", url: "/options/badges/steps2.png" },
-        { id: 2, type: " 7 Day Streak", url: "/options/badges/streak1.png" },
-        { id: 3, type: "14 Day Streak", url: "/options/badges/streak2.png" }
+        { id: 0, type: "50,000 Steps", url: "/options/badges/50kSteps.png" },
+        { id: 1, type: "100,000 Steps", url: "/options/badges/100kSteps.png" },
+        { id: 2, type: " 7 Day Streak", url: "/options/badges/7DayStreak.png" },
+        { id: 3, type: "14 Day Streak", url: "/options/badges/14DayStreak.png" }
       ]
     };
     this.getDate = this.getDate.bind(this);
@@ -46,7 +46,7 @@ class Achievements extends Component {
         labels: this.getLabels(),
         datasets: [
           {
-            label: `Steps for the Week of ${this.getDate()}`,
+            label: '',
             fill: false,
             lineTension: 0.1,
             backgroundColor: 'rgba(75,192,192,0.4)',
@@ -75,8 +75,32 @@ class Achievements extends Component {
     let badges = this.getBadges();
     return (
       <Grid className="container-fluid">
+        <Row className="show-grid graph-failures">
+          <Col xs={12} sm={12} md={8} lg={8}>
+            <h3>{`Steps for the Week of ${this.getDate()}`}</h3>
+            <Line
+              data={this.getChartData()}
+              options={{legend: { display: false }}}
+            />
+          </Col>
+          <Col className="tickers" xs={12} sm={12} md={4} lg={4}>
+            <Row>
+              <Col className="streak ticker" xs={6} sm={6} md={6} lg={6}>
+                <h1>{this.props.streak}</h1>
+                <p className="break">Days Without</p>
+                <p className="break">Giving Up!</p>
+              </Col>
+            </Row>
+            <Row>
+              <Col className="steps ticker" xs={6} sm={6} md={6} lg={6}>
+                <h1>{this.props.totalSteps === 0 ? this.props.steps : this.props.totalSteps}</h1>
+                <p>Total Steps!</p>
+              </Col>
+            </Row>
+          </Col>
+        </Row>
         <Row className="show-grid badges">
-            <h2>My Badges</h2>
+            <h3>My Badges</h3>
             {
               badges && badges.map((badge) => {
                 return (
@@ -86,24 +110,6 @@ class Achievements extends Component {
                 );
               })
             }
-        </Row>
-        <Row className="show-grid graph-failures">
-          <Col xs={12} sm={12} md={6} lg={6}>
-            <Line
-              data={this.getChartData()}
-            />
-          </Col>
-          <Col className="tickers" xs={12} sm={12} md={6} lg={6}>
-            <Col className="streak ticker" xs={6} sm={6} md={6} lg={6}>
-              <h1>{this.props.streak}</h1>
-              <p className="break">days without</p>
-              <p className="break">giving up!</p>
-            </Col>
-            <Col className="steps ticker" xs={6} sm={6} md={6} lg={6}>
-              <h1>{this.props.totalSteps === 0 ? this.props.steps : this.props.totalSteps}</h1>
-              <p>Steps!</p>
-            </Col>
-          </Col>
         </Row>
       </Grid>
     );

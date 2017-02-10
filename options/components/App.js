@@ -35,7 +35,6 @@ class App extends Component {
           { !this.props.accessToken ? <SplashScreen /> :
             (<div>
               <p><img className='logo' src='../logo.png' /></p>
-              <div>
                 <Tabs selected={0} className="tabs">
                   <Pane label="Settings" className="tab">
                     <Settings handleWebsiteSubmit={this.handleWebsiteSubmit} handleModesSubmit= {this.handleModesSubmit} websites={this.props.websites}/>
@@ -43,11 +42,10 @@ class App extends Component {
                   <Pane label="Achievements" className="tab">
                     <Achievements />
                   </Pane>
-                  <Pane label="Feedback" className="tab">
-                    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeYgRVbmicAGh8XkKzBx2JB_I0Q0z3m5r2atTbHhIrUWeIHAg/viewform?embedded=true" width="1381" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+                  <Pane label="Feedback" className="tab feedback">
+                    <iframe className="feedback-form" src="https://docs.google.com/forms/d/e/1FAIpQLSeYgRVbmicAGh8XkKzBx2JB_I0Q0z3m5r2atTbHhIrUWeIHAg/viewform?embedded=true" width="1381" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
                   </Pane>
                 </Tabs>
-              </div>
             </div>)
           }
         </MuiThemeProvider>
