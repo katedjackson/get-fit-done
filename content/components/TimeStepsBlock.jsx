@@ -32,11 +32,15 @@ class HourlyBlock extends Component {
   render() {
     return(
       <div>
-        <span id="block-overlay-top-text" className="block-cursor block-select block-overlay-top-text">{`You need ${this.props.stepGoal-this.props.steps} more steps to unlock this page...`}</span>
-        <div id="block-progress" className="block-progress">
+        <Row className="block-cursor block-select block-overlay-top-text">
+          {`You need ${this.props.stepGoal-this.props.steps} more steps to unlock this page...`}
+        </Row>
+        <Row className="block-progress">
           <TotalProgress {...this.props}/>
-        </div>
-        <div id="block-giveup-button" className="block-cursor block-select block-giveup-button block-buttons" onClick={this.giveUpToggle}>Give Up</div>
+        </Row>
+        <Row className="button-row">
+          <span className="block-cursor block-select block-giveup-button block-buttons" onClick={this.giveUpToggle}>Give Up</span>
+        </Row>
         <div id="block-popup-mask" className="block-cursor block-select block-popup-mask block-disappear"></div>
         <GiveUpPopUp {...this.props} showPopup={this.state.showPopup} giveUpToggle={this.giveUpToggle} unblock={this.unblock}/>
       </div>

@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import { giveup, toggleSleepExt, toggleStayUp, toggleSleepBlock} from '../../background/reducers/block';
 import { resetTime } from '../../background/reducers/time';
 import { resetLastSteps, resetStreak } from '../../background/reducers/user';
+import { Col, Row } from 'react-bootstrap';
 //import { checkBlockState } from '../../background/utils/blockingUtils'
 
 import ExtensionPopUp from './ExtensionPopUp';
@@ -47,16 +48,20 @@ class HourlyBlock extends Component {
   render() {
     return(
       <div>
-        <span id="block-overlay-top-text" className="block-cursor block-select block-overlay-top-text">{`It's time for bed. Get some sleep!`}</span>
-        <div id="block-progress" className="block-progress">
+        <Row className="block-cursor block-select block-overlay-top-text">{`It's time for bed. Get some sleep!`}
+        </Row>
+        <Row className="block-progress">
           <img className='sleep' src='https://i.imgur.com/KXY2b8V.png' />
-        </div>
-        <div id="block-giveup-button" className="block-cursor block-select block-giveup-button block-buttons" onClick={this.extensionToggle}>5 More Minutes</div>
-        <div id="block-popup-mask" className="block-cursor block-select block-popup-mask block-disappear"></div>
+        </Row>
+        <Row className="button-row">
+          <span id="extension-button" className="block-cursor block-select block-giveup-button block-buttons" onClick={this.extensionToggle}>5 More Minutes</span>
+          <span id="stayup-button" className="block-cursor block-select block-giveup-button block-buttons" onClick={this.giveUpToggle}>Stay Up</span>
+        </Row>
+        <div className="block-cursor block-select block-popup-mask block-disappear"></div>
         <ExtensionPopUp {...this.props} showPopup={this.state.showExtensionPopup} extensionToggle={this.extensionToggle} extend={this.extend}/>
-        <div id="block-giveup-button" className="block-cursor block-select block-giveup-button block-buttons" onClick={this.giveUpToggle}>Stay Up</div>
-        <div id="block-popup-mask" className="block-cursor block-select block-popup-mask block-disappear"></div>
+        <div className="block-cursor block-select block-popup-mask block-disappear"></div>
         <StayUpPopUp {...this.props} showPopup={this.state.showGiveUpPopup} giveUpToggle={this.giveUpToggle} unblock={this.unblock}/>
+
       </div>
     )
   }
