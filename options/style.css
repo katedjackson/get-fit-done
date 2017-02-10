@@ -209,6 +209,10 @@ div.col-lg-6.col-md-6.col-sm-6.col-xs-6 {
   width: 100%;
 }
 
+#app > div > div:nth-child(1) > div > div > div > div > div {
+  width: 100%;
+}
+
 /*---------- Feedback -----------*/
 .feedback {
   width: 100%;
