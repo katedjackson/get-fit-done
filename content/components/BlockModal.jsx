@@ -13,11 +13,7 @@ import SleepBlock from './SleepBlock';
 class BlockModal extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      showPopup: false
-    }
     this.giveUpToggle = this.giveUpToggle.bind(this);
-    // this.getSteps = this.getSteps.bind(this);
     this.unblock = this.unblock.bind(this);
   }
 
@@ -33,11 +29,18 @@ class BlockModal extends Component {
   }
 
   render(){
+    let blockMode = null;
+    if (this.props.sleepBlock) blockMode = 'sleepBlock';
+    else if (this.props.timeStepsBlock) blockMode = 'timeStepsBlock';
+    else if (this.props.hourlyBlock) blockMode = 'hourlyBlock';
+    console.log("BlockMode: ", blockMode)
     return (
     <div id="block-overlay-container" className="block-cursor block-select block-overlay-container">
       <div id="block-overlay" className="block-cursor block-select block-overlay">
         <div id="block-info-container" className="block-cursor block-select block-info-container">
-          <SleepBlock {...this.props} showPopup={this.state.showPopup} giveUpToggle={this.giveUpToggle} unblock={this.props.unblock}/>
+          { blockMode === 'sleepBlock' && <SleepBlock {...this.props} /> }
+          { blockMode === 'timeStepsBlock' && <TimeStepsBlock {...this.props} /> }
+          { blockMode === 'hourlyBlock' && <HourlyBlock {...this.props} /> }
         </div>
       </div>
     </div>
@@ -51,7 +54,10 @@ const mapStateToProps = (state) => {
     steps: state.user && state.user.steps,
     lastSteps: state.user && state.user.lastSteps,
     stepGoal: state.settings && state.settings.stepGoal,
-    streak: state.user && state.user.streak
+    streak: state.user && state.user.streak,
+    sleepBlock: state.block && state.block.sleepBlock,
+    timeStepsBlock: state.block && state.block.timeStepsBlock,
+    hourlyBlock: state.block && state.block.hourlyBlock
   };
 };
 

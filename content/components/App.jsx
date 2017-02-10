@@ -39,7 +39,7 @@ class App extends Component {
   render() {
     let showBlock = false;
     if (this.props.sleepBlock || this.props.timeStepsBlock || this.props.hourlyBlock) showBlock = true;
-
+    console.log("SHOW BLOCK: ", showBlock)
     return (
       <div>
       {(this.props.blacklist && showBlock && this.state.blockedUrl) ||

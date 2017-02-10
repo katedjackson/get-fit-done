@@ -13,7 +13,6 @@ class HourlyBlock extends Component {
       showPopup: false
     }
     this.giveUpToggle = this.giveUpToggle.bind(this);
-    // this.getSteps = this.getSteps.bind(this);
     this.unblock = this.unblock.bind(this);
   }
 
@@ -29,6 +28,7 @@ class HourlyBlock extends Component {
   }
 
   render() {
+    console.log("RENDER HOURLY BLOCK")
     return(
       <div>
         <span id="block-overlay-top-text" className="block-cursor block-select block-overlay-top-text">{`You need ${this.props.stepGoal-(this.props.steps - this.props.lastSteps)} more steps to unlock this page...`}</span>
