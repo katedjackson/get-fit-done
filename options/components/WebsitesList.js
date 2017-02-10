@@ -63,6 +63,12 @@ class WebsitesList extends Component {
   }
 }
 
+WebsitesList.propTypes = {
+  handleWebsiteSubmit: PropTypes.func,
+  blacklist: PropTypes.bool,
+  websites: PropTypes.string
+}
+
 const mapStateToProps = (state) => {
   return {
     websites: state.settings && state.settings.websites,

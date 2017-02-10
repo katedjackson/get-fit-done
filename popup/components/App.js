@@ -1,25 +1,34 @@
-import React, {Component} from 'react';
+import React, { Component, PropTypes } from 'react';
 import {connect} from 'react-redux';
 import ProgressBar from './ProgressBar';
+import TotalProgress from './TotalProgress';
+import SleepTime from './SleepTime';
+import Disabled from './Disabled';
+import NoMode from './NoMode';
 import Login from './Login';
-import { Col, Row } from 'react-bootstrap';
-import { incrementRefresh, getDailyThunk} from '../../background/reducers/user';
+import { Row } from 'react-bootstrap';
+import { incrementRefresh } from '../../background/reducers/user';
 import { checkHourlyBlock, checkTimeSteps, checkSleepTime } from '../../background/utils/blockingUtils'
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.refresh = this.refresh.bind(this);
+    this.loginView = this.loginView.bind(this);
+    this.signedInView = this.signedInView.bind(this);
   }
 
   refresh(){
+    let t = new Date();
+    let time = t.toString().slice(16, 21);
+
     if (this.props.timesRefreshed < 10){
       this.props.dispatch(incrementRefresh());
       this.props.dispatch({type: 'getSteps'})
       .then(() => {
         var state = store.getState();
         if (state.settings.hourlyMode) checkHourlyBlock(state);
-        if (state.settings.timeStepsMode) checkTimeSteps(state,time);
+        if (state.settings.timeStepsMode) checkTimeSteps(state, time);
         if (state.settings.sleepMode) checkSleepTime(state, time);
       })
     }
@@ -39,40 +48,31 @@ class App extends Component {
   }
 
   signedInView(){
-    let timeLeft;
-    if (this.props.timeLeft > 0) timeLeft = this.props.timeLeft;
-    else timeLeft = 0;
-
+    let blockMode = null;
+    if (this.props.disableBlock) blockMode = 'disableBlock';
+    else if (this.props.sleepBlock) blockMode = 'sleepBlock';
+    else if (this.props.timeStepsBlock) blockMode = 'timeStepsBlock';
+    else if (this.props.hourlyMode) blockMode = 'hourlyMode';
+    else blockMode = 'noMode'
     return (
       <div>
+      <Row>
+        <a title={(10 - this.props.timesRefreshed) + ' refreshes left this hour'} target="_blank" onClick={this.refresh}><img className="refresh" src="../refresh.png" /></a>
+        <a title="Settings" target="_blank" href="chrome-extension://fecjgkehmgognabbnohaoombfboddooo/options/index.html"><img className="settings" src="../settingsIcon.png" /></a>
+      </Row>
+      <Row className="popup-container">
         <Row>
-          <a title={(10-this.props.timesRefreshed) + ' refreshes left this hour'} target='_blank' onClick={this.refresh}><img className='refresh' src='/images/refresh.png' /></a>
-          <a title='Settings' target='_blank' href='chrome-extension://fecjgkehmgognabbnohaoombfboddooo/options/index.html'><img className='settings' src='/images/settingsIcon.png' /></a>
+          <img className="logo" src="../logo.png" />
         </Row>
-        <Row className="popup-container">
-          <Row>
-            <img className='logo' src='/images/logo.png' />
-          </Row>
-          <Row>
-            { (this.props.steps - this.props.lastSteps)  >= this.props.stepGoal ?
-              <h3 className='animated infinite tada'>Congrats you've reached your goal!</h3>
-              :
-              <h3></h3>
-            }
-          </Row>
-          <Row>
-            {!this.props.blocked ?
-              <h3>{timeLeft} minutes remaining</h3>
-              :
-              <h3>You need { this.props.stepGoal - (this.props.steps - this.props.lastSteps)} more steps to unlock</h3>
-            }
-          </Row>
-          <Row>
-            <ProgressBar />
-          </Row>
-          <Row>
-            <Login />
-          </Row>
+        <Row>
+          { blockMode === 'disableBlock' && <Disabled />}
+          { blockMode === 'sleepBlock' && <SleepTime /> }
+          { blockMode === 'timeStepsBlock' && <TotalProgress /> }
+          { blockMode === 'hourlyMode' && <ProgressBar />}
+          { blockMode === 'noMode' && <NoMode />}
+        </Row>
+        <Row>
+          <Login />
         </Row>
       </div>
     )
@@ -88,17 +88,31 @@ class App extends Component {
   }
 }
 
+App.propTypes = {
+  accessToken: PropTypes.string,
+  blocked: PropTypes.bool,
+  steps: PropTypes.number,
+  lastSteps: PropTypes.number,
+  stepGoal: PropTypes.string,
+  timesRefreshed: PropTypes.number,
+  sleepBlock: PropTypes.bool,
+  timeStepsBlock: PropTypes.bool,
+  hourlyMode: PropTypes.bool,
+  disableBlock: PropTypes.bool
+}
+
 const mapStateToProps = (state) => {
   return {
     accessToken: state.user && state.user.accessToken,
     blocked: state.block && state.block.hourlyBlock,
-    timeLeft : state.user && state.time.timeLeft,
     steps: state.user && state.user.steps,
     lastSteps: state.user && state.user.lastSteps,
     stepGoal: state.settings && state.settings.stepGoal,
-    timesRefreshed: state.user && state.user.timesRefreshed
-
-
+    timesRefreshed: state.user && state.user.timesRefreshed,
+    sleepBlock: state.block && state.block.sleepBlock,
+    timeStepsBlock: state.block && state.block.timeStepsBlock,
+    hourlyMode: state.settings && state.settings.hourlyMode,
+    disableBlock: state.block && state.block.disable
   };
 };
 
