@@ -91,9 +91,9 @@ function startRequest() {
         if (state.settings.timeStepsMode) checkTimeSteps(state,time);
         if (state.settings.sleepMode) checkSleepTime(state, time);
       })
-      .then((response) => {
-        checkBlockState(store.getState())
-      })
+      // .then((response) => {
+      //   checkBlockState(store.getState())
+      // })
     checkAchievements();
   }
   window.setTimeout(startRequest, pollInterval);

@@ -3,16 +3,16 @@ import { getTimeLeft, resetTime, decrementTime } from '../reducers/time'
 import { getDailyThunk, getWeeklyThunk, getHourlyThunk, resetLastSteps, incrementStreak, incrementTotalSteps } from '../reducers/user';
 
 
-export function checkBlockState(state){
-  if (state.block.showBlock){
-    if (!state.block.hourlyBlock && !state.block.timeStepsBlock && !state.block.sleepBlock){
-      store.dispatch(unblock());
-    }
-  }
-  else if (state.block.hourlyBlock || state.block.timeStepsBlock || state.block.sleepBlock){
-    store.dispatch(setBlock());
-  }
-}
+// export function checkBlockState(state){
+//   if (state.block.showBlock){
+//     if (!state.block.hourlyBlock && !state.block.timeStepsBlock && !state.block.sleepBlock){
+//       store.dispatch(unblock());
+//     }
+//   }
+//   else if (state.block.hourlyBlock || state.block.timeStepsBlock || state.block.sleepBlock){
+//     store.dispatch(setBlock());
+//   }
+// }
 
 export function checkHourlyBlock(state){
   var hrSteps = state.user.steps-state.user.lastSteps;
