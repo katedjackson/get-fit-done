@@ -9,7 +9,7 @@ import Pane from './Pane';
 import SplashScreen from './SplashScreen';
 import Footer from './Footer';
 import { setWebsites, setStepGoal } from '../../background/reducers/settings';
-import { logoutUser, loginUser } from '../../background/reducers/user';
+import { logoutUser, loginUser, getWeeklySteps } from '../../background/reducers/user';
 import { resetBlock } from '../../background/reducers/block';
 import { resetSettings } from '../../background/reducers/settings';
 import { resetTime } from '../../background/reducers/time';
@@ -39,9 +39,13 @@ class App extends Component {
   }
 
   login () {
-    fitbitAuth().then(accessToken => {
-      this.props.dispatch(loginUser(accessToken));
-    });
+    fitbitAuth()
+      .then(accessToken => {
+        this.props.dispatch(loginUser(accessToken))
+      })
+      .then(() => {
+        this.props.dispatch({ type: 'getChartSteps' })
+      })
   }
 
   signout() {
