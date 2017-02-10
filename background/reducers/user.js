@@ -1,8 +1,6 @@
 import { createAction, handleActions } from 'redux-actions';
 import axios from 'axios';
 
-//import { fitbitAuth } from '../auth'
-
 /* ------------------    ACTIONS    --------------------- */
 
 const LOGIN_USER = 'LOGIN_USER';
@@ -48,9 +46,11 @@ const initialState = {
   accessToken: '',
   badges: [],
   streak: 0,
+  streakDate: '',
   steps: 0,
   lastSteps: 0,
   weeklySteps: [],
+  weeklyStepsDate: '',
   totalSteps: 0,
   timesRefreshed: 0
 };
@@ -82,7 +82,11 @@ export default handleActions({
     return {...state, lastSteps: state.steps };
   },
   TOTAL_STEPS: (state) => {
-    return {...state, totalSteps: state.totalSteps + state.steps }
+    let d = new Date();
+    let dateArr = d.toLocaleDateString().split('/');
+    let date = `${dateArr[2]}-${`0${dateArr[0]}`.slice(-2)}-${`0${dateArr[1]}`.slice(-2)}`;
+    if (date !== state.streakDate) return {...state, totalSteps: state.totalSteps + state.steps }
+    else return state;
   },
   INCREMENT_REFRESH: (state) => {
     return {...state, timesRefreshed: state.timesRefreshed+1}
@@ -105,14 +109,6 @@ export const getDailyThunk = () =>
     .then(response => {
       dispatch(getDailySteps(response.data.summary.steps));
     })
-    // .catch((err) => {
-    //  if (err.response.data.errors[0].errorType === 'invalid_token' ||
-    //      err.response.data.errors[0].errorType === 'expired_token'){
-    //       fitbitAuth().then( accessToken => {
-    //         dispatch(loginUser(accessToken));
-    //       })
-    //   }
-    // });
   };
 
 export const getWeeklyThunk = () =>
@@ -121,12 +117,14 @@ export const getWeeklyThunk = () =>
     let d = new Date();
     let dateArr = d.toLocaleDateString().split('/');
     let date = `${dateArr[2]}-${`0${dateArr[0]}`.slice(-2)}-${`0${dateArr[1]}`.slice(-2)}`;
-    return axios.get(`https://api.fitbit.com/1/user/-/activities/steps/date/${date}/1w.json`,
-      { headers: {'Authorization': 'Bearer ' + accessToken}})
-    .then(response => {
-      let steps = response.data[`activities-steps`].map(activity => {
-        return activity.value;
-      });
-      dispatch(getWeeklySteps(steps));
-    })
+    if (date !== state.weeklyStepsDate) {
+      return axios.get(`https://api.fitbit.com/1/user/-/activities/steps/date/${date}/1w.json`,
+        { headers: {'Authorization': 'Bearer ' + accessToken}})
+      .then(response => {
+        let steps = response.data[`activities-steps`].map(activity => {
+          return activity.value;
+        });
+        dispatch(getWeeklySteps(steps));
+      })
+    } else return state;
   };
