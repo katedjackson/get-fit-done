@@ -8,12 +8,12 @@ import createLogger from 'redux-logger';
 import chromeStorage, { loadFromStorage } from './redux/chromeStorage';
 import { middleware } from 'redux-async-initial-state';
 
-import { getDailyThunk, getWeeklyThunk, getHourlyThunk, resetLastSteps, incrementStreak, incrementTotalSteps, resetRefresh } from './reducers/user';
-import { setBlock, unblock, toggleHourlyBlock, toggleTimeStepsBlock, toggleSleepBlock, toggleGaveUp, toggleStayUp } from './reducers/block';
+import { getDailyThunk, getWeeklyThunk, getHourlyThunk, resetLastSteps, resetRefresh } from './reducers/user';
+import { toggleGaveUp, toggleStayUp } from './reducers/block';
 
-import { getTimeLeft, resetTime, decrementTime } from './reducers/time'
+import { decrementTime } from './reducers/time'
 import checkAchievements from './achievements';
-import { checkBlockState, checkHourlyBlock, checkTimeSteps, checkSleepTime, checkDisable} from './utils/blockingUtils'
+import { checkHourlyBlock, checkTimeSteps, checkSleepTime, checkDisable} from './utils/blockingUtils'
 
 
 const keysToPersistInChrome = [
@@ -67,16 +67,14 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
 //keeping track of time
 var pollInterval = 1000; // 1 second
 
-
-
 function startRequest() {
   var state = store.getState();
   if (state.user.accessToken) {
     pollInterval = 1000 * 60;
-    let t = new Date()
-    let time = t.toString().slice(16,21);
+    let t = new Date();
+    let time = t.toString().slice(16, 21);
 
-    let currTimeVal = Number(time.slice(0,2) + time.slice(3));
+    let currTimeVal = Number(time.slice(0, 2) + time.slice(3));
     if (currTimeVal % 100 === 0){
       store.dispatch(resetRefresh());
     }
@@ -93,23 +91,23 @@ function startRequest() {
       })
       .then((response) => {
         var state = store.getState();
-        if (state.settings.disabledTimeMode) checkDisable(state,time);
+        if (state.settings.disabledTimeMode) checkDisable(state, time);
         if (state.settings.hourlyMode) checkHourlyBlock(state);
         if (!state.block.gaveUp){
-          if (state.settings.timeStepsMode) checkTimeSteps(state,time);
+          if (state.settings.timeStepsMode) checkTimeSteps(state, time);
         }
         else {
           let totalStepsTime = state.settings.totalStepsTime
-          if (time.slice(0,2) < totalStepsTime.slice(0,2)){
+          if (time.slice(0, 2) < totalStepsTime.slice(0, 2)){
             store.dispatch(toggleGaveUp());
           }
         }
         if (!state.block.stayUp){
           if (state.settings.sleepMode) checkSleepTime(state, time);
         }
-        else{
+        else {
           let startSleep = state.settings.sleepTime[0];
-          if (time.slice(0,2) < startSleep.slice(0,2)){
+          if (time.slice(0, 2) < startSleep.slice(0, 2)){
             store.dispatch(toggleStayUp());
           }
         }
