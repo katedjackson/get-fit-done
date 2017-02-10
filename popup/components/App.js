@@ -1,29 +1,35 @@
-import React, {Component} from 'react';
+import React, { Component, PropTypes } from 'react';
 import {connect} from 'react-redux';
 import ProgressBar from './ProgressBar';
 import TotalProgress from './TotalProgress';
 import SleepTime from './SleepTime';
 import Disabled from './Disabled';
+import NoMode from './NoMode';
 import Login from './Login';
 import { Row } from 'react-bootstrap';
-import { incrementRefresh, getDailyThunk} from '../../background/reducers/user';
+import { incrementRefresh } from '../../background/reducers/user';
 import { checkHourlyBlock, checkTimeSteps, checkSleepTime } from '../../background/utils/blockingUtils'
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.refresh = this.refresh.bind(this);
+    this.loginView = this.loginView.bind(this);
+    this.signedInView = this.signedInView.bind(this);
   }
 
 
   refresh(){
+    let t = new Date();
+    let time = t.toString().slice(16, 21);
+
     if (this.props.timesRefreshed < 10){
       this.props.dispatch(incrementRefresh());
       this.props.dispatch({type: 'getSteps'})
       .then(() => {
         var state = store.getState();
         if (state.settings.hourlyMode) checkHourlyBlock(state);
-        if (state.settings.timeStepsMode) checkTimeSteps(state,time);
+        if (state.settings.timeStepsMode) checkTimeSteps(state, time);
         if (state.settings.sleepMode) checkSleepTime(state, time);
       })
     }
@@ -32,7 +38,7 @@ class App extends Component {
   loginView(){
     return (
       <div>
-        <img className='logo' src='../logo.png' />
+        <img className="logo" src="../logo.png" />
         <Login />
       </div>
     )
@@ -45,8 +51,7 @@ class App extends Component {
     else if (this.props.sleepBlock) blockMode = 'sleepBlock';
     else if (this.props.timeStepsBlock) blockMode = 'timeStepsBlock';
     else if (this.props.hourlyBlock) blockMode = 'hourlyBlock';
-    console.log("props,", this.props);
-    console.log(blockMode);
+    else blockMode = 'noMode'
     return (
       <div>
       <Row>
@@ -62,6 +67,7 @@ class App extends Component {
           { blockMode === 'sleepBlock' && <SleepTime /> }
           { blockMode === 'timeStepsBlock' && <TotalProgress /> }
           { blockMode === 'hourlyBlock' && <ProgressBar />}
+          { blockMode === 'noMode' && <NoMode />}
         </Row>
         <Row>
           <Login />
@@ -79,6 +85,19 @@ class App extends Component {
 
     );
   }
+}
+
+App.propTypes = {
+  accessToken: PropTypes.string,
+  blocked: PropTypes.bool,
+  steps: PropTypes.number,
+  lastSteps: PropTypes.number,
+  stepGoal: PropTypes.number,
+  timesRefreshed: PropTypes.number,
+  sleepBlock: PropTypes.bool,
+  timeStepsBlock: PropTypes.bool,
+  hourlyBlock: PropTypes.bool,
+  disableBlock: PropTypes.bool
 }
 
 const mapStateToProps = (state) => {

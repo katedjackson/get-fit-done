@@ -1,4 +1,4 @@
-import React, { Component, PropType } from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Circle } from 'react-progressbar.js';
 import { Row } from 'react-bootstrap';
@@ -29,7 +29,7 @@ const Blocked = (props) => {
       <div>
         <Row>
               { (props.steps - props.lastSteps)  >= props.stepGoal ?
-                <h3 className='animated infinite tada'>Congrats you've reached your goal!</h3>
+                <h3 className="animated infinite tada">Congrats you've reached your goal!</h3>
                 :
                 <h3></h3>
               }
@@ -54,6 +54,15 @@ const Blocked = (props) => {
     );
 }
 
+Blocked.propTypes = {
+  accessToken: PropTypes.string,
+  steps: PropTypes.number,
+  lastSteps: PropTypes.number,
+  hourlySteps: PropTypes.number,
+  timeLeft: PropTypes.number,
+  stepGoal: PropTypes.number,
+  blocked: PropTypes.bool
+}
 const mapStateToProps = (state) => {
   return {
     accessToken: state.user && state.user.accessToken,
@@ -61,7 +70,8 @@ const mapStateToProps = (state) => {
     lastSteps: state.user && state.user.lastSteps,
     hourlySteps: state.user && state.user.hourlySteps,
     timeLeft: state.user && state.time.timeLeft,
-    stepGoal: state.settings && state.settings.stepGoal
+    stepGoal: state.settings && state.settings.stepGoal,
+    blocked: state.block && state.block.hourlyBlock
   };
 };
 

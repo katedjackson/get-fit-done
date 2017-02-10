@@ -1,11 +1,8 @@
-import React, { PropType } from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import {  Row } from 'react-bootstrap';
 
 const SleepTime = (props) => {
-
-    console.log("disable", props);
-
     const convertTime = (str) => {
       const timeArr = str.split(':');
       var hours = Number(timeArr[0]);
@@ -13,7 +10,7 @@ const SleepTime = (props) => {
 
       var result = `${((hours > 12) ? hours - 12 : hours)}:`;
       result += minutes;
-      result += (hours >= 12) ? " P.M." : " A.M.";
+      result += (hours >= 12) ? ' P.M.' : ' A.M.';
       return result
     }
     const time = convertTime(props.disabledEnd); //chage to am pm
@@ -30,6 +27,10 @@ const SleepTime = (props) => {
         </Row>
       </div>
    );
+}
+
+SleepTime.propTypes = {
+  disabledEnd: PropTypes.string
 }
 
 const mapStateToProps = (state) => {
