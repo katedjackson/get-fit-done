@@ -54,7 +54,7 @@ const ProgressBar = (props) => {
     );
 }
 
-Blocked.propTypes = {
+ProgressBar.propTypes = {
   accessToken: PropTypes.string,
   steps: PropTypes.number,
   lastSteps: PropTypes.number,
