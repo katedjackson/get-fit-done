@@ -3,7 +3,7 @@ import { PropTypes } from 'react';
 
 const initialState = {
   websites: 'ex: reddit.com',
-  blacklist: true, //if false, then whitelist
+  blacklist: false, //if false, then whitelist
   disabledTimeMode: false,
   disabledTime: ['09:00', '17:00'],
   hourlyMode: true,
