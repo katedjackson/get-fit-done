@@ -45,7 +45,7 @@ class HourlyBlock extends Component {
         </div>
         <div id="block-giveup-button" className="block-cursor block-select block-giveup-button block-buttons" onClick={this.giveUpToggle}>5 More Minutes</div>
         <div id="block-popup-mask" className="block-cursor block-select block-popup-mask block-disappear"></div>
-        <ExtensionPopUp {...this.props} showPopup={this.state.showPopup} giveUpToggle={this.giveUpToggle} extend={this.unblock}/>
+        <ExtensionPopUp {...this.props} showPopup={this.state.showPopup} giveUpToggle={this.giveUpToggle} extend={this.extend}/>
       </div>
     )
   }

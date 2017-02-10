@@ -60,7 +60,7 @@ export function checkTimeSteps(state, time){
 
 
 export function checkSleepTime(state, time){
-  let blockState = state.block.sleepBlock;
+  let sleepBlock = state.block.sleepBlock;
   let sleepExtension = state.block.sleepExtension;
   let sleepExtMin = state.block.sleepExtensionMin;
   let startSleep = state.settings.sleepTime[0];
@@ -69,7 +69,7 @@ export function checkSleepTime(state, time){
   let startSleepVal = Number(startSleep.slice(0,2) + startSleep.slice(3));
   let stopSleepVal = Number(stopSleep.slice(0,2) + stopSleep.slice(3));
 
-  if (blockState) {
+  if (sleepBlock) {
     if (startSleepVal < stopSleepVal){
       if (currTimeVal >= stopSleepVal || currTimeVal < startSleepVal){
         store.dispatch(toggleSleepBlock());
@@ -81,8 +81,17 @@ export function checkSleepTime(state, time){
       }
     }
   }
-  else if (!blockState) {
-    if (startSleepVal < stopSleepVal) {
+  else { //sleepBlock is false
+    if (sleepExtension) {
+      if (sleepExtMin > 0) {
+        store.dispatch(decrementSleepExt());
+      }
+      else {
+        store.dispatch(toggleSleepExt());
+        store.dispatch(toggleSleepBlock());
+      }
+    }
+    else if (startSleepVal < stopSleepVal) {
       if (currTimeVal >= startSleepVal && currTimeVal < stopSleepVal){
         store.dispatch(toggleSleepBlock());
       }
