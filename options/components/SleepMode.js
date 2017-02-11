@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setSleepTime, toggleSleepMode } from '../../background/reducers/settings'
+import { toggleSleepBlock } from '../../background/reducers/block'
 
 
 class SleepMode extends Component {
@@ -14,6 +15,9 @@ class SleepMode extends Component {
 
   toggleSleepMode = () => {
     this.props.dispatch(toggleSleepMode())
+    if (this.props.sleepBlock){
+      this.props.dispatch(toggleSleepBlock())
+    }
   };
 
   handleStartSleepTime = (event, index, value) => {
@@ -43,7 +47,8 @@ const mapStateToProps = (state) => {
     websites: state.settings && state.settings.websites,
     blacklist: state.settings && state.settings.blacklist,
     sleepMode: state.settings && state.settings.sleepMode,
-    sleepTime: state.settings && state.settings.sleepTime
+    sleepTime: state.settings && state.settings.sleepTime,
+    sleepBlock: state.block && state.block.sleepBlock
   };
 };
 

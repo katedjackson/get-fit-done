@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { TextField } from 'material-ui';
 
 import { toggleHourlyMode, setStepGoal } from '../../background/reducers/settings'
+import { toggleHourlyBlock } from '../../background/reducers/block'
 
 
 class HourlyMode extends Component {
@@ -15,6 +16,9 @@ class HourlyMode extends Component {
 
   toggleHourlyMode = () => {
     this.props.dispatch(toggleHourlyMode())
+    if (this.props.hourlyBlock){
+      this.props.dispatch(toggleHourlyBlock());
+    }
   };
 
   stepGoalChange = (evt, value) => {
@@ -44,7 +48,8 @@ const mapStateToProps = (state) => {
     websites: state.settings && state.settings.websites,
     blacklist: state.settings && state.settings.blacklist,
     hourlyMode: state.settings && state.settings.hourlyMode,
-    stepGoal: state.settings && state.settings.stepGoal
+    stepGoal: state.settings && state.settings.stepGoal,
+    hourlyBlock: state.block && state.block.hourlyBlock
   };
 };
 

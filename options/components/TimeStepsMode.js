@@ -5,6 +5,7 @@ import { TextField } from 'material-ui';
 
 
 import { toggleTimeStepsMode, setTotalStepGoal, setTotalStepsTime } from '../../background/reducers/settings'
+import { timeStepsBlock } from '../../background/reducers/block'
 
 
 class TimeStepsMode extends Component {
@@ -17,6 +18,9 @@ class TimeStepsMode extends Component {
 
   toggleTimeStepsMode = () => {
     this.props.dispatch(toggleTimeStepsMode())
+    if (this.props.timeStepsBlock){
+      this.props.dispatch(toggleTimeStepsBlock())
+    }
   };
 
   stepGoalChange = (evt, value) => {
@@ -52,7 +56,8 @@ const mapStateToProps = (state) => {
     blacklist: state.settings && state.settings.blacklist,
     timeStepsMode: state.settings && state.settings.timeStepsMode,
     totalStepGoal: state.settings && state.settings.totalStepGoal,
-    totalStepsTime: state.settings && state.settings.totalStepsTime
+    totalStepsTime: state.settings && state.settings.totalStepsTime,
+    timeStepsBlock: state.block && state.block.timeStepsBlock
   };
 };
 
