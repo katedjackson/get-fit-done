@@ -42,7 +42,6 @@ const loadStore = (currentState) => {
 const store = createStore(
   rootReducer,
   applyMiddleware(
-    createLogger(),
     chromeStorage(keysToPersistInChrome),
     alias({
       'getSteps': getDailyThunk,
