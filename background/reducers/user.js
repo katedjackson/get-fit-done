@@ -113,11 +113,11 @@ export const getDailyThunk = () =>
 
 export const getWeeklyThunk = () =>
   (dispatch, getState) => {
-    let { accessToken } = getState().user;
+    let { accessToken, weeklyStepsDate } = getState().user;
     let d = new Date();
     let dateArr = d.toLocaleDateString().split('/');
     let date = `${dateArr[2]}-${`0${dateArr[0]}`.slice(-2)}-${`0${dateArr[1]}`.slice(-2)}`;
-    if (date !== state.weeklyStepsDate) {
+    if (date !== weeklyStepsDate) {
       return axios.get(`https://api.fitbit.com/1/user/-/activities/steps/date/${date}/1w.json`,
         { headers: {'Authorization': 'Bearer ' + accessToken}})
       .then(response => {
