@@ -15,6 +15,7 @@ class Achievements extends Component {
     this.getDate = this.getDate.bind(this);
     this.getChartData = this.getChartData.bind(this);
     this.getLabels = this.getLabels.bind(this);
+    this.getBadges = this.getBadges.bind(this);
   }
 
   getBadges() {
@@ -71,6 +72,7 @@ class Achievements extends Component {
 
   render () {
     let badges = this.getBadges();
+    console.log(badges);
     return (
       <Grid className="container-fluid">
         <Row className="show-grid graph-failures">
@@ -95,7 +97,7 @@ class Achievements extends Component {
           <Col xs={12} sm={12} md={12} lg={12}>
             <h3>My Badges</h3>
             {
-              badges && badges.map((badge) => {
+              badges.length && badges.map((badge) => {
                 return (
                   <Col xs={6} sm={6} md={3} lg={3} className="badge-col" key={badge.id}>
                     <img src={badge.url}></img>
