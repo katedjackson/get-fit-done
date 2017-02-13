@@ -49,9 +49,9 @@ class App extends Component {
   signedInView(){
     let blockMode = null;
     if (this.props.disableBlock) blockMode = 'disableBlock';
-    else if (this.props.sleepBlock) blockMode = 'sleepBlock';
-    else if (this.props.timeStepsBlock) blockMode = 'timeStepsBlock';
     else if (this.props.hourlyMode) blockMode = 'hourlyMode';
+    else if (this.props.timeStepsMode) blockMode = 'timeStepsBlock';
+    else if (this.props.sleepMode) blockMode = 'sleepBlock';
     else blockMode = 'noMode'
     return (
       <div>
@@ -109,7 +109,9 @@ const mapStateToProps = (state) => {
     sleepBlock: state.block && state.block.sleepBlock,
     timeStepsBlock: state.block && state.block.timeStepsBlock,
     hourlyMode: state.settings && state.settings.hourlyMode,
-    disableBlock: state.block && state.block.disable
+    disableBlock: state.block && state.block.disable,
+    sleepMode: state.settings && state.settings.sleepMode,
+    timeStepsMode: state.settings && state.settings.timeStepsMode
   };
 };
 

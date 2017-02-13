@@ -31,7 +31,10 @@ const TotalProgress = (props) => {
           }
         </Row>
         <Row>
-          <h3>You need { props.stepGoal - props.steps} more steps to unlock</h3>
+          { props.block ?
+            <h3>You need { props.stepGoal - props.steps} more steps to unlock</h3> :
+            <h3>You need {props.stepGoal - props.steps} steps by {props.blockTime}</h3>
+          }
         </Row>
         <Row>
           <Circle
@@ -54,7 +57,9 @@ TotalProgress.propTypes = {
 const mapStateToProps = (state) => {
   return {
     steps: state.user && state.user.steps,
-    stepGoal: state.settings && state.settings.totalStepGoal
+    stepGoal: state.settings && state.settings.totalStepGoal,
+    block: state.block && state.block.timeStepsBlock,
+    blockTime: state.settings && state.settings.totalStepsTime
   };
 };
 
