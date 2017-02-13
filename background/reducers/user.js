@@ -12,7 +12,6 @@ const GET_DAILY_STEPS = 'GET_DAILY_STEPS';
 const GET_WEEKLY_STEPS = 'GET_WEEKLY_STEPS';
 const GET_HOURLY_STEPS = 'GET_HOURLY_STEPS';
 const RESET_LAST_STEPS = 'RESET_LAST_STEPS';
-const TOTAL_STEPS = 'TOTAL_STEPS';
 const INCREMENT_REFRESH = 'INCREMENT_REFRESH';
 const RESET_REFRESH = 'RESET_REFRESH';
 
@@ -34,8 +33,6 @@ const getDailySteps = createAction(GET_DAILY_STEPS);
 
 const getWeeklySteps = createAction(GET_WEEKLY_STEPS);
 
-export const incrementTotalSteps = createAction(TOTAL_STEPS);
-
 export const incrementRefresh = createAction(INCREMENT_REFRESH);
 
 export const resetRefresh = createAction(RESET_REFRESH);
@@ -51,7 +48,6 @@ const initialState = {
   lastSteps: 0,
   weeklySteps: [],
   weeklyStepsDate: '',
-  totalSteps: 0,
   timesRefreshed: 0
 };
 
@@ -69,7 +65,11 @@ export default handleActions({
     return {...state, streak: 0 };
   },
   INCREMENT_STREAK: (state) => {
-    return {...state, streak: ++state.streak }
+    let d = new Date();
+    let dateArr = d.toLocaleDateString().split('/');
+    let date = `${dateArr[2]}-${`0${dateArr[0]}`.slice(-2)}-${`0${dateArr[1]}`.slice(-2)}`;
+    if (date !== state.streakDate) return {...state, streakDate: date, streak: state.streak + 1 }
+    else return state;
   },
   GET_DAILY_STEPS: (state, { payload }) => {
     if (state.lastSteps) return {...state, steps: payload };
@@ -80,13 +80,6 @@ export default handleActions({
   },
   RESET_LAST_STEPS: (state) => {
     return {...state, lastSteps: state.steps };
-  },
-  TOTAL_STEPS: (state) => {
-    let d = new Date();
-    let dateArr = d.toLocaleDateString().split('/');
-    let date = `${dateArr[2]}-${`0${dateArr[0]}`.slice(-2)}-${`0${dateArr[1]}`.slice(-2)}`;
-    if (date !== state.streakDate) return {...state, totalSteps: state.totalSteps + state.steps }
-    else return state;
   },
   INCREMENT_REFRESH: (state) => {
     return {...state, timesRefreshed: state.timesRefreshed+1}

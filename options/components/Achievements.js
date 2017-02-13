@@ -8,15 +8,14 @@ class Achievements extends Component {
     super(props);
     this.state = {
       achievementBadges: [
-        { id: 0, type: "50,000 Steps", url: "/images/badges/50kSteps.png" },
-        { id: 1, type: "100,000 Steps", url: "/images/badges/100kSteps.png" },
-        { id: 2, type: " 7 Day Streak", url: "/images/badges/7DayStreak.png" },
-        { id: 3, type: "14 Day Streak", url: "/images/badges/14DayStreak.png" }
+        { id: 0, type: " 7 Day Streak", url: "/images/badges/7DayStreak.png" },
+        { id: 1, type: "14 Day Streak", url: "/images/badges/14DayStreak.png" }
       ]
     };
     this.getDate = this.getDate.bind(this);
     this.getChartData = this.getChartData.bind(this);
     this.getLabels = this.getLabels.bind(this);
+    this.getBadges = this.getBadges.bind(this);
   }
 
   getBadges() {
@@ -73,6 +72,7 @@ class Achievements extends Component {
 
   render () {
     let badges = this.getBadges();
+    console.log(badges);
     return (
       <Grid className="container-fluid">
         <Row className="show-grid graph-failures">
@@ -85,16 +85,10 @@ class Achievements extends Component {
           </Col>
           <Col className="tickers" xs={12} sm={12} md={4} lg={4}>
             <Row>
-              <Col className="streak ticker" xs={6} sm={6} md={6} lg={6}>
+              <Col className="streak ticker" xs={12} sm={12} md={12} lg={12}>
                 <h1>{this.props.streak}</h1>
                 <p className="break">Days Without</p>
                 <p className="break">Giving Up!</p>
-              </Col>
-            </Row>
-            <Row>
-              <Col className="steps ticker" xs={6} sm={6} md={6} lg={6}>
-                <h1>{this.props.totalSteps === 0 ? this.props.steps : this.props.totalSteps}</h1>
-                <p>Total Steps!</p>
               </Col>
             </Row>
           </Col>
@@ -124,7 +118,6 @@ const mapStateToProps = (state) => {
     badges: state.user && state.user.badges,
     streak: state.user && state.user.streak,
     weeklySteps: state.user && state.user.weeklySteps,
-    totalSteps: state.user && state.user.totalSteps,
     steps: state.user && state.user.steps
   };
 };
