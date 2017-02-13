@@ -97,7 +97,7 @@ class Achievements extends Component {
           <Col xs={12} sm={12} md={12} lg={12}>
             <h3>My Badges</h3>
             {
-              badges.length && badges.map((badge) => {
+              badges && badges.map((badge) => {
                 return (
                   <Col xs={6} sm={6} md={3} lg={3} className="badge-col" key={badge.id}>
                     <img src={badge.url}></img>
