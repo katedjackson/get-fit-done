@@ -7,7 +7,7 @@ import Disabled from './Disabled';
 import NoMode from './NoMode';
 import { Row } from 'react-bootstrap';
 import { incrementRefresh } from '../../background/reducers/user';
-import { checkHourlyBlock, checkTimeSteps, checkSleepTime } from '../../background/utils/blockingUtils'
+import { toggleHourlyBlock, toggleTimeStepsBlock } from '../../background/reducers/block';
 
 class App extends Component {
   constructor(props) {
@@ -25,10 +25,16 @@ class App extends Component {
       this.props.dispatch(incrementRefresh());
       this.props.dispatch({type: 'getSteps'})
       .then(() => {
-        var state = store.getState();
-        if (state.settings.hourlyMode) checkHourlyBlock(state);
-        if (state.settings.timeStepsMode) checkTimeSteps(state, time);
-        if (state.settings.sleepMode) checkSleepTime(state, time);
+        if (this.props.hourlyBlock && this.props.blocked){
+          if (this.props.steps - this.props.lastSteps >= this.stepGoal){
+            this.props.dispatch(toggleHourlyBlock());
+          }
+        }
+        if (this.props.timeStepsMode && this.props.timeStepsBlock){
+          if (this.props.steps >= this.props.totalStepGoal){
+            this.props.dispatch(toggleTimeStepsBlock());
+          }
+        }
       })
     }
   }
@@ -111,7 +117,8 @@ const mapStateToProps = (state) => {
     hourlyMode: state.settings && state.settings.hourlyMode,
     disableBlock: state.block && state.block.disable,
     sleepMode: state.settings && state.settings.sleepMode,
-    timeStepsMode: state.settings && state.settings.timeStepsMode
+    timeStepsMode: state.settings && state.settings.timeStepsMode,
+    totalStepGoal: state.settings && state.settings.totalStepGoal
   };
 };
 
