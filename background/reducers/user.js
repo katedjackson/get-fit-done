@@ -14,6 +14,7 @@ const GET_HOURLY_STEPS = 'GET_HOURLY_STEPS';
 const RESET_LAST_STEPS = 'RESET_LAST_STEPS';
 const INCREMENT_REFRESH = 'INCREMENT_REFRESH';
 const RESET_REFRESH = 'RESET_REFRESH';
+const SET_WEEKLY_STEPS_DATE = 'SET_WEEKLY_STEPS_DATE';
 
 /* --------------    ACTION CREATORS    ----------------- */
 
@@ -36,6 +37,8 @@ const getWeeklySteps = createAction(GET_WEEKLY_STEPS);
 export const incrementRefresh = createAction(INCREMENT_REFRESH);
 
 export const resetRefresh = createAction(RESET_REFRESH);
+
+const setWeeklyStepsDate = createAction(SET_WEEKLY_STEPS_DATE);
 
 /* ------------------    REDUCER    --------------------- */
 
@@ -86,6 +89,9 @@ export default handleActions({
   },
   RESET_REFRESH: (state) => {
     return {...state, timesRefreshed: 0}
+  },
+  SET_WEEKLY_STEPS_DATE: (state, { payload }) => {
+    return {...state, weeklyStepsDate: payload};
   }
 }, initialState);
 
@@ -118,6 +124,7 @@ export const getWeeklyThunk = () =>
           return activity.value;
         });
         dispatch(getWeeklySteps(steps));
+        dispatch(setWeeklyStepsDate(date));
       })
     } else return state;
   };
