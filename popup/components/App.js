@@ -55,10 +55,17 @@ class App extends Component {
   signedInView(){
     let blockMode = null;
     if (this.props.disableBlock) blockMode = 'disableBlock';
-    else if (this.props.hourlyMode) blockMode = 'hourlyMode';
-    else if (this.props.timeStepsMode) blockMode = 'timeStepsBlock';
-    else if (this.props.sleepMode) blockMode = 'sleepBlock';
-    else blockMode = 'noMode'
+    else if (this.props.blocked || this.props.timeStepsBlock || this.props.sleepBlock){
+      if (this.props.sleepMode) blockMode = 'sleepBlock';
+      else if (this.props.timeStepsMode) blockMode = 'timeStepsBlock';
+      else if (this.props.hourlyMode) blockMode = 'hourlyMode';
+    }
+    else{
+      if (this.props.hourlyMode) blockMode = 'hourlyMode';
+      else if (this.props.timeStepsMode) blockMode = 'timeStepsBlock';
+      else if (this.props.sleepMode) blockMode = 'sleepBlock';
+      else blockMode = 'noMode'
+    }
     return (
       <div>
         <Row>
