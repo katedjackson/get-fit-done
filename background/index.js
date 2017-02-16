@@ -107,7 +107,9 @@ function startRequest() {
         }
         else {
           let startSleep = state.settings.sleepTime[0];
-          if (time.slice(0, 2) < startSleep.slice(0, 2)){
+          let stopSleep = state.setting.sleepTime[1]
+          if (time.slice(0, 2) > startSleep.slice(0, 2)
+              && time.slice(0,2) < stopSleep.slice(0,2)){
             store.dispatch(toggleStayUp());
           }
         }
