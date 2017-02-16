@@ -126,5 +126,5 @@ export const getWeeklyThunk = () =>
         dispatch(getWeeklySteps(steps));
         dispatch(setWeeklyStepsDate(date));
       })
-    } else return state;
+    }
   };
