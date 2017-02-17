@@ -42,7 +42,6 @@ const loadStore = (currentState) => {
 const store = createStore(
   rootReducer,
   applyMiddleware(
-    createLogger(),
     chromeStorage(keysToPersistInChrome),
     alias({
       'getSteps': getDailyThunk,
@@ -107,7 +106,7 @@ function startRequest() {
         }
         else {
           let startSleep = state.settings.sleepTime[0];
-          let stopSleep = state.setting.sleepTime[1]
+          let stopSleep = state.settings.sleepTime[1]
           if (time.slice(0, 2) > startSleep.slice(0, 2)
               && time.slice(0,2) < stopSleep.slice(0,2)){
             store.dispatch(toggleStayUp());
