@@ -1,8 +1,8 @@
 {
   "name": "Get [F]it Done",
-  "version": "1.0.8",
+  "version": "1.0.11",
   "manifest_version": 2,
-  "description": "Blocks pages based on fitbit data to encourage user to move around",
+  "description": "A Fitbit integrated page blocking Chrome extension to get users moving.",
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApjR3Sh9CmGrJP+XLBF6IraqQAqXxg1MtZ/WcgnN/0HR2w1LWw2DfW/uxSrHU/xIFn1OXKDcBJEeWtpF0Z9sfaKYsHGoBhMQ9622GJYnsCRZZeGuXCe5mYnw0A2p7eh1+YWGHV5CM85n7KGb9pMpvhYy5JoYGl49sKsQlgfFxPDuMThGZ9dlHXHvtUBa0tJEMcfv9OtUdrY5F8GHDIBGxWfprgjEpsr9r4HRDYQ87U0AuGx2Mo4IEOeplHDPyqQVW/eq35icMA0G/tiyjIbEma0dbzTMjDRfFFQN0rE1WKf+IFPGRx/j44WBruQFI2IJun7mSDXTND842Izl3l3e6eQIDAQAB",
   "browser_action":{
     "default_title": "Get Fit Done",
