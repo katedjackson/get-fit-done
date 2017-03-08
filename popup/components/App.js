@@ -17,6 +17,25 @@ class App extends Component {
     this.signedInView = this.signedInView.bind(this);
   }
 
+  componentWillUpdate(nextProps, nextState){
+    console.log("componentWillUpdate: ")
+    console.log("hourlyBlock: ", this.props.blocked)
+    console.log("timestepsblock: ", this.props.timeStepsBlock)
+    console.log("sleepBlock: ", this.props.sleepBlock)
+    if (this.props.blocked || this.props.timeStepsBlock || this.props.sleepBlock){
+      if (this.props.hourlyBlock && this.props.blocked){
+        if (this.props.steps - this.props.lastSteps >= this.stepGoal){
+          this.props.dispatch(toggleHourlyBlock());
+        }
+      }
+      if (this.props.timeStepsMode && this.props.timeStepsBlock){
+        if (this.props.steps >= this.props.totalStepGoal){
+          this.props.dispatch(toggleTimeStepsBlock());
+        }
+      }
+    }
+  }
+
   refresh(){
     let t = new Date();
     let time = t.toString().slice(16, 21);
@@ -24,18 +43,18 @@ class App extends Component {
     if (this.props.timesRefreshed < 10){
       this.props.dispatch(incrementRefresh());
       this.props.dispatch({type: 'getSteps'})
-      .then(() => {
-        if (this.props.hourlyBlock && this.props.blocked){
-          if (this.props.steps - this.props.lastSteps >= this.stepGoal){
-            this.props.dispatch(toggleHourlyBlock());
-          }
-        }
-        if (this.props.timeStepsMode && this.props.timeStepsBlock){
-          if (this.props.steps >= this.props.totalStepGoal){
-            this.props.dispatch(toggleTimeStepsBlock());
-          }
-        }
-      })
+      // .then(() => {
+      //   if (this.props.hourlyBlock && this.props.blocked){
+      //     if (this.props.steps - this.props.lastSteps >= this.stepGoal){
+      //       this.props.dispatch(toggleHourlyBlock());
+      //     }
+      //   }
+      //   if (this.props.timeStepsMode && this.props.timeStepsBlock){
+      //     if (this.props.steps >= this.props.totalStepGoal){
+      //       this.props.dispatch(toggleTimeStepsBlock());
+      //     }
+      //   }
+      // })
     }
   }
 
